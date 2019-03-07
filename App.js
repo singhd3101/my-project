@@ -8,7 +8,11 @@ import CreateTeam from './components/CreateTeam';
 import { createStackNavigator,createAppContainer } from 'react-navigation'
 
 class Home extends React.Component {
-
+  static navigationOptions = {
+    header: (
+    <FixedHeader/>
+    )
+    }
   constructor(props){
     super(props);
     this.state = {
@@ -27,7 +31,6 @@ class Home extends React.Component {
   render() {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <FixedHeader/>
         <ImageBackground source={require('./assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
         <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', borderRadius: '10'}}>
