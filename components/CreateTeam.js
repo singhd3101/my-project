@@ -1,7 +1,33 @@
 import React from 'react'
-import {ScrollView,View,Text,TextInput, Button} from 'react-native'
-import { FormLabel, FormInput, FormValidationMessage,Card } from 'react-native-elements'
+import { ScrollView, View, Text,TextInput, Button, StyleSheet} from 'react-native'
+import { Card } from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'space-between'
+    },
+    teamCount: {
+        width: '10%',
+        fontSize: 20,
+        height: 40,
+        textAlign: 'center',
+        paddingTop: 5
+    },
+    text: {
+        width: '40%',
+        fontSize: 20,
+        height: 40,
+        textAlign: 'left',
+        paddingTop: 5
+    },
+    button: {
+      width: '40%',
+      height: 40
+    }
+  });
 
 class CreateTeam extends React.Component {
     static navigationOptions = {screen: 'Team'}
@@ -39,14 +65,17 @@ class CreateTeam extends React.Component {
 
     renderTeams() {
         return this.state.teamNames.map((item, index) =>
-        <View style={{flexDirection: 'row', flex: 1}}>
-            <Text key={index}>{index + 1} {item}</Text>
+        <View style={styles.container}>
+            <Text style={styles.teamCount}>{index + 1}.</Text>
+            <Text style={styles.text}>{item}</Text>
             <Button key={index + 50} title="Delete" onPress={() => this.deleteTeam(item)}
-                    color='red' buttonStyle={{marginRight: 5 }}/>
+                    color='red' buttonStyle={styles.button}/>
         </View>);
     }
 
     render() {
+        var header = ['Team Name', 'Action']
+        var data = [['Team Name'], ['Action']]
         return(
             <ScrollView style={{padding: 15}}>
             <FixedHeader />
@@ -58,7 +87,6 @@ class CreateTeam extends React.Component {
                <View>
                     {this.renderTeams()}
                </View>
-
             </Card>
             </ScrollView>
         )

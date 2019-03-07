@@ -30,7 +30,6 @@ class Home extends React.Component {
       <View>
         <FixedHeader/>
         <Button title="Create Quest" onPress={() => this.props.navigation.navigate('CreateQuest')} />    
-
       </View>
     );
   }
