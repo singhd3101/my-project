@@ -1,7 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import FixedHeader from './elements/FixedHeader';
+import CreateQuest from './components/CreateQuest';
+import { createStackNavigator,createAppContainer } from 'react-navigation'
 
-export default class App extends React.Component {
+class Home extends React.Component {
+  static navigationOptions = {
+    screen: 'Home'
+}
 
   constructor(props){
     super(props);
@@ -20,19 +26,29 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Hello Moto! {this.state.name}</Text>
-        <Button id="btn" title="Check" onPress={() => this.findUserName()} />
+      <View>
+        <FixedHeader/>
+        <Button title="Create Quest" onPress={() => this.props.navigation.navigate('CreateQuest')} />   
+
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const AppNavigator = createStackNavigator({
+  Home: {
+  screen: Home
   },
+  CreateQuest: {
+  screen: CreateQuest
+  }
 });
+
+const App = createAppContainer(AppNavigator);
+export default App;
+  
+
+
+
+
+
