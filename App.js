@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import FixedHeader from './elements/FixedHeader';
 import CreateQuest from './components/CreateQuest';
+import CreateTeam from './components/CreateTeam';
 import { createStackNavigator,createAppContainer } from 'react-navigation'
 
 class Home extends React.Component {
@@ -28,7 +29,7 @@ class Home extends React.Component {
     return (
       <View>
         <FixedHeader/>
-        <Button title="Create Quest" onPress={() => this.props.navigation.navigate('CreateQuest')} />   
+        <Button title="Create Quest" onPress={() => this.props.navigation.navigate('CreateQuest')} />    
 
       </View>
     );
@@ -41,6 +42,9 @@ const AppNavigator = createStackNavigator({
   },
   CreateQuest: {
   screen: CreateQuest
+  },
+  CreateTeam: {
+  screen: CreateTeam
   }
 });
 
