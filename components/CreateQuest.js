@@ -2,6 +2,7 @@ import React from 'react'
 import FixedHeader from '../elements/FixedHeader.js';
 import {ScrollView,View,Text,TextInput,StyleSheet,ImageBackground} from 'react-native'
 import { FormLabel, FormInput, FormValidationMessage,Card } from 'react-native-elements'
+import CreateTeam from './CreateTeam';
 
 class CreateQuest extends React.Component {
     constructor(props) {
@@ -54,7 +55,6 @@ class CreateQuest extends React.Component {
                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
                <Text>Quest Name</Text>
                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-
             </Card>
             </ImageBackground>
             </ScrollView>

@@ -4,6 +4,7 @@ import { StyleSheet, Text, View,ImageBackground } from 'react-native';
 import FixedHeader from './elements/FixedHeader';
 import FadeInView from './elements/FadeInView';
 import CreateQuest from './components/CreateQuest';
+import CreateTeam from './components/CreateTeam';
 import { createStackNavigator,createAppContainer } from 'react-navigation'
 
 class Home extends React.Component {
@@ -64,6 +65,9 @@ const AppNavigator = createStackNavigator({
   },
   CreateQuest: {
   screen: CreateQuest
+  },
+  CreateTeam: {
+  screen: CreateTeam
   }
 });
 
