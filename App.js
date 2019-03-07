@@ -39,8 +39,8 @@ class Home extends React.Component {
         </FadeInView>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10'}}>
         <Button 
-        title="Create Quest" 
-        onPress={() => this.props.navigation.navigate('CreateQuest')}
+        title="Create Team" 
+        onPress={() => this.props.navigation.navigate('CreateTeam')}
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
