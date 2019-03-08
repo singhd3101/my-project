@@ -5,7 +5,6 @@ import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
 
-
 class CreateQuest extends React.Component {
     
     constructor(props) {
@@ -14,18 +13,38 @@ class CreateQuest extends React.Component {
             name: '',
             numberOfPlayers: 2,
             timeLimit: 30,
+            error: ''
         }
     }
 
     updateForm(newState) {
-        this.setState(newState);
+      console.log('newState ', newState);
+      if(this.state.name == ''){
+        this.setState({
+          error: 'Please enter a quest name'
+        });
+      } else {
+        this.setState({
+          newState
+        });
+      }  
     }
 
     createQuest(){
-        fetch("https://mighty-dusk-79530.herokuapp.com/api/users")
+        let name = this.state.name.trim()
+        if(name == ''){
+          this.setState({
+            error: 'Please enter a quest name'
+          });
+        } else {
+          this.setState({
+            error: ''
+          });
+          fetch("https://mighty-dusk-79530.herokuapp.com/api/users")
             .then(res => res.json())
             .then(name => console.log('res ', name[0].username));
-        this.props.navigation.navigate('CreateTeam');
+          this.props.navigation.navigate('CreateTeam');
+        }
     }
 
     render() {
@@ -57,7 +76,8 @@ class CreateQuest extends React.Component {
                <Text>Quest Name</Text>
                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, 
                     borderBottomColor:'#555' }} value={this.state.name} 
-                    onChangeText={text => this.updateForm({name: text})}/>
+                    onChangeText={text => this.setState({name: text, error: ''})}/>
+               <Text style={{color:'#ff0000'}}>{this.state.error}</Text>
                <Text style={{paddingTop:15}}>Number of Players in each team</Text>
                <Dropdown
                     selectedItemColor={'green'}

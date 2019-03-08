@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView, View, Text,TextInput, Button, StyleSheet} from 'react-native'
+import { ScrollView, View, Text,TextInput, Button} from 'react-native'
 import { Card } from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader';
 import style from '../assets/style';
@@ -10,23 +10,36 @@ class CreateTeam extends React.Component {
         super(props)
         this.state ={
             teamName: '',
-            teamNames: ['test']
+            teamNames: ['test'],
+            error: ''
         }
     }
 
     addTeam(teamName) {
-        var list = this.state.teamNames.concat(teamName);
-        this.setState({
-            teamNames: list,
-            teamName: ''
-        });
+        if (teamName == ''){
+            this.setState({
+                error: 'Please enter the text to proceed'
+            });
+        } else {
+            var list = this.state.teamNames.concat(teamName);
+            this.setState({
+                teamNames: list,
+                teamName: '',
+                error: ''
+            });
+        }
     }
 
     updateForm(teamName) {
         if (teamName == ''){
-            alert("Please enter the text to proceed");
+            this.setState({
+                error: 'Please enter the text to proceed'
+            });
         } else {
-            this.setState({teamName});
+            this.setState({
+                teamName: teamName,
+                error: ''
+            });
         }
     }
 
@@ -60,6 +73,7 @@ class CreateTeam extends React.Component {
                <Text>Team Name</Text>
                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }}
                           value={this.state.teamName} onChangeText={text => this.updateForm(text)}/>
+                <Text style={{color:'#ff0000'}}>{this.state.error}</Text>
                <Button title="Create Team" onPress={() => this.addTeam(this.state.teamName)} />
                <View>
                     {this.renderTeams()}
