@@ -77,8 +77,10 @@ class CreateTeam extends React.Component {
         var header = ['Team Name', 'Action']
         var data = [['Team Name'], ['Action']]
         return(
-            <ScrollView style={{padding: 15}}>
+            <ScrollView>
+                <View>
             <FixedHeader />
+            </View>
             <Card>
                <Text>Team Name</Text>
                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }}

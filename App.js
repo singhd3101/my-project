@@ -5,6 +5,7 @@ import FixedHeader from './elements/FixedHeader';
 import FadeInView from './elements/FadeInView';
 import CreateQuest from './components/CreateQuest';
 import CreateTeam from './components/CreateTeam';
+import OrganizerView from './components/OrganizerView';
 import { createStackNavigator,createAppContainer } from 'react-navigation'
 
 class Home extends React.Component {
@@ -33,27 +34,25 @@ class Home extends React.Component {
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <ImageBackground source={require('./assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
         <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={{fontFamily: "Papyrus", color:'white', fontSize:30, fontWeight:'bold'}}> EAT. SLEEP. HUNT. </Text>
+        <Text style={{fontFamily: "Papyrus", color:'white', fontSize:30, fontWeight:'bold'}}> REPEAT. </Text>
+        <Text style={{fontFamily: "Papyrus", color:'white', fontSize:40}}> Join as a </Text>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', borderRadius: '10'}}>
         <Button 
-         title="Create Quest" 
+         title="Organizer" 
          type="clear"
-         onPress={() => this.props.navigation.navigate('CreateQuest')}
+         onPress={() => this.props.navigation.navigate('OrganizerView')}
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
         </FadeInView>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10'}}>
+        <View style={{marginTop:'2%'}}>
+        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', borderRadius: '10'}}>
         <Button 
-        title="Create Team" 
+        title="Player" 
         onPress={() => this.props.navigation.navigate('CreateTeam')}
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%',marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10'}}>
-        <Button 
-        title="Create Quest" 
-        onPress={() => this.props.navigation.navigate('CreateQuest')} 
-        type="clear"
-        titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
-        </FadeInView>
+        </View>
         </View>
         
         </ImageBackground>
@@ -71,7 +70,11 @@ const AppNavigator = createStackNavigator({
   },
   CreateTeam: {
   screen: CreateTeam
+  },
+  OrganizerView: {
+    screen: OrganizerView
   }
+  
 });
 
 const App = createAppContainer(AppNavigator);
