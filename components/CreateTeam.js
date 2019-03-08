@@ -1,7 +1,6 @@
 import React from 'react'
 import { ScrollView, View, Text,TextInput, Button, StyleSheet} from 'react-native'
 import { Card } from 'react-native-elements'
-import FixedHeader from '../elements/FixedHeader'
 
 const styles = StyleSheet.create({
     container: {
@@ -78,7 +77,6 @@ class CreateTeam extends React.Component {
         var data = [['Team Name'], ['Action']]
         return(
             <ScrollView style={{padding: 15}}>
-            <FixedHeader />
             <Card>
                <Text>Team Name</Text>
                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }}

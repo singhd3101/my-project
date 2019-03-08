@@ -1,14 +1,18 @@
 import React from 'react'
-import FixedHeader from '../elements/FixedHeader.js';
-import {ScrollView,View,Text,TextInput,StyleSheet,ImageBackground} from 'react-native'
-import { FormLabel, FormInput, FormValidationMessage,Card } from 'react-native-elements'
-import CreateTeam from './CreateTeam';
+import {Button} from 'react-native-elements'
+import FixedHeader from '../elements/FixedHeader';
+import { View, Text, TextInput, ImageBackground} from 'react-native'
+import { Card } from 'react-native-elements'
+import { Dropdown } from 'react-native-material-dropdown';
+import FadeInView from '../elements/FadeInView';
 
 class CreateQuest extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
-            name: ''
+            name: '',
+            numberOfPlayers: 2,
+            timeLimit: 30,
         }
     }
 
@@ -16,48 +20,67 @@ class CreateQuest extends React.Component {
         this.setState(newState);
     }
 
-
-
+    createQuest(){
+        fetch("https://mighty-dusk-79530.herokuapp.com/api/users")
+            .then(res => res.json())
+            .then(name => console.log('res ', name[0].username));
+        this.props.navigation.navigate('CreateTeam');
+    }
 
     render() {
+        var timeLimit = [{
+            value: 30,
+          }, {
+            value: 60,
+          }, {
+            value: 90,
+          }, {
+            value: 120,
+          }];
+        let numberOfPlayers = [{
+            value: 2,
+          }, {
+            value: 4,
+          }, {
+            value: 6,
+          }, {
+            value: 8,
+          }];
         return(
-            <ScrollView>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <FixedHeader/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
             <Card 
             title="Create Quest" style={{fontSize: 40, fontColor: 'blue', width:'40'}}>
                <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-               <Text>Quest Name</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
+               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, 
+                    borderBottomColor:'#555' }} value={this.state.name} 
+                    onChangeText={text => this.updateForm({name: text})}/>
+               <Text style={{paddingTop:15}}>Number of Players in each team</Text>
+               <Dropdown
+                    selectedItemColor={'green'}
+                    onChangeText={text => this.setState({numberOfPlayers : text})}
+                    value={this.state.numberOfPlayers}
+                    data={numberOfPlayers}
+                />
+                <Text style={{paddingTop:15}}>Time Limit for the quest (in mins)</Text>
+                <Dropdown
+                    selectedItemColor={'green'}
+                    onChangeText={text => this.setState({timeLimit : text})}
+                    value={this.state.timeLimit}
+                    data={timeLimit}
+                />
+                <FadeInView style={{width: 305, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
+                borderRadius: '10', alignItems:'center'}}>
+                <Button 
+                    title="Create Teams" 
+                    type="clear"
+                    onPress={() => this.createQuest()}
+                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
+                </FadeInView>
             </Card>
             </ImageBackground>
-            </ScrollView>
+            </View>
         )
     }
 }
