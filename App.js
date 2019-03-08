@@ -7,6 +7,7 @@ import CreateQuest from './components/CreateQuest';
 import CreateTeam from './components/CreateTeam';
 import OrganizerView from './components/OrganizerView';
 import VerifySubmission from './components/VerifySubmission';
+import CreateClues from './components/CreateClues';
 import { createStackNavigator,createAppContainer } from 'react-navigation'
 
 class Home extends React.Component {
@@ -64,8 +65,8 @@ class Home extends React.Component {
             borderBottomRightRadius: 10,
         }}>
         <Button 
-        title="Verify Submission" 
-        onPress={() => this.props.navigation.navigate('VerifySubmission')}
+        title="CreateClues" 
+        onPress={() => this.props.navigation.navigate('CreateClues')}
         type="clear"
          titleStyle={{color: '#562547'}} />   
         </FadeInView>
@@ -93,6 +94,9 @@ const AppNavigator = createStackNavigator({
   },
   VerifySubmission: {
     screen: VerifySubmission
+  },
+  CreateClues: {
+    screen: CreateClues
   }
   
 });
