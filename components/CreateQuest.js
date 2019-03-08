@@ -1,12 +1,13 @@
 import React from 'react'
-import {Button} from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader';
 import { View, Text, TextInput, ImageBackground} from 'react-native'
-import { Card } from 'react-native-elements'
+import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
 
+
 class CreateQuest extends React.Component {
+    
     constructor(props) {
         super(props)
         this.state ={
@@ -50,6 +51,7 @@ class CreateQuest extends React.Component {
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
+
             <Card 
             title="Create Quest" style={{fontSize: 40, fontColor: 'blue', width:'40'}}>
                <Text>Quest Name</Text>
