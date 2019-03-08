@@ -2,32 +2,7 @@ import React from 'react'
 import { ScrollView, View, Text,TextInput, Button, StyleSheet} from 'react-native'
 import { Card } from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader';
-
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'space-between'
-    },
-    teamCount: {
-        width: '10%',
-        fontSize: 20,
-        height: 40,
-        textAlign: 'center',
-        paddingTop: 5
-    },
-    text: {
-        width: '40%',
-        fontSize: 20,
-        height: 40,
-        textAlign: 'left',
-        paddingTop: 5
-    },
-    button: {
-      width: '40%',
-      height: 40
-    }
-  });
+import style from '../assets/style';
 
 class CreateTeam extends React.Component {
     static navigationOptions = {screen: 'Team'}
@@ -65,11 +40,11 @@ class CreateTeam extends React.Component {
 
     renderTeams() {
         return this.state.teamNames.map((item, index) =>
-        <View style={styles.container}>
-            <Text style={styles.teamCount}>{index + 1}.</Text>
-            <Text style={styles.text}>{item}</Text>
+        <View style={style.container}>
+            <Text style={style.teamCount}>{index + 1}.</Text>
+            <Text style={style.text}>{item}</Text>
             <Button key={index + 50} title="Delete" onPress={() => this.deleteTeam(item)}
-                    color='red' buttonStyle={styles.button}/>
+                    color='red' buttonStyle={style.button}/>
         </View>);
     }
 
