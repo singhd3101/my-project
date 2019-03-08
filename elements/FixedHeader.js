@@ -5,11 +5,12 @@ import {Image} from 'react-native'
 const FixedHeader = () =>(
     <Header
         leftComponent={
-            <Image source={require('../assets/logo.gif')} style={{width: '60%', height: '60%', backgroundColor:'#c9683e', marginTop:10}}/>
+            <Image source={require('../assets/cps.png')} style={{width: '60%', height: '60%', backgroundColor:'#c9683e', marginTop:10}}/>
         }
         centerComponent={{	text: 'Treasure Hunt',
             style: { color: '#fff', fontWeight:'bold', fontSize:30, fontFamily: "Papyrus",paddingTop:20} }}
         rightComponent={{ color: '#fff',paddingTop:20 }}
-        containerStyle={{backgroundColor: '#c9683e', height:120}}/>
+        containerStyle={{backgroundColor: '#c9683e', height:120}}
+        leftContainerStyle={{flex:1.5}}/>
 )
 export default FixedHeader
