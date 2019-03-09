@@ -42,7 +42,27 @@ class CreateQuest extends React.Component {
           });
           fetch("https://mighty-dusk-79530.herokuapp.com/api/users")
             .then(res => res.json())
-            .then(name => console.log('res ', name[0].username));
+            .then(name => console.log('I am ', name[0].username, '!'));
+          fetch('https://mighty-dusk-79530.herokuapp.com/api/questDetails', {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: this.state.name,
+                    numberOfPlayers: this.state.numberOfPlayers,
+                    timeLimit: this.state.timeLimit
+                }),
+              }).then((response) => response.json())
+                  .then((responseJson) => {
+                    console.log('Name: ', responseJson.name);
+                    console.log('Number of players: ', responseJson.numberOfPlayers);
+                    console.log('Time Limit: ', responseJson.timeLimit);
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
           this.props.navigation.navigate('CreateTeam');
         }
     }
