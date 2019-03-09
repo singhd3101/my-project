@@ -15,16 +15,15 @@ class ListClues extends React.Component {
         }
     }
 
-    viewClue(){
-
-    }
-
     renderClues() {
         return this.state.clues.map((item, index) =>
-        <View style={styles.container} key={index}>
-            <Button key={index + 50} title={item} onPress={() => alert(item)}
+        <Card key={index}>
+            <View style={styles.container}>
+            <Button key={index + 50} title={item} onPress={() => this.props.navigation.navigate('CreateClues', 
+                    {index: index})}
                     buttonStyle={styles.button}/>
-        </View>);
+        </View>
+        </Card>);
     }
 
     render() {
@@ -33,14 +32,14 @@ class ListClues extends React.Component {
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
             <FixedHeader height={90} />
             <ScrollView style={{padding: 15}}>
-            <Card title='Clues' containerStyle={{fontSize: 40, fontColor: 'blue', width:320}}>
+            <Card title='Clues' containerStyle={{width:320}}>
                 <FadeInView style={{width: 280, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                     borderRadius: '10', alignItems:'center'}}>
                     <Button 
                         title="Create Clue" 
                         type="clear"
                         width
-                        onPress={() => {}}
+                        onPress={() => this.props.navigation.navigate('CreateClues')}
                         titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
                 <View style={{marginTop:10}}></View>
