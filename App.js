@@ -12,6 +12,7 @@ import ListClues from './components/ListClues';
 import QuestCode from './components/QuestCode';
 import CreateClues from './components/CreateClues';
 import { createStackNavigator,createAppContainer } from 'react-navigation'
+import MonitorTeams from './components/MonitorTeams';
 
 class Home extends React.Component {
   static navigationOptions = {
@@ -60,26 +61,6 @@ class Home extends React.Component {
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
         </View>
-        <View style={{marginTop:'2%'}}>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
-        borderRadius: '10'}}>
-        <Button 
-        title="QuestCode" 
-        onPress={() => this.props.navigation.navigate('QuestCode')}
-        type="clear"
-         titleStyle={{color: '#562547'}} />   
-        </FadeInView>
-        </View>
-        <View style={{marginTop:'2%'}}>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
-        borderRadius: '10'}}>
-        <Button 
-        title="ListClues" 
-        onPress={() => this.props.navigation.navigate('ListClues')}
-        type="clear"
-         titleStyle={{color: '#562547'}} />   
-        </FadeInView>
-        </View>
         </View>
         
         </ImageBackground>
@@ -112,6 +93,10 @@ const AppNavigator = createStackNavigator({
   },
   PlayerView: {
     screen: PlayerView
+  },
+
+  MonitorTeams: {
+    screen: MonitorTeams
   },
   QuestCode: {
     screen: QuestCode

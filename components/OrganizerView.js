@@ -30,8 +30,8 @@ class OrganizerView extends React.Component {
         </FadeInView>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10'}}>
         <Button 
-        title="Create Team" 
-        onPress={() => this.props.navigation.navigate('CreateTeam')}
+        title="Start Quest" 
+        onPress={() => this.props.navigation.navigate('MonitorTeams')}
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
