@@ -14,7 +14,7 @@ class VerifySubmission extends React.Component {
     }
 
     sendReview(){
-        this.props.navigation.navigate('OrganizerView');
+        this.props.navigation.navigate('MonitorTeams');
     }
 
     render() {
@@ -27,21 +27,21 @@ class VerifySubmission extends React.Component {
                 <Image source={require('../assets/submission.jpg')} style={{width: '100%', height: '50%'}} />
                 <View style={{marginTop:40}}></View>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#32CD32', 
+                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Accept" 
                     type="clear"
                     onPress={() => this.sendReview()}
-                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
+                    titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#FF4500', 
+                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#b10000', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Reject" 
                     type="clear"
                     onPress={() => this.sendReview()}
-                    titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547'}}/>   
+                    titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
                 </View>
                 <View style={{marginTop:40}}></View>

@@ -23,5 +23,11 @@ export default StyleSheet.create({
     button: {
       width: '40%',
       height: 40
+    },
+    chatContainer: {
+      flex: 1,
+      backgroundColor: 'white',
+      alignItems: 'center',
+      justifyContent: 'center'
     }
   });
