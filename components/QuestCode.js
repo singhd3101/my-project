@@ -23,13 +23,13 @@ class QuestCode extends React.Component {
             <Text style={{fontFamily:"Papyrus", fontSize:40, color:'#562547', textAlign:'center', 
             textDecorationLine:'underline'}}>A3E24M</Text>
             <View style={{marginTop:10}}></View>
-            <FadeInView style={{width: 250, height: 50,marginTop:'2%', backgroundColor: '#a65c31', 
+            <FadeInView style={{width: 250, height: 50,marginTop:'2%', backgroundColor: 'powderblue', 
              borderRadius: '10', marginLeft:5}}>
              <Button 
               title="Main Menu" 
               type="clear"
               onPress={() => this.props.navigation.navigate('OrganizerView')}
-              titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
+              titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
             </FadeInView>
             </Card> 
             </View>       
