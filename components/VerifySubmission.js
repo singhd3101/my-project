@@ -14,7 +14,7 @@ class VerifySubmission extends React.Component {
     }
 
     sendReview(){
-        this.props.navigation.navigate('OrganizerView');
+        this.props.navigation.navigate('MonitorTeams');
     }
 
     render() {

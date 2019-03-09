@@ -1,7 +1,7 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { ScrollView, View, Text, Button, ImageBackground} from 'react-native'
-import { Card } from 'react-native-elements'
+import { ScrollView, View, Text, ImageBackground} from 'react-native'
+import { Card, Button } from 'react-native-elements'
 import styles from '../assets/style';
 import FadeInView from '../elements/FadeInView';
 

@@ -1,8 +1,10 @@
-import React from 'react'
-import { ScrollView, View, Text,TextInput, Button, StyleSheet, ImageBackground} from 'react-native'
-import { Card } from 'react-native-elements'
-import FixedHeader from '../elements/FixedHeader'
+import React from 'react';
+import { ScrollView, View, Text,TextInput, StyleSheet, ImageBackground} from 'react-native';
+import { Card, Button } from 'react-native-elements';
+import FixedHeader from '../elements/FixedHeader';
 import styles from '../assets/style';
+import FadeInView from '../elements/FadeInView';
+import Icon from 'react-native-vector-icons/AntDesign';
 
 class CreateTeam extends React.Component {
     static navigationOptions = {screen: 'Team'}
@@ -20,6 +22,11 @@ class CreateTeam extends React.Component {
         if(tn == ''){
             this.setState({
                 teamNameError: 'Please enter the text to proceed'
+            });
+        } else if(this.state.teamNames.includes(teamName)) {
+            let error = teamName.concat(' already present.');
+            this.setState({
+                teamNameError: error
             });
         } else {
             var list = this.state.teamNames.concat(teamName);
@@ -53,13 +60,20 @@ class CreateTeam extends React.Component {
         });
     }
 
+    createClues(){
+        if(this.state.teamNames.length < 2){
+            alert("Create atleast 2 teams.");
+        } else {
+            this.props.navigation.navigate('ListClues');
+        }
+    }
+
     renderTeams() {
         return this.state.teamNames.map((item, index) =>
         <View style={styles.container} key={index}>
             <Text style={styles.teamCount}>{index + 1}.</Text>
             <Text style={styles.text}>{item}</Text>
-            <Button key={index + 50} title="Delete" onPress={() => this.deleteTeam(item)}
-                    color='red' buttonStyle={styles.button}/>
+            <Icon name="delete" size={25} color="red" onPress={() => this.deleteTeam(item)} />
         </View>);
     }
 
@@ -76,8 +90,24 @@ class CreateTeam extends React.Component {
                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }}
                           value={this.state.teamName} onChangeText={text => this.updateForm(text)}/>
                 <Text style={{color:'#ff0000'}}>{this.state.teamNameError}</Text>
-               <Button title="Create Team" onPress={() => this.addTeam(this.state.teamName)} />
-               <Button title="Create Clues" onPress={() => this.props.navigation.navigate('ListClues')} />
+                <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
+                <FadeInView style={{width: 140, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
+                alignItems:'center', borderRadius: '10'}}>
+                <Button 
+                    title="Create Team" 
+                    type="clear"
+                    onPress={() => this.addTeam(this.state.teamName)}
+                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
+                </FadeInView>
+                <FadeInView style={{width: 140, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
+                alignItems:'center', borderRadius: '10'}}>
+                <Button 
+                    title="Next" 
+                    type="clear"
+                    onPress={() => this.createClues()}
+                    titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547'}}/>   
+                </FadeInView>
+                </View>
                <View>
                     {this.renderTeams()}
                </View>
