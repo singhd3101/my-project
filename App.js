@@ -11,6 +11,7 @@ import VerifySubmission from './components/VerifySubmission';
 import ListClues from './components/ListClues';
 import CreateClues from './components/CreateClues';
 import { createStackNavigator,createAppContainer } from 'react-navigation'
+import MonitorTeams from './components/MonitorTeams';
 
 class Home extends React.Component {
   static navigationOptions = {
@@ -105,6 +106,9 @@ const AppNavigator = createStackNavigator({
   },
   PlayerView: {
     screen: PlayerView
+  },
+  MonitorTeams: {
+    screen: MonitorTeams
   }
   
 });

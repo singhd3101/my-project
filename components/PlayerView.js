@@ -27,13 +27,13 @@ class PlayerView extends React.Component {
             <Card containerStyle={{width:300, marginLeft:40}}>
             <Text style={{fontFamily:"Papyrus", fontSize:30, color:'#562547', textAlign:'center'}}>Enter Code</Text>
             <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
-            <FadeInView style={{width: 250, height: 50,marginTop:'2%', backgroundColor: '#a65c31', 
+            <FadeInView style={{width: 250, height: 50,marginTop:'2%', backgroundColor: 'powderblue', 
              borderRadius: '10', marginLeft:5}}>
              <Button 
               title="Submit" 
               type="clear"
               onPress={() => this.props.navigation.navigate('OrganizerView')}
-              titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
+              titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
         </FadeInView>
             </Card> 
             </View>       
