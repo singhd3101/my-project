@@ -83,8 +83,8 @@ class CreateTeam extends React.Component {
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-            <FixedHeader />
-            <ScrollView style={{padding: 15}}>
+            <ScrollView>
+            <FixedHeader marginTop={-60}/>
             <Card>
                <Text style={{fontWeight:'bold'}}>Team Name</Text>
                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }}
@@ -108,6 +108,7 @@ class CreateTeam extends React.Component {
                     titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
                 </View>
+                <View style={{marginTop:10}}></View>
                <View>
                     {this.renderTeams()}
                </View>

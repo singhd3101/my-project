@@ -1,7 +1,8 @@
-import React from 'react'
+import React from 'react';
 import FixedHeader from '../elements/FixedHeader';
-import { ScrollView, View, Text, ImageBackground} from 'react-native'
-import { Card, Button } from 'react-native-elements'
+import { ScrollView, View, Text, ImageBackground} from 'react-native';
+import { Button as Btn } from 'react-native';
+import { Card, Button } from 'react-native-elements';
 import styles from '../assets/style';
 import FadeInView from '../elements/FadeInView';
 
@@ -19,7 +20,7 @@ class ListClues extends React.Component {
         return this.state.clues.map((item, index) =>
         <Card key={index}>
             <View style={styles.container}>
-            <Button key={index + 50} title={item} onPress={() => this.props.navigation.navigate('CreateClues', 
+            <Btn key={index + 50} title={item} onPress={() => this.props.navigation.navigate('CreateClues', 
                     {index: index})}
                     buttonStyle={styles.button}/>
         </View>
