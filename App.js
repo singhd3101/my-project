@@ -4,6 +4,7 @@ import { StyleSheet, Text, View,ImageBackground } from 'react-native';
 import FixedHeader from './elements/FixedHeader';
 import FadeInView from './elements/FadeInView';
 import CreateQuest from './components/CreateQuest';
+import PlayerView from './components/PlayerView';
 import CreateTeam from './components/CreateTeam';
 import OrganizerView from './components/OrganizerView';
 import VerifySubmission from './components/VerifySubmission';
@@ -53,7 +54,7 @@ class Home extends React.Component {
         borderRadius: '10'}}>
         <Button 
         title="Player" 
-        onPress={() => this.props.navigation.navigate('CreateTeam')}
+        onPress={() => this.props.navigation.navigate('PlayerView')}
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
@@ -101,6 +102,9 @@ const AppNavigator = createStackNavigator({
   },
   ListClues: {
     screen: ListClues
+  },
+  PlayerView: {
+    screen: PlayerView
   }
   
 });
