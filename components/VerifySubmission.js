@@ -35,7 +35,7 @@ class VerifySubmission extends React.Component {
                     onPress={() => this.sendReview()}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#FF4500', 
+                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Reject" 

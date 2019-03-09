@@ -10,23 +10,38 @@ class CreateTeam extends React.Component {
         super(props)
         this.state ={
             teamName: '',
-            teamNames: ['test','test','test','test','test','test','test','test','test','test','test','test','test','test','test','test']
+            teamNames: ['test','test','test','test','test','test','test','test','test','test','test','test','test','test','test','test'],
+            teamNameError: ''
         }
     }
 
     addTeam(teamName) {
-        var list = this.state.teamNames.concat(teamName);
-        this.setState({
-            teamNames: list,
-            teamName: ''
-        });
+        let tn = teamName.trim();
+        if(tn == ''){
+            this.setState({
+                teamNameError: 'Please enter the text to proceed'
+            });
+        } else {
+            var list = this.state.teamNames.concat(teamName);
+            this.setState({
+                teamNames: list,
+                teamName: '',
+                teamNameError: ''
+            });
+        }
     }
 
     updateForm(teamName) {
-        if (teamName == ''){
-            alert("Please enter the text to proceed");
+        let tn = teamName.trim();
+        if (tn == ''){
+            this.setState({
+                teamNameError: 'Please enter the text to proceed'
+            });
         } else {
-            this.setState({teamName});
+            this.setState({
+                teamName: teamName,
+                teamNameError: ''
+            });
         }
     }
 
@@ -54,12 +69,13 @@ class CreateTeam extends React.Component {
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-            <FixedHeader height={90} />
+            <FixedHeader />
             <ScrollView style={{padding: 15}}>
             <Card>
-               <Text>Team Name</Text>
+               <Text style={{fontWeight:'bold'}}>Team Name</Text>
                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }}
                           value={this.state.teamName} onChangeText={text => this.updateForm(text)}/>
+                <Text style={{color:'#ff0000'}}>{this.state.teamNameError}</Text>
                <Button title="Create Team" onPress={() => this.addTeam(this.state.teamName)} />
                <Button title="Create Clues" onPress={() => this.props.navigation.navigate('ListClues')} />
                <View>
