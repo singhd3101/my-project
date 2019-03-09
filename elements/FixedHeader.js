@@ -5,7 +5,7 @@ import {Image} from 'react-native'
 const FixedHeader = () =>(
     <Header
         leftComponent={
-            <Image source={require('../assets/cps.png')} resizeMethod="scale"
+            <Image source={require('../assets/comp.png')} resizeMethod="scale"
             style={{width: '50%', height: '50%', backgroundColor:'#0e2a48', marginTop:10}}/>
         }
         centerComponent={{	text: 'Treasure Hunt',
