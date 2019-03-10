@@ -27,7 +27,14 @@ export default StyleSheet.create({
     chatContainer: {
       flex: 1,
       backgroundColor: 'white',
-      alignItems: 'center',
-      justifyContent: 'center'
+      width: '90%'
+    },
+    chatBox: {
+      padding: 10,
+      borderWidth: 0.5,
+      borderColor: '#d6d7da'
+    },
+    boldText: {
+      fontWeight: 'bold'
     }
   });
