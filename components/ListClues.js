@@ -19,12 +19,15 @@ class ListClues extends React.Component {
     renderClues() {
         return this.state.clues.map((item, index) =>
         <Card key={index}>
+       
             <View style={styles.container}>
             <Btn key={index + 50} title={item} onPress={() => this.props.navigation.navigate('CreateClues', 
                     {index: index})}
                     buttonStyle={styles.button}/>
         </View>
-        </Card>);
+       
+        </Card>
+       );
     }
 
     createQuest(){
