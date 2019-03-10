@@ -1,7 +1,7 @@
-import React from 'react'
-import {ScrollView,View,TextInput,StyleSheet,ImageBackground,Image,FlatList} from 'react-native'
-import { Container, Header, Content,Left, Card, CardItem, Body, Text } from 'native-base';
-import FixedHeader from '../elements/FixedHeader'
+import React from 'react';
+import {ScrollView,View,TextInput,StyleSheet,ImageBackground,Image,FlatList} from 'react-native';
+import { Container, Header, Content,Left, Card, CardItem, Body, Text, Icon } from 'native-base';
+import FixedHeader from '../elements/FixedHeader';
 
 
 class MonitorTeams extends React.Component {
@@ -72,8 +72,15 @@ class MonitorTeams extends React.Component {
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <FixedHeader/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-        <ScrollView style={{padding: 15}}>
-        <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white',textAlign:"center"}}>Teams</Text>
+        <ScrollView style={{padding: 15, marginBottom:120}}>
+        <View style={{flexDirection:"row"}}>
+             <View style={{flex:1}}>
+             <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white',textAlign:"left"}}>Teams</Text>
+             </View>
+             <View style={{flex:1}}>
+             <Icon name='information-circle' onPress={() => alert('Green highlighted team is awaiting verification.')}/>
+            </View>
+        </View>
             <FlatList 
                 data={this.state.data}
                 keyExtractor={(item, index) => item.id}

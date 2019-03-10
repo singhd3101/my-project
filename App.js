@@ -12,6 +12,7 @@ import ListClues from './components/ListClues';
 import QuestCode from './components/QuestCode';
 import CreateClues from './components/CreateClues';
 import ViewClue from './components/ViewClue';
+import QuestHistory from './components/QuestHistory';
 import { createStackNavigator,createAppContainer } from 'react-navigation'
 import MonitorTeams from './components/MonitorTeams';
 
@@ -103,6 +104,9 @@ const AppNavigator = createStackNavigator({
   },
   ViewClue: {
     screen: ViewClue
+  },
+  QuestHistory: {
+    screen: QuestHistory
   }
   
 });

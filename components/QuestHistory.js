@@ -5,7 +5,7 @@ import {Button} from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
 
 
-class OrganizerView extends React.Component {
+class QuestHistory extends React.Component {
     
     constructor(props) {
         super(props)
@@ -20,18 +20,28 @@ class OrganizerView extends React.Component {
         <FixedHeader/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
         <View>
-        <Text style={{fontFamily:"Papyrus",color: '#fff',fontSize:30, marginBottom:40, marginTop: 200, textAlign:"center"}}>Welcome Organizer!</Text>
+        <Text style={{fontFamily:"Papyrus",color: '#fff',fontSize:30, marginBottom:40, marginTop: 200, 
+            textAlign:"center"}}>Choose a Quest</Text>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', borderRadius: '10',marginLeft: 60}}>
         <Button 
-         title="Create Quest" 
+         title="Northeastern Hunt" 
          type="clear"
-         onPress={() => this.props.navigation.navigate('CreateQuest')}
+         onPress={() => this.props.navigation.navigate('MonitorTeams')}
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
         </FadeInView>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10',marginLeft: 60}}>
         <Button 
-        title="Start Quest" 
-        onPress={() => this.props.navigation.navigate('QuestHistory')}
+        disabled
+        title="Charles Espalande Hunt" 
+        onPress={() => this.props.navigation.navigate('MonitorTeams')}
+        type="clear"
+         titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
+        </FadeInView>
+        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10',marginLeft: 60}}>
+        <Button 
+        disabled
+        title="Quincy Market Hunt" 
+        onPress={() => this.props.navigation.navigate('MonitorTeams')}
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
@@ -41,4 +51,4 @@ class OrganizerView extends React.Component {
         )
     }
 }
-export default OrganizerView
+export default QuestHistory
