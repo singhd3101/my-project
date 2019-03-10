@@ -22,7 +22,7 @@ class Chat extends React.Component {
 
     render() {
         return(
-             <ScrollView style={{padding: 10}}>
+             <View style={{padding: 10}}>
                 <Card style={styles.chatBox}>
                     {this.props.chatMessages.map((chatData) => (
                         <ChatMessage key={chatData.message} playerName={chatData.playerName} message={chatData.message} />
@@ -40,7 +40,7 @@ class Chat extends React.Component {
                     type="clear"
                     onPress={() => this.addMessage()}
                     titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547', marginTop:10}}/>
-            </ScrollView>
+            </View>
         )
     }
 }
