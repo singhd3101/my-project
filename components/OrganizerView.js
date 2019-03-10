@@ -19,16 +19,16 @@ class OrganizerView extends React.Component {
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <FixedHeader/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{fontFamily:"Papyrus",color: '#fff',fontSize:30 }}>Welcome Organizer!</Text>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', borderRadius: '10'}}>
+        <View>
+        <Text style={{fontFamily:"Papyrus",color: '#fff',fontSize:30, marginBottom:40, marginTop: 200, textAlign:"center"}}>Welcome Organizer!</Text>
+        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', borderRadius: '10',marginLeft: 60}}>
         <Button 
          title="Create Quest" 
          type="clear"
          onPress={() => this.props.navigation.navigate('CreateQuest')}
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
         </FadeInView>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10'}}>
+        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10',marginLeft: 60}}>
         <Button 
         title="Start Quest" 
         onPress={() => this.props.navigation.navigate('MonitorTeams')}

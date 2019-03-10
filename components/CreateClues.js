@@ -14,7 +14,7 @@ class CreateClues extends React.Component {
             clueError: '',
             solution: '',
             solutionError: '',
-            points: 10,
+            points: "Please Select",
             hint: '',
             deductedPoints: 5,
             index: -1,
@@ -73,16 +73,18 @@ class CreateClues extends React.Component {
               hint: this.state.hint,
               deductedPoints
             });
-            this.props.navigation.navigate('Home');
+            this.props.navigation.navigate('ListClues');
           }
     }
 
     deleteClue(){
       alert('This will delete the clue from list of clues.')
+      this.props.navigation.navigate('ListClues');
     }
 
     render() {
-        let points = [{
+        let points = [
+          {
             key: 10,
             value: 10,
           }, {
@@ -102,22 +104,21 @@ class CreateClues extends React.Component {
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-
             <Card 
-            title="Add/Edit Clue" style={{fontSize: 40, fontColor: 'blue', width:'40'}} containerStyle={{height:450}}>
-               <Text>Clue</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, 
+            title="Add/Edit Clue" titleStyle={{fontSize: 20, color: '#562547', fontFamily:"Papyrus"}} containerStyle={{marginTop:40}}>
+               <Text style={{fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Clue</Text>
+               <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
                     borderBottomColor:'#555' }} value={this.state.clue} 
                     onChangeText={text => this.setState({clue: text, clueError: ''})}
                     placeholder={'eg. Mountain of books'}/>
                <Text style={{color:'#ff0000'}}>{this.state.clueError}</Text>
-               <Text>Solution</Text>
-               <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, 
+               <Text style={{fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Solution</Text>
+               <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
                     borderBottomColor:'#555' }} value={this.state.solution} 
                     onChangeText={text => this.setState({solution: text, solutionError: ''})}
                     placeholder={'eg. Snell Library'}/>
                <Text style={{color:'#ff0000'}}>{this.state.solutionError}</Text>
-               <Text>Points for solving the clue</Text>
+               <Text style={{fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Points for solving the clue</Text>
                 <Dropdown
                     selectedItemColor={'green'}
                     onChangeText={text => this.setState({points : text, deductedPoints: parseInt(text, 10)/2})}
@@ -125,31 +126,32 @@ class CreateClues extends React.Component {
                     data={points}
                     itemCount={5}
                 />
-                <Text>Hint</Text>
-                <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, 
+                <Text style={{fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Hint</Text>
+                <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
                     borderBottomColor:'#555' }} value={this.state.hint} 
                     onChangeText={text => this.setState({hint: text})}
                     placeholder={'eg. Near Curry Center'}/>
-                <Text style={{marginTop:20}}>Points deducted for requesting hint: {this.state.deductedPoints}</Text>
-                <View style={{marginTop:30}}></View>
+                <Text style={{marginTop:20,fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Points deducted for requesting hint: {this.state.deductedPoints}</Text>
+                <View style={{marginTop:40}}></View>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#32CD32', 
+                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Submit" 
                     type="clear"
                     onPress={() => this.createClue()}
-                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
+                    titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'red', 
+                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#b10000', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Delete" 
                     type="clear"
                     onPress={() => this.deleteClue()}
-                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
+                    titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
                 </View>
+                <View style={{marginTop:60}}></View>
             </Card>
             </ImageBackground>
             </View>

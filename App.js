@@ -40,12 +40,12 @@ class Home extends React.Component {
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <ImageBackground source={require('./assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-        <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
-        <Text style={{fontFamily: "Papyrus", color:'white', fontSize:30, fontWeight:'bold'}}> EAT. SLEEP. HUNT. </Text>
-        <Text style={{fontFamily: "Papyrus", color:'white', fontSize:30, fontWeight:'bold'}}> REPEAT. </Text>
-        <Text style={{fontFamily: "Papyrus", color:'white', fontSize:40}}> Join as a </Text>
+        <View>
+        <Text style={{fontFamily: "Papyrus", color:'white', fontSize:30, fontWeight:'bold', marginTop:200, textAlign:"center"}}> EAT. SLEEP. HUNT. </Text>
+        <Text style={{fontFamily: "Papyrus", color:'white', fontSize:30, fontWeight:'bold',textAlign:"center"}}> REPEAT. </Text>
+        <Text style={{fontFamily: "Papyrus", color:'white', fontSize:40,textAlign:"center"}}> Join as a </Text>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
-        borderRadius: '10'}}>
+        borderRadius: '10',marginLeft:60}}>
         <Button 
          title="Organizer" 
          type="clear"
@@ -54,20 +54,10 @@ class Home extends React.Component {
         </FadeInView>
         <View style={{marginTop:'2%'}}>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
-        borderRadius: '10'}}>
+        borderRadius: '10',marginLeft:60}}>
         <Button 
         title="Player" 
         onPress={() => this.props.navigation.navigate('PlayerView')}
-        type="clear"
-         titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
-        </FadeInView>
-        </View>
-        <View style={{marginTop:'2%'}}>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
-        borderRadius: '10'}}>
-        <Button 
-        title="View Clue" 
-        onPress={() => this.props.navigation.navigate('ViewClue')}
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
