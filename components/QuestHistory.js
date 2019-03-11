@@ -22,14 +22,14 @@ class QuestHistory extends React.Component {
         <View>
         <Text style={{fontFamily:"Papyrus",color: '#fff',fontSize:30, marginBottom:40, marginTop: 200, 
             textAlign:"center"}}>Choose a Quest</Text>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', borderRadius: '10',marginLeft: 60}}>
+        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', borderRadius: '10', alignSelf: "center"}}>
         <Button 
          title="Northeastern Hunt" 
          type="clear"
          onPress={() => this.props.navigation.navigate('MonitorTeams')}
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
         </FadeInView>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10',marginLeft: 60}}>
+        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10', alignSelf: "center"}}>
         <Button 
         disabled
         title="Charles Espalande Hunt" 
@@ -37,7 +37,7 @@ class QuestHistory extends React.Component {
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10',marginLeft: 60}}>
+        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10', alignSelf: "center"}}>
         <Button 
         disabled
         title="Quincy Market Hunt" 

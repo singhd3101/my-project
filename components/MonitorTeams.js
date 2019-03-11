@@ -72,14 +72,10 @@ class MonitorTeams extends React.Component {
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <FixedHeader/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-        <ScrollView style={{padding: 15, marginBottom:120}}>
-        <View style={{flexDirection:"row"}}>
-             <View style={{flex:1}}>
-             <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white',textAlign:"left"}}>Teams</Text>
-             </View>
-             <View style={{flex:1}}>
-             <Icon name='information-circle' onPress={() => alert('Green highlighted team is awaiting verification.')}/>
-            </View>
+        <ScrollView style={{padding: 15, marginBottom:120, alignSelf: "center"}}>
+        <View style={{flexDirection:"row", alignSelf: "center"}}>
+            <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white',textAlign:"left"}}>Teams</Text>
+            <Icon name='information-circle' style={{color:'#fff', marginLeft:5, marginTop:5}} onPress={() => alert('Green highlighted team is awaiting verification.')}/>
         </View>
             <FlatList 
                 data={this.state.data}
