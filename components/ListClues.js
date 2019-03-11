@@ -42,7 +42,7 @@ class ListClues extends React.Component {
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-            <ScrollView style={{padding: 15, marginBottom:70}}>
+            <ScrollView style={{padding: 15, marginBottom:70, alignSelf:"center"}}>
             <Card title='Clues' containerStyle={{width:320}} titleStyle={{fontSize:20, fontFamily:"Papyrus",color:'#562547'}}>
             <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <FadeInView style={{width: 140, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 

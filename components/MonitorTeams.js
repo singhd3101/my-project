@@ -59,10 +59,8 @@ class MonitorTeams extends React.Component {
             </CardItem>
         </Card>
       return <Card transparent key={item.id}> 
-      <CardItem header style={{height:170, width:170,backgroundColor:'powderblue'}} button onPress={() => alert("No submissions yet")} key={item.id} bordered>
-          
-                  <Text  style={{marginLeft:35,color:'#562547'}} key={item.id}>Team {item.teamName}</Text>
-
+        <CardItem header style={{height:170, width:170,backgroundColor:'powderblue'}} button onPress={() => alert("No submissions yet")} key={item.id} bordered>
+        <Text  style={{marginLeft:35,color:'#562547'}} key={item.id}>Team {item.teamName}</Text>
       </CardItem>
 </Card>
   }
