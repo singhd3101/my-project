@@ -68,7 +68,7 @@ class MonitorTeams extends React.Component {
     render() {
         return(
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <FixedHeader/>
+        <FixedHeader marginTop={60}/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
         <ScrollView style={{padding: 15, marginBottom:120, alignSelf: "center"}}>
         <View style={{flexDirection:"row", alignSelf: "center"}}>

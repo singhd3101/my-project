@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { View, Text, TextInput, ImageBackground} from 'react-native'
+import { ScrollView, View, Text, TextInput, ImageBackground} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
@@ -102,10 +102,12 @@ class CreateClues extends React.Component {
           }];
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <FixedHeader/>
+            <FixedHeader marginTop={60}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
+            <ScrollView>
             <Card 
-            title="Add/Edit Clue" titleStyle={{fontSize: 20, color: '#562547', fontFamily:"Papyrus"}} containerStyle={{marginTop:40}}>
+            title="Add/Edit Clue" titleStyle={{fontSize: 20, color: '#562547', fontFamily:"Papyrus"}} 
+            containerStyle={{marginTop:40, marginBottom:60}}>
                <Text style={{fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Clue</Text>
                <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
                     borderBottomColor:'#555' }} value={this.state.clue} 
@@ -153,6 +155,7 @@ class CreateClues extends React.Component {
                 </View>
                 <View style={{marginTop:60}}></View>
             </Card>
+            </ScrollView>
             </ImageBackground>
             </View>
         )

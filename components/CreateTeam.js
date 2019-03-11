@@ -82,7 +82,7 @@ class CreateTeam extends React.Component {
         var data = [['Team Name'], ['Action']]
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <FixedHeader/>
+            <FixedHeader marginTop={60}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
             <ScrollView style={{marginBottom:70}}>
             <Card>
