@@ -27,7 +27,29 @@ export default StyleSheet.create({
     chatContainer: {
       flex: 1,
       backgroundColor: 'white',
-      alignItems: 'center',
-      justifyContent: 'center'
+      width: '100%'
+    },
+    chatBox: {
+      padding: 10,
+      borderWidth: 0.5,
+      borderColor: '#d6d7da'
+    },
+    boldText: {
+      fontWeight: 'bold'
+    },
+    chatPanel:{
+      flexDirection:'row',
+      marginTop: 10,
+      marginRight: 20,
+      marginLeft: 10
+    },
+    chatPanelText:{
+        width: '90%',
+        textAlign:'left',
+        fontWeight: 'bold',
+        fontFamily:"Papyrus",
+        marginTop: 15,
+        fontSize: 20,
+        color: '#562547'
     }
   });

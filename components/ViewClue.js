@@ -1,19 +1,24 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { View, Text, TextInput, ImageBackground} from 'react-native'
+import { ScrollView, View, Text, TextInput, ImageBackground} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import FadeInView from '../elements/FadeInView';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../assets/style';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import UploadImage from './UploadImage';
+import Chat from './ChatComponents';
 
 class ViewClue extends React.Component {
     
     constructor(props) {
         super(props)
         this.state ={
-            teamName:['Morbid Hunters', 'Bits Please', 'Hakuna Matata', 'Avengers', 'Justice League', 'Gryffindor', 'Ravenclaw', 'Hufflepuff', 'Slytherin']
+            teamName:['Morbid Hunters', 'Bits Please', 'Hakuna Matata', 'Avengers', 'Justice League', 'Gryffindor', 'Ravenclaw', 'Hufflepuff', 'Slytherin'],
+            chatMessages: [{playerName: "Sam", message:"Hi all, I am at library and I don't think the answer is here"},
+                            {playerName: "Adam", message:"lets meet in ccis"},
+                        ],
+            clue: 'Clue: somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing '
         }
     }
 
@@ -28,6 +33,13 @@ class ViewClue extends React.Component {
     skip(){
         alert('Warning: No points for this clue will be given to the team');
         this.props.navigation.navigate('ViewClue');
+        this.setState({
+            clue: 'New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team'
+        })
+    }
+
+    addMessage(msg) {
+        this.chatMessages.push(msg);
     }
 
     render() {
@@ -48,7 +60,7 @@ class ViewClue extends React.Component {
                 </View>
                 <View style={{marginTop:20}}></View>
                 <Card containerStyle={{width:320, marginTop:-5, marginLeft:-5, marginRight:-5}}>
-                    <Text>Clue: somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing </Text>
+                    <Text>{this.state.clue}</Text>
                 </Card>
                 <View style={{marginTop:20}}></View>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
@@ -91,10 +103,28 @@ class ViewClue extends React.Component {
                 <Icon name="chat" size={45} color="#ffcf40" onPress={() => this._panel.show()} />
             </Card>
             <SlidingUpPanel ref={c => this._panel = c}>
-                <View style={styles.chatContainer}>
-                   <Text>Here is the team chat panel.</Text>
-                    <Button title='Hide' onPress={() => this._panel.hide()} />
-                </View>
+                {() => (
+                    <View style={styles.chatContainer}>
+                    <ScrollView>
+                        <View style={styles.chatPanel}>
+                            <Text style={styles.chatPanelText}>Team Discussion Board.</Text>
+                            <Icon name="clear" size={45} color="#ffcf40" onPress={() => this._panel.hide()} />
+                        </View>
+                        <Chat chatMessages = {this.state.chatMessages} addMessage={this.addMessage}></Chat>
+                        <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
+                                borderBottomColor:'#555' , margin:20, }} value={this.state.message}
+                                placeholder={'Enter Message'} onChangeText={(text) => {
+                        this.setState({
+                            message: text
+                        })}}/>
+                        <FadeInView style={{width: 300, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
+                            alignItems:'center', borderRadius: '10', marginLeft:40}}>
+                        <Button title="Send" type="clear" onPress={() => this.addMessage()}
+                            titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547'}}/>
+                        </FadeInView>
+                    </ScrollView>
+                    </View>
+                )}
             </SlidingUpPanel>
             </ImageBackground>
             </View>
