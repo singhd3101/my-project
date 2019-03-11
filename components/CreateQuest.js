@@ -113,7 +113,7 @@ class CreateQuest extends React.Component {
                     data={timeLimit}
                 />
                 <FadeInView style={{width: 305, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
-                borderRadius: '10', alignItems:'center', marginTop:20}}>
+                borderRadius: '10', alignItems:'center', marginTop:20, alignSelf: "center"}}>
                 <Button 
                     title="Create Teams" 
                     type="clear"

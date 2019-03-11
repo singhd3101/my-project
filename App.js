@@ -46,7 +46,7 @@ class Home extends React.Component {
         <Text style={{fontFamily: "Papyrus", color:'white', fontSize:30, fontWeight:'bold',textAlign:"center"}}> REPEAT. </Text>
         <Text style={{fontFamily: "Papyrus", color:'white', fontSize:40,textAlign:"center"}}> Join as a </Text>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
-        borderRadius: '10',marginLeft:60}}>
+        borderRadius: '10', alignSelf: "center"}}>
         <Button 
          title="Organizer" 
          type="clear"
@@ -55,7 +55,7 @@ class Home extends React.Component {
         </FadeInView>
         <View style={{marginTop:'2%'}}>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
-        borderRadius: '10',marginLeft:60}}>
+        borderRadius: '10', alignSelf: "center"}}>
         <Button 
         title="Player" 
         onPress={() => this.props.navigation.navigate('PlayerView')}
