@@ -36,5 +36,19 @@ export default StyleSheet.create({
     },
     boldText: {
       fontWeight: 'bold'
+    },
+    chatPanel:{
+      flexDirection:'row',
+      marginTop: 10,
+      marginRight: 20,
+      marginLeft: 10
+    },
+    chatPanelText:{
+        width: '90%',
+        textAlign:'center',
+        fontWeight: 'bold',
+        marginTop: 15,
+        fontSize: 20
     }
   });
+  

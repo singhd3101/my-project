@@ -12,7 +12,6 @@ class Chat extends React.Component {
     }
 
     addMessage() {
-        console.log("MEssage", this.state.message);
         if (this.state.message != '')
             this.props.addMessage({playerName:"Me", message: this.state.message});
         this.setState({
@@ -31,7 +30,6 @@ class Chat extends React.Component {
                 <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
                     borderBottomColor:'#555' , margin:20, }} value={this.state.message}
                     placeholder={'Enter Message'} onChangeText={(text) => {
-                        console.log(text)
                         this.setState({
                             message: text
                         })}}/>
