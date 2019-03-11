@@ -26,8 +26,7 @@ export default StyleSheet.create({
     },
     chatContainer: {
       flex: 1,
-      backgroundColor: 'white',
-      width: '90%'
+      backgroundColor: 'white'
     },
     chatBox: {
       padding: 10,
@@ -51,4 +50,3 @@ export default StyleSheet.create({
         fontSize: 20
     }
   });
-  
