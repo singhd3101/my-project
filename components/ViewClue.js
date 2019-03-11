@@ -1,18 +1,29 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { View, Text, TextInput, ImageBackground} from 'react-native'
+import { View, Text, ImageBackground, ScrollView} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import FadeInView from '../elements/FadeInView';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../assets/style';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import Chat from './ChatComponents';
 
 class ViewClue extends React.Component {
     
     constructor(props) {
         super(props)
         this.state ={
-            teamName:['Morbid Hunters', 'Bits Please', 'Hakuna Matata', 'Avengers', 'Justice League', 'Gryffindor', 'Ravenclaw', 'Hufflepuff', 'Slytherin']
+            teamName:['Morbid Hunters', 'Bits Please', 'Hakuna Matata', 'Avengers', 'Justice League', 'Gryffindor', 'Ravenclaw', 'Hufflepuff', 'Slytherin'],
+            chatMessages: [{playerName: "Sam", message:"Hi all, I am at library and I don't think the answer is here"},
+                            {playerName: "Adam", message:"lets meet in ccis"},
+                            {playerName: "Sam", message:"coming"},
+                            {playerName: "Clara", message:"Maybe it is in ryder hall"},
+                            {playerName: "Sam", message:"Clara please go to ryder"},
+                            {playerName: "Clara", message:"ok"},
+                            {playerName: "Sam", message:"any update clara"},
+                            {playerName: "Clara", message:"still finding"},
+                            {playerName: "Sam", message:"okay"},
+                        ]
         }
     }
 
@@ -27,6 +38,10 @@ class ViewClue extends React.Component {
     skip(){
         alert('Warning: No points for this clue will be given to the team');
         this.props.navigation.navigate('ViewClue');
+    }
+
+    addMessage(msg) {
+        this.chatMessages.push(msg);
     }
 
     render() {
@@ -94,15 +109,24 @@ class ViewClue extends React.Component {
                 <View style={{marginTop:100}}></View>
                 <Icon name="chat" size={45} color="#ffcf40" onPress={() => this._panel.show()} />
             </Card>
-            <SlidingUpPanel ref={c => this._panel = c}>
-                <View style={styles.chatContainer}>
-                   <Text>Here is the team chat panel.</Text>
-                    <Button title='Hide' onPress={() => this._panel.hide()} />
-                </View>
-            </SlidingUpPanel>
+            <SlidingUpPanel ref={c => (this._panel = c)}>
+                {() => (
+                    <View style={styles.chatContainer}>
+                    <ScrollView>
+                        <View style={styles.chatPanel}>
+                            <Text style={styles.chatPanelText}>Here is the team chat panel.</Text>
+                            <Icon name="clear" size={45} color="#ff5c33" onPress={() => this._panel.hide()} />
+                        </View>
+                        <Chat chatMessages = {this.state.chatMessages} addMessage={this.addMessage}></Chat>
+                        <Text>{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}</Text>
+                    </ScrollView>
+                    </View>
+                )}
+                </SlidingUpPanel>
             </ImageBackground>
             </View>
         )
     }
 }
+
 export default ViewClue
