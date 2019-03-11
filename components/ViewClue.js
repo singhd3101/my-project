@@ -6,6 +6,7 @@ import FadeInView from '../elements/FadeInView';
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import styles from '../assets/style';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import UploadImage from './UploadImage';
 
 class ViewClue extends React.Component {
     
@@ -51,18 +52,13 @@ class ViewClue extends React.Component {
                 </Card>
                 <View style={{marginTop:20}}></View>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
+                <UploadImage
+                        payloadKey='file'
+                        endpoint='https://mighty-dusk-79530.herokuapp.com/api/upload' />
+                <FadeInView style={{width: 180, height: 50,paddingTop:'1%', backgroundColor: '#1dd43c', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
-                    title="Upload" 
-                    type="clear"
-                    onPress={() => this.sendReview()}
-                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
-                </FadeInView>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#1dd43c', 
-                alignItems:'center', borderRadius: '10'}}>
-                <Button 
-                    title="Send" 
+                    title="Request Verification" 
                     type="clear"
                     onPress={() => this.sendReview()}
                     titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547'}}/>   
@@ -70,7 +66,7 @@ class ViewClue extends React.Component {
                 </View>
                 <View style={{marginTop:60}}></View>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
+                <FadeInView style={{width: 120, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Requst Hint" 
@@ -78,7 +74,7 @@ class ViewClue extends React.Component {
                     onPress={() => this.sendReview()}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'6%', alignItems:'center', borderRadius: '10'}}>
+                <FadeInView style={{width: 180, height: 50,paddingTop:'6%', alignItems:'center', borderRadius: '10'}}>
                 <Text style={{fontFamily: "Papyrus", color: '#562547'}}>-20 points</Text> 
                 </FadeInView>
                 </View>

@@ -11,8 +11,8 @@ class CreateQuest extends React.Component {
         super(props)
         this.state ={
             name: '',
-            numberOfPlayers: "Please Select",
-            timeLimit: "Please Select",
+            numberOfPlayers: 2,
+            timeLimit: 30,
             error: ''
         }
     }
