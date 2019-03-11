@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { View, Text, TextInput, ImageBackground} from 'react-native'
+import { ScrollView, View, Text, TextInput, ImageBackground} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
@@ -88,11 +88,11 @@ class CreateQuest extends React.Component {
           }];
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <FixedHeader/>
+            <FixedHeader marginTop={60}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-
+            <ScrollView>
             <Card 
-            title="Create Quest" titleStyle={{fontSize: 20,fontFamily:"Papyrus",color:'#562547',paddingBottom:20}} containerStyle={{marginTop:50,paddingTop:20}}>
+            title="Create Quest" titleStyle={{fontSize: 20,fontFamily:"Papyrus",color:'#562547',paddingBottom:20}} containerStyle={{marginTop:30,paddingTop:20, marginBottom:60}}>
                <Text style={{fontFamily:"Papyrus", fontSize:18, color:'#562547'}}>Quest Name</Text>
                <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
                     borderBottomColor:'#555' }} value={this.state.name} placeholder={'eg. Quest 1'}
@@ -121,6 +121,7 @@ class CreateQuest extends React.Component {
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
             </Card>
+            </ScrollView>
             </ImageBackground>
             </View>
         )

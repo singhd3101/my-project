@@ -82,7 +82,7 @@ class ViewClue extends React.Component {
                 <Button 
                     title="Request Verification" 
                     type="clear"
-                    onPress={() => this.sendReview()}
+                    onPress={() => alert('Image verification requested from organizer.')}
                     titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
                 </View>
