@@ -15,18 +15,7 @@ class PlayerView extends React.Component {
     }
 
     updateForm(newState) {
-        this.setState(newState);
-        let name = this.state.name.trim();
-        if(name == ''){
-            this.setState({
-              error: 'Please enter a quest code'
-            });
-          } else {
-            this.setState({
-              name: newState.name,
-              error: ''
-            });
-          }  
+        this.setState(newState);  
     }
 
     submitCode(){

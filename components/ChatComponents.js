@@ -22,7 +22,7 @@ class Chat extends React.Component {
 
     render() {
         return(
-             <View style={{padding: 10}}>
+             <View style={{padding: 10, backgroundColor:'#f5f5f5'}}>
                 <Card style={styles.chatBox}>
                     {this.props.chatMessages.map((chatData) => (
                         <ChatMessage key={chatData.message} playerName={chatData.playerName} message={chatData.message} />

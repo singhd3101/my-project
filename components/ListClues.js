@@ -18,7 +18,7 @@ class ListClues extends React.Component {
 
     renderClues() {
         return this.state.clues.map((item, index) =>
-        <Card key={index} title={'Clue '.concat(index).concat('.')}>
+        <Card key={index} containerStyle={{backgroundColor:'#f5f5f5'}} title={'Clue '.concat(index + 1).concat('.')} titleStyle={{fontFamily:"Papyrus",color:'#562547'}}>
             <View style={styles.container}>
             <Btn key={index + 50} title={item} onPress={() => this.props.navigation.navigate('CreateClues', 
                     {index: index})}
