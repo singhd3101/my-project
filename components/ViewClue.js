@@ -19,7 +19,8 @@ class ViewClue extends React.Component {
                             {playerName: "Adam", message:"lets meet in ccis"},
                         ],
             clue: 'Clue: somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing ',
-            hintRequested: false
+            hintRequested: false,
+            score: 200
         }
     }
 
@@ -64,11 +65,11 @@ class ViewClue extends React.Component {
                     <Text style={{justifyContent:'flex-start', fontSize: 20,fontFamily:"Papyrus",color:'#562547'}}>{team}</Text>
                     </View>
                     <View style={{flex:1}}>
-                    <Text style={{justifyContent:'flex-end', textAlign:'right', fontSize: 20,fontFamily:"Papyrus",color:'#562547'}}>Team Score: 200</Text>
+                    <Text style={{justifyContent:'flex-end', textAlign:'right', fontSize: 20,fontFamily:"Papyrus",color:'#562547'}}>Team Score: {this.state.score}</Text>
                     </View>
                 </View>
                 <View style={{marginTop:20}}></View>
-                <Card containerStyle={{width:320, marginTop:-5, marginLeft:-5, marginRight:-5}}>
+                <Card containerStyle={{width:'100%', marginTop:-5, marginLeft:-5, marginRight:-5}}>
                     <Text>{this.state.clue}</Text>
                 </Card>
                 <View style={{marginTop:20}}></View>
@@ -87,11 +88,16 @@ class ViewClue extends React.Component {
                 </View>
                 <View style={{marginTop:60}}></View>
                 {this.state.hintRequested ? 
-                <Text style={{fontFamily: "Papyrus", color: '#562547', paddingTop:5, marginBottom:-27}}>Hint: bla bla bla !</Text> : 
+                    <Text style={{fontFamily: "Papyrus", color: '#562547', paddingTop:5, marginBottom:-27}}>Hint: bla bla bla !</Text> :
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
-                <FadeInView style={{width: 120, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
+                <FadeInView style={{width: '40%', height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 alignItems:'center', borderRadius: '10'}}>
-                <Button title="Requst Hint" type="clear" onPress={() => this.setState({hintRequested : true})}
+                <Button title="Requst Hint" type="clear"
+                    onPress={() =>
+                        this.setState({
+                            hintRequested : true,
+                            score: this.state.score - 20
+                        })}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
                 <FadeInView style={{width: 180, height: 50,paddingTop:'6%', alignItems:'center', borderRadius: '10'}}>
@@ -99,7 +105,7 @@ class ViewClue extends React.Component {
                 </FadeInView>
                 </View>}
                 <View style={{marginTop:60}}></View>
-                <FadeInView style={{width: 315, height: 50,paddingTop:'1%', backgroundColor: 'orange', 
+                <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'orange',
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Skip this Clue" 
