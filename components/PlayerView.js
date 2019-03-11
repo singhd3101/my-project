@@ -9,12 +9,35 @@ class PlayerView extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
-            name: ''
+            name: '',
+            error: ''
         }
     }
 
     updateForm(newState) {
         this.setState(newState);
+        let name = this.state.name.trim();
+        if(name == ''){
+            this.setState({
+              error: 'Please enter a quest code'
+            });
+          } else {
+            this.setState({
+              name: newState.name,
+              error: ''
+            });
+          }  
+    }
+
+    submitCode(){
+        let name = this.state.name.trim();
+        if(name == ''){
+            this.setState({
+                error: 'Please enter a valid quest code.'
+              });
+        } else {
+            this.props.navigation.navigate('ViewClue');
+        }
     }
 
     render() {
@@ -25,16 +48,20 @@ class PlayerView extends React.Component {
             <View style={{marginTop:200}}>
             <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white', textAlign:'center'}}>Welcome Player!</Text>
             <Card containerStyle={{width:300, marginLeft:40}}>
-            <Text style={{fontFamily:"Papyrus", fontSize:30, color:'#562547', textAlign:'center'}}>Enter Code</Text>
-            <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }} value={this.state.name} onChangeText={text => this.updateForm({name: text})}/>
+            <Text style={{fontFamily:"Papyrus", fontSize:30, color:'#562547', textAlign:'center'}}>
+                Enter Code</Text>
+            <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, 
+            borderBottomColor:'#555' }} value={this.state.name} 
+            onChangeText={text => this.updateForm({name: text, error: ''})}/>
+            <Text style={{color:'#ff0000'}}>{this.state.error}</Text>
             <FadeInView style={{width: 250, height: 50,marginTop:20, backgroundColor: 'powderblue', 
              borderRadius: '10', marginLeft:5}}>
              <Button 
               title="Submit" 
               type="clear"
-              onPress={() => this.props.navigation.navigate('ViewClue')}
+              onPress={() => this.submitCode()}
               titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
-        </FadeInView>
+            </FadeInView>
             </Card> 
             </View>       
             </ImageBackground>
