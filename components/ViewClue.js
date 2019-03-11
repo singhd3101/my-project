@@ -115,7 +115,7 @@ class ViewClue extends React.Component {
                     <ScrollView>
                         <View style={styles.chatPanel}>
                             <Text style={styles.chatPanelText}>Here is the team chat panel.</Text>
-                            <Icon name="clear" size={45} color="#ffcf40" onPress={() => this._panel.hide()} />
+                            <Icon name="clear" size={45} color="#ff5c33" onPress={() => this._panel.hide()} />
                         </View>
                         <Chat chatMessages = {this.state.chatMessages} addMessage={this.addMessage}></Chat>
                         <Text>{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}{'\n'}</Text>
