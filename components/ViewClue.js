@@ -119,17 +119,6 @@ class ViewClue extends React.Component {
                             <Icon name="clear" size={45} color="#ffcf40" onPress={() => this._panel.hide()} />
                         </View>
                         <Chat chatMessages = {this.state.chatMessages} addMessage={this.addMessage}></Chat>
-                        <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
-                                borderBottomColor:'#555' , margin:20, }} value={this.state.message}
-                                placeholder={'Enter Message'} onChangeText={(text) => {
-                        this.setState({
-                            message: text
-                        })}}/>
-                        <FadeInView style={{width: 300, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
-                            alignItems:'center', borderRadius: '10', marginLeft:40}}>
-                        <Button title="Send" type="clear" onPress={() => this.addMessage()}
-                            titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547'}}/>
-                        </FadeInView>
                     </ScrollView>
                     </View>
                 )}
