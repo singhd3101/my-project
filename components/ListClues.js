@@ -1,6 +1,6 @@
 import React from 'react';
 import FixedHeader from '../elements/FixedHeader';
-import { ScrollView, View, Text, ImageBackground} from 'react-native';
+import { ScrollView, View, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import { Button as Btn } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import styles from '../assets/style';
@@ -18,6 +18,8 @@ class ListClues extends React.Component {
 
     renderClues() {
         return this.state.clues.map((item, index) =>
+        <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateClues', 
+        {index: index})}>
         <Card key={index} containerStyle={{backgroundColor:'#f5f5f5'}} title={'Clue '.concat(index + 1).concat('.')} titleStyle={{fontFamily:"Papyrus",color:'#562547'}}>
             <View style={styles.container}>
             <Btn key={index + 50} title={item} onPress={() => this.props.navigation.navigate('CreateClues', 
@@ -25,6 +27,7 @@ class ListClues extends React.Component {
                     buttonStyle={styles.button}/>
         </View>
         </Card>
+        </TouchableOpacity>
        );
     }
 
@@ -45,6 +48,7 @@ class ListClues extends React.Component {
             <ScrollView style={{padding: 15, marginBottom:70, alignSelf:"center"}}>
             <Card title='Clues' containerStyle={{width:320}} titleStyle={{fontSize:20, fontFamily:"Papyrus",color:'#562547'}}>
             <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateClues')}>
                 <FadeInView style={{width: 140, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
@@ -54,6 +58,8 @@ class ListClues extends React.Component {
                         onPress={() => this.props.navigation.navigate('CreateClues')}
                         titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/> 
                 </FadeInView>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.createQuest()}>
                 <FadeInView style={{width: 140, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
@@ -63,6 +69,7 @@ class ListClues extends React.Component {
                         onPress={() => this.createQuest()}
                         titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/> 
                 </FadeInView>
+                </TouchableOpacity>
                 </View>
                <View style={{marginTop:10}}></View>
                <View>

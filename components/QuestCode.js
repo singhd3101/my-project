@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TextInput, ImageBackground } from 'react-native'
+import { View, Text, ImageBackground } from 'react-native'
 import FadeInView from '../elements/FadeInView';
 import { Button, Card } from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'

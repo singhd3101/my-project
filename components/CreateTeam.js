@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, Text,TextInput, StyleSheet, ImageBackground} from 'react-native';
+import { ScrollView, View, Text,TextInput, ImageBackground} from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import FixedHeader from '../elements/FixedHeader';
 import styles from '../assets/style';
@@ -12,7 +12,7 @@ class CreateTeam extends React.Component {
         super(props)
         this.state ={
             teamName: '',
-            teamNames: ['test','test','test','test','test','test','test','test','test','test','test','test','test','test','test','test'],
+            teamNames: ['test','test1','test2'],
             teamNameError: ''
         }
     }

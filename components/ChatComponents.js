@@ -34,11 +34,13 @@ class Chat extends React.Component {
                 this.setState({
                     message: text
                 })}}/>
+                <TouchableOpacity onPress={() => this.addMessage()}>
                 <FadeInView style={{width: 300, height: 50,paddingTop:'1%', backgroundColor: 'powderblue',
                     alignItems:'center', borderRadius: '10', marginLeft:40}}>
                 <Button title="Send" type="clear" onPress={() => this.addMessage()}
                     titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547'}}/>
                 </FadeInView>
+                </TouchableOpacity>
             </View>
         )
     }

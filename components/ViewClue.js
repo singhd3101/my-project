@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { ScrollView, View, Text, TextInput, ImageBackground} from 'react-native'
+import { ScrollView, View, Text, TextInput, ImageBackground, TouchableOpacity} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import FadeInView from '../elements/FadeInView';
 import SlidingUpPanel from 'rn-sliding-up-panel';
@@ -92,7 +92,7 @@ class ViewClue extends React.Component {
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <FadeInView style={{width: '40%', height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 alignItems:'center', borderRadius: '10'}}>
-                <Button title="Requst Hint" type="clear"
+                <Button title="Request Hint" type="clear"
                     onPress={() =>
                         this.setState({
                             hintRequested : true,
@@ -105,6 +105,7 @@ class ViewClue extends React.Component {
                 </FadeInView>
                 </View>}
                 <View style={{marginTop:60}}></View>
+                <TouchableOpacity onPress={() => this.skip()}>
                 <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'orange',
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
@@ -113,6 +114,7 @@ class ViewClue extends React.Component {
                     onPress={() => this.skip()}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
+                </TouchableOpacity>
                 <View style={{marginTop:80}}></View>
                 <Icon name="chat" size={45} color="#ffcf40" onPress={() => this._panel.show()} />
             </Card>
@@ -122,7 +124,7 @@ class ViewClue extends React.Component {
                     <ScrollView>
                         <View style={styles.chatPanel}>
                             <Text style={styles.chatPanelText}>Team Discussion Board.</Text>
-                            <Icon name="clear" size={45} color="#ffcf40" onPress={() => this._panel.hide()} />
+                            <Icon name="clear" size={45} color="red" onPress={() => this._panel.hide()} />
                         </View>
                         <Chat chatMessages = {this.state.chatMessages} addMessage={this.addMessage}></Chat>
                     </ScrollView>

@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { ScrollView, View, Text, TextInput, ImageBackground} from 'react-native'
+import { ScrollView, View, Text, TextInput, ImageBackground, TouchableOpacity} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
@@ -136,6 +136,7 @@ class CreateClues extends React.Component {
                 <Text style={{marginTop:20,fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Points deducted for requesting hint: {this.state.deductedPoints}</Text>
                 <View style={{marginTop:40}}></View>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
+                <TouchableOpacity onPress={() => this.createClue()}>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
@@ -144,6 +145,8 @@ class CreateClues extends React.Component {
                     onPress={() => this.createClue()}
                     titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => this.deleteClue()}>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#b10000', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
@@ -152,6 +155,7 @@ class CreateClues extends React.Component {
                     onPress={() => this.deleteClue()}
                     titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
+                </TouchableOpacity>
                 </View>
                 <View style={{marginTop:60}}></View>
             </Card>
