@@ -20,7 +20,7 @@ class ViewClue extends React.Component {
                         ],
             clue: 'Clue: somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing ',
             hintRequested: false,
-            score: 200
+            score: 200,
         }
     }
 
@@ -62,10 +62,12 @@ class ViewClue extends React.Component {
             <Card containerStyle={{height:500}}>
             <View style={{flexDirection:"row"}}>
                     <View style={{flex:1}}>
-                    <Text style={{justifyContent:'flex-start', fontSize: 20,fontFamily:"Papyrus",color:'#562547'}}>{team}</Text>
+                    <Text style={{justifyContent:'flex-start', fontSize: 20,fontFamily:"Papyrus",color:'#562547'}}>
+                    {team}</Text>
                     </View>
                     <View style={{flex:1}}>
-                    <Text style={{justifyContent:'flex-end', textAlign:'right', fontSize: 20,fontFamily:"Papyrus",color:'#562547'}}>Team Score: {this.state.score}</Text>
+                    <Text style={{justifyContent:'flex-end', textAlign:'right', fontSize: 20,fontFamily:"Papyrus",
+                    color:'#562547'}}>Team Score: {this.state.score}</Text>
                     </View>
                 </View>
                 <View style={{marginTop:20}}></View>
@@ -88,7 +90,8 @@ class ViewClue extends React.Component {
                 </View>
                 <View style={{marginTop:60}}></View>
                 {this.state.hintRequested ? 
-                    <Text style={{fontFamily: "Papyrus", color: '#562547', paddingTop:5, marginBottom:-27}}>Hint: bla bla bla !</Text> :
+                    <Text style={{fontFamily: "Papyrus", color: '#562547', paddingTop:5, marginBottom:-27}}>
+                    Hint: bla bla bla !</Text> :
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <FadeInView style={{width: '40%', height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 alignItems:'center', borderRadius: '10'}}>
@@ -100,7 +103,8 @@ class ViewClue extends React.Component {
                         })}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
-                <FadeInView style={{width: 180, height: 50,paddingTop:'6%', alignItems:'center', borderRadius: '10'}}>
+                <FadeInView style={{width: 180, height: 50,paddingTop:'6%', alignItems:'center',
+                 borderRadius: '10'}}>
                 <Text style={{fontFamily: "Papyrus", color: '#562547'}}>-20 points</Text> 
                 </FadeInView>
                 </View>}

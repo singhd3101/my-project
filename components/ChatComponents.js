@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, TextInput, ScrollView} from 'react-native'
+import { View, Text, TextInput, ScrollView, TouchableOpacity} from 'react-native'
 import { Card, Button } from 'react-native-elements';
 import styles from '../assets/style';
 import FadeInView from '../elements/FadeInView';
