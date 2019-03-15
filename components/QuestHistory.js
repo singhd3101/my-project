@@ -19,10 +19,11 @@ class QuestHistory extends React.Component {
         <FixedHeader marginTop={60}/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
         <View>
-        <Text style={{fontFamily:"Papyrus",color: '#fff',fontSize:30, marginBottom:40, marginTop: 200, 
+        <Text style={{fontFamily:"Papyrus",color: '#fff',fontSize:30, marginBottom:40, marginTop: 100, 
             textAlign:"center"}}>Choose a Quest</Text>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('MonitorTeams')}>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', borderRadius: '10', alignSelf: "center"}}>
+        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue',
+         borderRadius: '10', alignSelf: "center"}}>
         <Button 
          title="Northeastern Hunt" 
          type="clear"

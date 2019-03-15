@@ -34,8 +34,9 @@ class PlayerView extends React.Component {
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-            <View style={{marginTop:200}}>
-            <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white', textAlign:'center'}}>Welcome Player!</Text>
+            <View style={{marginTop:150}}>
+            <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white', textAlign:'center'}}>
+            Welcome Player!</Text>
             <Card containerStyle={{width:300, alignSelf:"center"}}>
                 <Text style={{fontFamily:"Papyrus", fontSize:30, color:'#562547', textAlign:'center'}}>
                     Enter Code</Text>

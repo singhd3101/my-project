@@ -25,7 +25,8 @@ class VerifySubmission extends React.Component {
 
             <Card title="Verify Submission" containerStyle={{height:500}}>
                 <Image source={require('../assets/submission.jpg')} style={{width: '100%', height: '50%'}} />
-                <View style={{marginTop:40}}></View>
+                <View style={{marginTop:20}}></View>
+                <Text style={{marginBottom:20, fontWeight:'bold'}}>Solution: Snell Library</Text>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 
                 alignItems:'center', borderRadius: '10'}}>
