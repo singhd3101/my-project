@@ -103,7 +103,7 @@ class ViewClue extends React.Component {
                         })}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
-                <FadeInView style={{width: 180, height: 50,paddingTop:'6%', alignItems:'center',
+                <FadeInView style={{width: 180, height: 50, paddingTop:'6%', alignItems:'center',
                  borderRadius: '10'}}>
                 <Text style={{fontFamily: "Papyrus", color: '#562547'}}>-20 points</Text> 
                 </FadeInView>

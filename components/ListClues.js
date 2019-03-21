@@ -18,8 +18,8 @@ class ListClues extends React.Component {
 
     renderClues() {
         return this.state.clues.map((item, index) =>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateClues', 
-        {index: index})}>
+        <TouchableOpacity style={{marginBottom:40}} onPress={() => this.props.navigation.navigate('CreateClues', 
+        {index: index})} key={index}>
         <Card key={index} containerStyle={{backgroundColor:'#f5f5f5'}} title={'Clue '.concat(index + 1).concat('.')} titleStyle={{fontFamily:"Papyrus",color:'#562547'}}>
             <View style={styles.container}>
             <Btn key={index + 50} title={item} onPress={() => this.props.navigation.navigate('CreateClues', 
@@ -45,8 +45,9 @@ class ListClues extends React.Component {
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-            <ScrollView style={{padding: 15, marginBottom:70, alignSelf:"center"}}>
-            <Card title='Clues' containerStyle={{width:320}} titleStyle={{fontSize:20, fontFamily:"Papyrus",color:'#562547'}}>
+            <ScrollView style={{padding: 15, marginBottom:70, paddingBottom:50, alignSelf:"center"}}>
+            <Card title='Clues' containerStyle={{width:320}} titleStyle={{fontSize:20, fontFamily:"Papyrus",
+            color:'#562547'}}>
             <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate('CreateClues')}>
                 <FadeInView style={{width: 140, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 

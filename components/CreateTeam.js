@@ -42,7 +42,7 @@ class CreateTeam extends React.Component {
         let tn = teamName.trim();
         if (tn == ''){
             this.setState({
-                teamNameError: 'Please enter the text to proceed'
+                teamNameError: 'Please enter a team name'
             });
         } else {
             this.setState({
@@ -86,9 +86,12 @@ class CreateTeam extends React.Component {
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
             <ScrollView style={{marginBottom:70}}>
             <Card>
-               <Text style={{fontWeight:'bold', fontFamily:"Papyrus", fontSize:20,color:'#562547'}}>Team Name</Text>
-               <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, borderBottomColor:'#555' }}
-                          value={this.state.teamName} placeholder={'eg.Team A'} onChangeText={text => this.updateForm(text)}/>
+               <Text style={{fontWeight:'bold', fontFamily:"Papyrus", fontSize:20,color:'#562547'}}>
+               Team Name</Text>
+               <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
+               borderBottomColor:'#555' }}
+                          value={this.state.teamName} placeholder={'eg.Team A'} 
+                          onChangeText={text => this.updateForm(text)}/>
                 <Text style={{color:'#ff0000'}}>{this.state.teamNameError}</Text>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <FadeInView style={{width: 140, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 

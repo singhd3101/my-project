@@ -115,7 +115,7 @@ class CreateQuest extends React.Component {
                 <FadeInView style={{width: 305, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 borderRadius: '10', alignItems:'center', marginTop:20, alignSelf: "center"}}>
                 <Button 
-                    title="Create Teams" 
+                    title="Next" 
                     type="clear"
                     onPress={() => this.createQuest()}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
