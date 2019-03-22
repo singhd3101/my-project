@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { ScrollView, View, Text, TextInput, ImageBackground, TouchableOpacity} from 'react-native'
+import { ScrollView, View, Text, TextInput, ImageBackground, TouchableOpacity, Alert} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
@@ -77,9 +77,32 @@ class CreateClues extends React.Component {
           }
     }
 
+    clear(){
+      this.setState({
+        clue: '',
+        solution: '',
+        points: "Please Select",
+        hint: '',
+        deductedPoints: 5
+      });
+    }
+
     deleteClue(){
-      alert('This will delete the clue from list of clues.')
-      this.props.navigation.navigate('ListClues');
+      //Add validation when api call is added, should check if user is trying to delete after clicking add clue, 
+      //should not allow user to delete anything if clicked add new clue
+      Alert.alert(
+        'Confirmation',
+        'Are you sure you want to delete this clue?',
+        [
+          {
+            text: 'Cancel',
+            onPress: () => console.log('Cancel Pressed'),
+            style: 'cancel',
+          },
+          {text: 'Delete', onPress: () => this.props.navigation.navigate('ListClues')},
+        ],
+        {cancelable: false},
+      );
     }
 
     render() {
@@ -134,7 +157,18 @@ class CreateClues extends React.Component {
                     onChangeText={text => this.setState({hint: text})}
                     placeholder={'eg. Near Curry Center'}/>
                 <Text style={{marginTop:20,fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Points deducted for requesting hint: {this.state.deductedPoints}</Text>
-                <View style={{marginTop:40}}></View>
+                <View style={{marginTop:25}}></View>
+                <TouchableOpacity onPress={() => this.clear()}>
+                <FadeInView style={{width: 310, height: 50,paddingTop:'1%', backgroundColor: '#562547', 
+                alignItems:'center', borderRadius: '10'}}>
+                <Button 
+                    title="Clear" 
+                    type="clear"
+                    onPress={() => this.clear()}
+                    titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
+                </FadeInView>
+                </TouchableOpacity>
+                <View style={{marginTop:25}}></View>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <TouchableOpacity onPress={() => this.createClue()}>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 

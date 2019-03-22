@@ -64,7 +64,7 @@ class ListClues extends React.Component {
                 <FadeInView style={{width: 140, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
-                        title="Create Quest" 
+                        title="Done" 
                         type="clear"
                         width
                         onPress={() => this.createQuest()}
