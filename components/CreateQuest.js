@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { ScrollView, View, Text, TextInput, ImageBackground} from 'react-native'
+import { ScrollView, View, Text, TextInput, ImageBackground,TouchableOpacity} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
@@ -193,6 +193,7 @@ class CreateQuest extends React.Component {
                     maxLength={3}
                     keyboardType={'numeric'}/>
                 <Text style={{color:'#ff0000'}}>{this.state.timeLimitError}</Text>
+                <TouchableOpacity onPress={() => this.createQuest()}>
                 <FadeInView style={{width: 305, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 borderRadius: '10', alignItems:'center', marginTop:20, alignSelf: "center"}}>
                 <Button 
@@ -201,6 +202,7 @@ class CreateQuest extends React.Component {
                     onPress={() => this.createQuest()}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
+                </TouchableOpacity>
             </Card>
             </ScrollView>
             </ImageBackground>

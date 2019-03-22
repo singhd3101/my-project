@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { ScrollView, View, Text, TextInput, ImageBackground, TouchableOpacity} from 'react-native'
+import { ScrollView, View, Text, TextInput, ImageBackground, TouchableOpacity,Alert} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import FadeInView from '../elements/FadeInView';
 import SlidingUpPanel from 'rn-sliding-up-panel';
@@ -39,12 +39,25 @@ class ViewClue extends React.Component {
     }
 
     skip(){
-        alert('Warning: No points for this clue will be given to the team');
-        this.props.navigation.navigate('ViewClue', {index: 1});
-        this.setState({
-            hintRequested: false,
-            clue: 'New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team'
-        })
+        Alert.alert(
+            'Confirmation',
+            'Are you sure you want to skip the clue?',
+            [
+              {
+                text: 'Cancel',
+                onPress: () => console.log('Cancel Pressed'),
+                style: 'cancel',
+              },
+              {text: 'Yes', onPress: () =>  
+              {this.props.navigation.navigate('ViewClue', {index: 1}),
+              this.setState({
+                  hintRequested: false,
+                  clue: 'New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team'
+              })}
+        },
+            ],
+            {cancelable: false},
+          )
     }
 
     addMessage(msg) {
@@ -92,23 +105,32 @@ class ViewClue extends React.Component {
                 {this.state.hintRequested ? 
                     <Text style={{fontFamily: "Papyrus", color: '#562547', paddingTop:5, marginBottom:-27}}>
                     Hint: bla bla bla !</Text> :
-                <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
-                <FadeInView style={{width: '40%', height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
+                <View>
+                <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button title="Request Hint" type="clear"
                     onPress={() =>
-                        this.setState({
-                            hintRequested : true,
-                            score: this.state.score - 20
-                        })}
+                        Alert.alert(
+                            'Confirmation',
+                            'Are you sure you want to request the hint?',
+                            [
+                              {
+                                text: 'Cancel',
+                                onPress: () => console.log('Cancel Pressed'),
+                                style: 'cancel',
+                              },
+                              {text: 'Yes', onPress: () =>  this.setState({
+                                hintRequested : true,
+                                score: this.state.score - 20
+                            })},
+                            ],
+                            {cancelable: false},
+                          )
+                       }
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
                 </FadeInView>
-                <FadeInView style={{width: 180, height: 50, paddingTop:'6%', alignItems:'center',
-                 borderRadius: '10'}}>
-                <Text style={{fontFamily: "Papyrus", color: '#562547'}}>-20 points</Text> 
-                </FadeInView>
                 </View>}
-                <View style={{marginTop:60}}></View>
+                <View style={{marginTop:10}}></View>
                 <TouchableOpacity onPress={() => this.skip()}>
                 <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'orange',
                 alignItems:'center', borderRadius: '10'}}>

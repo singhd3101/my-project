@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { View, Text, TextInput, ImageBackground, Image} from 'react-native'
+import { View, Text, TextInput, ImageBackground, Image,ScrollView} from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import FadeInView from '../elements/FadeInView';
 
@@ -26,6 +26,7 @@ class VerifySubmission extends React.Component {
             <Card title="Verify Submission" containerStyle={{height:500}}>
                 <Image source={require('../assets/submission.jpg')} style={{width: '100%', height: '50%'}} />
                 <View style={{marginTop:20}}></View>
+                <Text style={{marginBottom:20, fontWeight:'bold'}}>Clue: Mountain of Books</Text>
                 <Text style={{marginBottom:20, fontWeight:'bold'}}>Solution: Snell Library</Text>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 
