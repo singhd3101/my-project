@@ -15,6 +15,9 @@ import ViewClue from './components/ViewClue';
 import QuestHistory from './components/QuestHistory';
 import { createStackNavigator,createAppContainer } from 'react-navigation'
 import MonitorTeams from './components/MonitorTeams';
+import OrganizerTutorial from './components/OrganizerTutorial';
+import PlayerTutorial from './components/PlayerTutorial';
+import MonitorTutorial from './components/MonitorTutorial';
 
 class Home extends React.Component {
   static navigationOptions = {
@@ -58,7 +61,7 @@ class Home extends React.Component {
         borderRadius: '10', alignSelf: "center"}}>
         <Button 
         title="Player" 
-        onPress={() => this.props.navigation.navigate('PlayerView')}
+        onPress={() => this.props.navigation.navigate('PlayerTutorial')}
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
@@ -107,6 +110,15 @@ const AppNavigator = createStackNavigator({
   },
   QuestHistory: {
     screen: QuestHistory
+  },
+  OrganizerTutorial: {
+    screen: OrganizerTutorial
+  },
+  PlayerTutorial: {
+    screen: PlayerTutorial
+  },
+  MonitorTutorial: {
+    screen: MonitorTutorial
   }
   
 });

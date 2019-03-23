@@ -27,13 +27,13 @@ class OrganizerView extends React.Component {
         <Button 
          title="Create Quest" 
          type="clear"
-         onPress={() => this.props.navigation.navigate('CreateQuest')}
+         onPress={() => this.props.navigation.navigate('OrganizerTutorial')}
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
         </FadeInView>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10', alignSelf: "center"}}>
         <Button 
         title="Start Quest" 
-        onPress={() => this.props.navigation.navigate('QuestHistory')}
+        onPress={() => this.props.navigation.navigate('MonitorTutorial')}
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>
