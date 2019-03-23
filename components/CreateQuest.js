@@ -12,7 +12,7 @@ class CreateQuest extends React.Component {
         this.state ={
             name: '',
             numberOfPlayers: 2,
-            timeLimit: 0,
+            timeLimit: '',
             error: '',
             timeLimitError: '',
             numberOfTeams: 2
@@ -65,14 +65,14 @@ class CreateQuest extends React.Component {
           this.setState({
             error: 'Please enter a quest name'
           });
+        } else if(tl == ''){
+          this.setState({ 
+            timeLimitError: 'Time limit should not be empty'});
         } else if(tl == 0) {
           this.setState({
             timeLimitError: 'Time limit should not be less than 30 mins'
           });
-        } else if(tl == ''){
-          this.setState({ 
-            timeLimitError: 'Time limit should not be empty'});
-        } else if(parseInt(tl) > 360){
+        }  else if(parseInt(tl) > 360){
           this.setState({ 
             timeLimitError: 'Time limit should not exceed 360 mins'});
         } else if(parseInt(tl) < 30){
@@ -188,10 +188,9 @@ class CreateQuest extends React.Component {
                 <Text style={{paddingTop:15, fontFamily:"Papyrus", fontSize:18, color:'#562547'}}>
                 Time Limit for the quest (in mins less than 360)</Text>
                 <TextInput style= {{height:26, fontSize: 15, color: '#000', borderBottomWidth:1, 
-                    borderBottomColor:'#555' }} value={this.state.timeLimit.toString()} placeholder={'eg. 30'}
+                    borderBottomColor:'#555' }} value={this.state.timeLimit} placeholder={'eg. 30'}
                     onChangeText={text => this.setTimeLimit(text)}
-                    maxLength={3}
-                    keyboardType={'numeric'}/>
+                    maxLength={3} />
                 <Text style={{color:'#ff0000'}}>{this.state.timeLimitError}</Text>
                 <FadeInView style={{width: 305, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 borderRadius: '10', alignItems:'center', marginTop:20, alignSelf: "center"}}>

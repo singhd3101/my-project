@@ -54,12 +54,17 @@ class MonitorTeams extends React.Component {
     renderTeams(item) {
         if(item.verified === 'y')
         return <Card transparent key={item.id}> 
-            <CardItem header style={{height:170,width:170, backgroundColor:'green'}} button onPress={() => this.props.navigation.navigate('VerifySubmission')} key={item.id} bordered>
-              <Text key={item.id} style={{color:'white',marginLeft:35}}> Team {item.teamName}</Text>     
+            <CardItem header style={{height:170,width:170, backgroundColor:'#28b515'}} button 
+            onPress={() => this.props.navigation.navigate('VerifySubmission')} key={item.id} bordered>
+              <View key={item.id} style={{flexDirection:"col", alignSelf: "center"}}>
+              <Text key={item.id} style={{color:'white',marginLeft:25, fontSize:24}}> Team {item.teamName}</Text>
+              <Text key={item.id} style={{color:'white',marginLeft:5}}> Solved Clues: 3</Text>     
+              </View>
             </CardItem>
         </Card>
       return <Card transparent key={item.id}> 
-        <CardItem header style={{height:170, width:170,backgroundColor:'powderblue'}} button onPress={() => alert("No submissions yet")} key={item.id} bordered>
+        <CardItem header style={{height:170, width:170,backgroundColor:'powderblue'}} button 
+        onPress={() => alert("No submissions yet")} key={item.id} bordered>
         <Text  style={{marginLeft:35,color:'#562547'}} key={item.id}>Team {item.teamName}</Text>
       </CardItem>
 </Card>

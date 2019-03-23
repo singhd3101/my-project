@@ -58,7 +58,7 @@ class Home extends React.Component {
         borderRadius: '10', alignSelf: "center"}}>
         <Button 
         title="Player" 
-        onPress={() => this.props.navigation.navigate('PlayerView')}
+        onPress={() => this.props.navigation.navigate('ListClues')}
         type="clear"
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
         </FadeInView>

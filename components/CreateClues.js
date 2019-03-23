@@ -83,6 +83,8 @@ class CreateClues extends React.Component {
         solution: '',
         points: "Please Select",
         hint: '',
+        clueError: '',
+        solutionError: '',
         deductedPoints: 5
       });
     }
@@ -156,10 +158,12 @@ class CreateClues extends React.Component {
                     borderBottomColor:'#555' }} value={this.state.hint} 
                     onChangeText={text => this.setState({hint: text})}
                     placeholder={'eg. Near Curry Center'}/>
-                <Text style={{marginTop:20,fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Points deducted for requesting hint: {this.state.deductedPoints}</Text>
+                <Text style={{marginTop:20,fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>
+                Points deducted for requesting hint: {this.state.deductedPoints}</Text>
                 <View style={{marginTop:25}}></View>
-                <TouchableOpacity onPress={() => this.clear()}>
-                <FadeInView style={{width: 310, height: 50,paddingTop:'1%', backgroundColor: '#562547', 
+                <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
+                <TouchableOpacity onPress={() => this.createClue()}>
+                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#562547', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Clear" 
@@ -168,25 +172,13 @@ class CreateClues extends React.Component {
                     titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
                 </TouchableOpacity>
-                <View style={{marginTop:25}}></View>
-                <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
-                <TouchableOpacity onPress={() => this.createClue()}>
+                <TouchableOpacity onPress={() => this.deleteClue()}>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Submit" 
                     type="clear"
                     onPress={() => this.createClue()}
-                    titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
-                </FadeInView>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.deleteClue()}>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#b10000', 
-                alignItems:'center', borderRadius: '10'}}>
-                <Button 
-                    title="Delete" 
-                    type="clear"
-                    onPress={() => this.deleteClue()}
                     titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
                 </TouchableOpacity>
