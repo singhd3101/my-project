@@ -14,7 +14,7 @@ class CreateClues extends React.Component {
             clueError: '',
             solution: '',
             solutionError: '',
-            points: "Please Select",
+            points: 10,
             hint: '',
             deductedPoints: 5,
             index: -1,

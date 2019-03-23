@@ -37,6 +37,8 @@ class PlayerView extends React.Component {
             <View style={{marginTop:150}}>
             <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white', textAlign:'center'}}>
             Welcome Player!</Text>
+            <Text style={{fontFamily:"Papyrus", fontSize:15, color:'white', textAlign:'center'}}>
+            Enter the code that you received from the organizer eg. A3E24M</Text>
             <Card containerStyle={{width:300, alignSelf:"center"}}>
                 <Text style={{fontFamily:"Papyrus", fontSize:30, color:'#562547', textAlign:'center'}}>
                     Enter Code</Text>
