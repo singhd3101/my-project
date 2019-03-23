@@ -22,12 +22,12 @@ class VerifySubmission extends React.Component {
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-
+            <ScrollView style={{marginBottom:60}}>
             <Card title="Verify Submission" containerStyle={{height:500}}>
                 <Image source={require('../assets/submission.jpg')} style={{width: '100%', height: '50%'}} />
-                <View style={{marginTop:20}}></View>
-                <Text style={{marginBottom:20, fontWeight:'bold'}}>Clue: Mountain of Books</Text>
-                <Text style={{marginBottom:20, fontWeight:'bold'}}>Solution: Snell Library</Text>
+                <View style={{marginTop:10}}></View>
+                <Text style={{marginBottom:10, fontWeight:'bold'}}>Clue: Mountain of Books</Text>
+                <Text style={{marginBottom:10, fontWeight:'bold'}}>Solution: Snell Library</Text>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 
                 alignItems:'center', borderRadius: '10'}}>
@@ -54,6 +54,7 @@ class VerifySubmission extends React.Component {
                     />
                 </View>
             </Card>
+            </ScrollView>
             </ImageBackground>
             </View>
         )

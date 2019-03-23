@@ -1,6 +1,6 @@
 import React from 'react'
 import {Header} from 'react-native-elements'
-import {Image} from 'react-native'
+import {Image, TouchableOpacity} from 'react-native'
 
 
 class FixedHeader extends React.Component {
@@ -15,9 +15,11 @@ class FixedHeader extends React.Component {
                     style={{width: '50%', height: '50%', backgroundColor:'#0e2a48', marginTop:10}}/>
                 }
                 centerComponent={{	text: 'Treasure Hunt',
-                    style: { color: '#fff', fontWeight:'bold', fontSize:30, fontFamily: "Papyrus",paddingTop:20} }}
+                    style: { color: '#fff', fontWeight:'bold', fontSize:30, fontFamily: "Papyrus",
+                    paddingTop:20} }}
                 rightComponent={{ color: '#fff',paddingTop:20 }}
-                containerStyle={{backgroundColor: '#0e2a48', height:120, marginTop: this.props.marginTop ? this.props.marginTop : 0}}
+                containerStyle={{backgroundColor: '#0e2a48', height:120, 
+                marginTop: this.props.marginTop ? this.props.marginTop : 0}}
                 leftContainerStyle={{flex:1.4}}/>
         );
     }
