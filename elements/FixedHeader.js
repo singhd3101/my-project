@@ -1,6 +1,6 @@
 import React from 'react'
 import {Header} from 'react-native-elements'
-import {Image, TouchableOpacity} from 'react-native'
+import {Image, TouchableWithoutFeedback } from 'react-native'
 
 
 class FixedHeader extends React.Component {
@@ -11,8 +11,10 @@ class FixedHeader extends React.Component {
         return (
             <Header
                 leftComponent={
+                    <TouchableWithoutFeedback  onPress={() => this.props.navigation.navigate('OrganizerView')} >
                     <Image source={require('../assets/comp.png')} resizeMethod="scale"
                     style={{width: '50%', height: '50%', backgroundColor:'#0e2a48', marginTop:10}}/>
+                    </TouchableWithoutFeedback >
                 }
                 centerComponent={{	text: 'Treasure Hunt',
                     style: { color: '#fff', fontWeight:'bold', fontSize:30, fontFamily: "Papyrus",
