@@ -71,7 +71,7 @@ class ListClues extends React.Component {
     render() {
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <FixedHeader marginTop={60}/>
+            <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
             <ScrollView style={{padding: 15, marginBottom:70, paddingBottom:50, alignSelf:"center"}}>
             <Card title='Clues' containerStyle={{width:320}} titleStyle={{fontSize:20, fontFamily:"Papyrus",

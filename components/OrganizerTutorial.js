@@ -43,7 +43,7 @@ export default class OrganizerTutorial extends React.Component {
         return (
             <Swiper style={styles.wrapper} showsButtons={true} loop={false} nextButton={next} prevButton={previous}>
                 <View style={styles.slide1}>
-                    <FixedHeader marginTop={60} />
+                    <FixedHeader marginTop={60} navigating={this.props.navigation}/>
                     <ImageBackground source={require('../assets/theme1.jpg')} style={{ width: '100%', height: '100%' }}>
                         <View style={{ marginTop: 50 }} />
                         <Text style={{ color: '#fff', fontSize: 30, fontWeight: 'bold', fontFamily: "Papyrus", marginLeft: 40 }}>
@@ -61,13 +61,13 @@ export default class OrganizerTutorial extends React.Component {
                             borderRadius: '10', alignSelf: "center"
                         }}>
                             <Button title="Skip Tutorial" type="clear"
-                                onPress={() => this.props.navigation.navigate('OrganizerView')}
+                                onPress={() => this.props.navigation.navigate('CreateQuest')}
                                 titleStyle={{ fontFamily: "Papyrus", color: '#562547' }} />
                         </FadeInView>
                     </ImageBackground>
                 </View>
                 <View style={styles.slide2}>
-                    <FixedHeader marginTop={60} />
+                    <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
                     <ImageBackground source={require('../assets/theme1.jpg')} style={{ width: '100%', height: '100%' }}>
                         <View style={{ marginTop: 50 }} />
                         <Text style={{ color: '#fff', fontSize: 30, fontWeight: 'bold', fontFamily: "Papyrus", marginLeft: 40 }}>
@@ -85,13 +85,13 @@ export default class OrganizerTutorial extends React.Component {
                             borderRadius: '10', alignSelf: "center"
                         }}>
                             <Button title="Skip Tutorial" type="clear"
-                                onPress={() => this.props.navigation.navigate('OrganizerView')}
+                                onPress={() => this.props.navigation.navigate('CreateQuest')}
                                 titleStyle={{ fontFamily: "Papyrus", color: '#562547' }} />
                         </FadeInView>
                     </ImageBackground>
                 </View>
                 <View style={styles.slide3}>
-                <FixedHeader marginTop={60} />
+                <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
                     <ImageBackground source={require('../assets/theme1.jpg')} style={{ width: '100%', height: '100%' }}>
                         <View style={{ marginTop: 50 }} />
                         <Text style={{ color: '#fff', fontSize: 30, fontWeight: 'bold', fontFamily: "Papyrus", marginLeft: 40 }}>

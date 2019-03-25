@@ -11,7 +11,7 @@ class FixedHeader extends React.Component {
         return (
             <Header
                 leftComponent={
-                    <TouchableWithoutFeedback  onPress={() => this.props.navigation.navigate('OrganizerView')} >
+                    <TouchableWithoutFeedback  onPress={() => this.props.navigating.navigate('Home')} >
                     <Image source={require('../assets/comp.png')} resizeMethod="scale"
                     style={{width: '50%', height: '50%', backgroundColor:'#0e2a48', marginTop:10}}/>
                     </TouchableWithoutFeedback >

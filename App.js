@@ -20,10 +20,13 @@ import PlayerTutorial from './components/PlayerTutorial';
 import MonitorTutorial from './components/MonitorTutorial';
 
 class Home extends React.Component {
-  static navigationOptions = {
-    header: (
-    <FixedHeader/>
-    )
+  static navigationOptions = ({navigation}) => {
+    return{
+      header: (
+        <FixedHeader navigating={navigation}/>
+        )
+    }
+   
     }
   constructor(props){
     super(props);

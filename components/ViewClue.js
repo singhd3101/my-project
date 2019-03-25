@@ -70,7 +70,7 @@ class ViewClue extends React.Component {
         let team = 'Team: '.concat(items[Math.floor(Math.random()*items.length)]);
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-            <FixedHeader marginTop={60}/>
+            <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>            
             <Card containerStyle={{height:500}}>
             <View style={{flexDirection:"row"}}>

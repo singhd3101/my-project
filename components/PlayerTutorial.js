@@ -40,7 +40,7 @@ export default class PlayerTutorial extends React.Component {
         return (
             <Swiper style={styles.wrapper} showsButtons={true} loop={false} nextButton={next} prevButton={previous}>
                 <View style={styles.slide1}>
-                    <FixedHeader marginTop={60} />
+                    <FixedHeader marginTop={60} navigating={this.props.navigation} />
                     <ImageBackground source={require('../assets/theme1.jpg')} style={{ width: '100%', height: '100%' }}>
                         <View style={{ marginTop: 50 }} />
                         <Text style={{ color: '#fff', fontSize: 30, fontWeight: 'bold', fontFamily: "Papyrus", marginLeft: 40 }}>
@@ -63,7 +63,7 @@ export default class PlayerTutorial extends React.Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.slide2}>
-                    <FixedHeader marginTop={60} />
+                    <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
                     <ImageBackground source={require('../assets/theme1.jpg')} style={{ width: '100%', height: '100%' }}>
                         <View style={{ marginTop: 50 }} />
                         <Text style={{ color: '#fff', fontSize: 30, fontWeight: 'bold', fontFamily: "Papyrus", marginLeft: 40 }}>
@@ -86,7 +86,7 @@ export default class PlayerTutorial extends React.Component {
                     </ImageBackground>
                 </View>
                 <View style={styles.slide3}>
-                <FixedHeader marginTop={60} />
+                <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
                     <ImageBackground source={require('../assets/theme1.jpg')} style={{ width: '100%', height: '100%' }}>
                         <View style={{ marginTop: 30 }} />
                         <Text style={{ color: '#fff', fontSize: 30, fontWeight: 'bold', fontFamily: "Papyrus", marginLeft: 40 }}>

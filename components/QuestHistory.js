@@ -16,7 +16,7 @@ class QuestHistory extends React.Component {
     render() {
         return(
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <FixedHeader marginTop={60}/>
+        <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
         <View>
         <Text style={{fontFamily:"Papyrus",color: '#fff',fontSize:30, marginBottom:40, marginTop: 100, 
