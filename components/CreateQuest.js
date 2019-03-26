@@ -192,7 +192,7 @@ class CreateQuest extends React.Component {
                     onChangeText={text => this.setTimeLimit(text)}
                     maxLength={3} />
                 <Text style={{color:'#ff0000'}}>{this.state.timeLimitError}</Text>
-                <TouchableOpacity onPress={() => this.createQuest()}>
+                <TouchableOpacity onPress={() => this.createQuest()} style={{marginBottom:'20%'}}>
                 <FadeInView style={{width: 305, height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 borderRadius: '10', alignItems:'center', marginTop:20, alignSelf: "center"}}>
                 <Button 

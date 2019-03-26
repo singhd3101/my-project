@@ -163,7 +163,7 @@ class CreateClues extends React.Component {
                 <View style={{marginTop:25}}></View>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <TouchableOpacity onPress={() => this.createClue()}>
-                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#562547', 
+                <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#b10000', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
                     title="Clear" 

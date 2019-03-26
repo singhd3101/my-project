@@ -65,7 +65,62 @@ class ViewClue extends React.Component {
         this.chatMessages.push(msg);
     }
 
+    renderSkipButton(){
+        if(this.state.hintRequested){
+            return(
+            <TouchableOpacity onPress={() => this.skip()} style={{marginTop:'10%'}}>
+                <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'orange',
+                alignItems:'center', borderRadius: '10'}}>
+                <Button 
+                    title="Skip this Clue" 
+                    type="clear"
+                    onPress={() => this.skip()}
+                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
+                </FadeInView>
+                </TouchableOpacity>)
+        }
+        else {
+            return(
+            <TouchableOpacity onPress={() => this.skip()}>
+                <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'orange',
+                alignItems:'center', borderRadius: '10'}}>
+                <Button 
+                    title="Skip this Clue" 
+                    type="clear"
+                    onPress={() => this.skip()}
+                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
+                </FadeInView>
+                </TouchableOpacity>)
+        }
+    }
+
     render() {
+        let skipButton;
+
+    if(this.state.hintRequested){
+        skipButton = (
+            <TouchableOpacity onPress={() => this.skip()} style={{marginTop:'10%'}}>
+                <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'orange',
+                alignItems:'center', borderRadius: '10'}}>
+                <Button 
+                    title="Skip this Clue" 
+                    type="clear"
+                    onPress={() => this.skip()}
+                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
+                </FadeInView>
+                </TouchableOpacity>)
+    } else {
+        skipButton = (<TouchableOpacity onPress={() => this.skip()}>
+        <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'orange',
+        alignItems:'center', borderRadius: '10'}}>
+        <Button 
+            title="Skip this Clue" 
+            type="clear"
+            onPress={() => this.skip()}
+            titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
+        </FadeInView>
+        </TouchableOpacity>);
+    }
 	    let items = this.state.teamName;
         let team = 'Team: '.concat(items[Math.floor(Math.random()*items.length)]);
         return(
@@ -112,7 +167,7 @@ class ViewClue extends React.Component {
                     onPress={() =>
                         Alert.alert(
                             'Confirmation',
-                            'Are you sure you want to request the hint?',
+                            'Are you sure you want to request the hint? Note: 20 points would be deducted',
                             [
                               {
                                 text: 'Cancel',
@@ -131,16 +186,7 @@ class ViewClue extends React.Component {
                 </FadeInView>
                 </View>}
                 <View style={{marginTop:10}}></View>
-                <TouchableOpacity onPress={() => this.skip()}>
-                <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'orange',
-                alignItems:'center', borderRadius: '10'}}>
-                <Button 
-                    title="Skip this Clue" 
-                    type="clear"
-                    onPress={() => this.skip()}
-                    titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
-                </FadeInView>
-                </TouchableOpacity>
+                {skipButton}
                 <View style={{marginTop:80}}></View>
                 <Icon name="chat" size={45} color="#ffcf40" onPress={() => this._panel.show()} />
             </Card>
