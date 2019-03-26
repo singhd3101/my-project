@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import { Button } from 'react-native-elements';
+import { RNS3 } from 'react-native-aws3';
 import {
     Text,
     View,
@@ -15,6 +16,7 @@ import {
 import FadeInView from '../elements/FadeInView';
 import { ImagePicker, Permissions } from 'expo';
 import uid from 'uuid/v4';
+
 export default class UploadImage extends Component{
     constructor(props){
         super(props)
@@ -92,12 +94,8 @@ export default class UploadImage extends Component{
                     })
                     alert('Image sent to organizer successfully !!');
                 }).catch(function(error){
-                    this.setState({
-                        loading:false,
-                        uploaded_photo:file
-                    })
-                    console.log('Upload Failed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-                    alert('Image upload failed. Please try again.');
+                    console.log('error: ', error);
+                    alert(error);
                 });
 }
         })
@@ -107,14 +105,57 @@ export default class UploadImage extends Component{
         const fileType = uriParts[uriParts.length - 1];
         const { headers } = this.props;
         const endpoint = this.state.endpoint; // Define Endpoint Here
-        const payloadKey = this.state.poayloadKey; // Define PayloadKey here Ex. 'file'
+        const payloadKey = 'file'; // Define PayloadKey here Ex. 'file'
         const method = 'POST';
         const formData = new FormData();
+        console.log('payloadKey ', payloadKey)
         formData.append(payloadKey, {
           uri,
           name: uid(),
           type: `image/${fileType}`,
         });
+
+       /*  const f = {
+            uri,
+            name: uid(),
+            type: `image/${fileType}`,
+        }
+
+        const o = {
+            keyPrefix: '',
+            bucket: 'studyawspollydt.com',
+            region: 'us-east-1',
+            accessKey: 'AKIAJPUD4AU7L5VRTILQ',
+            secretKey: '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',
+            successActionStatus: 201
+        };
+
+        RNS3.put(f,o).then(response => {
+            if (response.status !== 201){
+                console.log('rns3 error: ', response);
+            }
+            console.log('rns3 response body: ', response.body);
+        }).catch(error => console.log('catch error: ', error)); */
+
+
+        const presignedUrl = 'https://s3.amazonaws.com/studyawspollydt.com/images/myimage.jpg?AWSAccessKeyId=AKIAJPUD4AU7L5VRTILQ&Content-Type=image%2Fjpeg&Expires=1553574876&Signature=w6qsj9j1aj8NJyKeLQPRmmPPXo4%3D';
+
+        const xhr = new XMLHttpRequest()
+        xhr.open('PUT', presignedUrl)
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                console.log('Image successfully uploaded to S3')
+            } else {
+                console.log('Error while sending the image to S3')
+            }
+        }
+    }
+    xhr.setRequestHeader('Content-Type', 'image/jpeg')
+    xhr.send({ uri, type: 'image/jpeg', name: 'myimage.jpg'})
+
+
+
         console.log('formData ', formData)
         const options = {
           method,
