@@ -90,7 +90,7 @@ export default class UploadImage extends Component{
                         loading:false,
                         uploaded_photo:file
                     })
-                    alert('Image sent to organizer successfully !!');
+                    alert('Image uploaded successfully !!');
                 }).catch(function(error){
                     this.setState({
                         loading:false,
