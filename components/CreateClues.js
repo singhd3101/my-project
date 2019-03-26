@@ -145,6 +145,7 @@ class CreateClues extends React.Component {
                     onChangeText={text => this.setState({solution: text, solutionError: ''})}
                     placeholder={'eg. Snell Library'}/>
                <Text style={{color:'#ff0000'}}>{this.state.solutionError}</Text>
+               <View style={{marginTop:20}}></View>
                <Text style={{fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Points for solving the clue</Text>
                 <Dropdown
                     selectedItemColor={'green'}
@@ -153,6 +154,7 @@ class CreateClues extends React.Component {
                     data={points}
                     itemCount={5}
                 />
+                <View style={{marginTop:20}}></View>
                 <Text style={{fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Hint</Text>
                 <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 
                     borderBottomColor:'#555' }} value={this.state.hint} 

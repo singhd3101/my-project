@@ -20,7 +20,7 @@ class QuestHistory extends React.Component {
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
         <View>
         <Text style={{fontFamily:"Papyrus",color: '#fff',fontSize:30, marginBottom:40, marginTop: 100, 
-            textAlign:"center"}}>Choose a Quest</Text>
+            textAlign:"center"}}>Your last created quest</Text>
         <TouchableOpacity onPress={() => this.props.navigation.navigate('MonitorTeams')}>
         <FadeInView style={{width: 250, height: 50,paddingTop:'1%', backgroundColor: 'powderblue',
          borderRadius: '10', alignSelf: "center"}}>
@@ -31,22 +31,6 @@ class QuestHistory extends React.Component {
          titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>   
         </FadeInView>
         </TouchableOpacity>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10', alignSelf: "center"}}>
-        <Button 
-        disabled
-        title="Charles Espalande Hunt" 
-        onPress={() => this.props.navigation.navigate('MonitorTeams')}
-        type="clear"
-         titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
-        </FadeInView>
-        <FadeInView style={{width: 250, height: 50,paddingTop:'1%', marginTop: '2%', backgroundColor: 'powderblue', borderRadius: '10', alignSelf: "center"}}>
-        <Button 
-        disabled
-        title="Quincy Market Hunt" 
-        onPress={() => this.props.navigation.navigate('MonitorTeams')}
-        type="clear"
-         titleStyle={{fontFamily: "Papyrus", color: '#562547'}} />   
-        </FadeInView>
         </View>       
         </ImageBackground>
       </View>
