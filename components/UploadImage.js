@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import FadeInView from '../elements/FadeInView';
 import { Permissions } from 'expo';
+import Environment from '../environment';
 
 YellowBox.ignoreWarnings(['Require cycle']);
 
@@ -102,9 +103,9 @@ export default class UploadImage extends Component{
         const xhr = new XMLHttpRequest()
         var AWS = require('aws-sdk');
         var s3 = new AWS.S3({
-            accessKeyId:'AKIAJPUD4AU7L5VRTILQ', 
-            secretAccessKey:'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', 
-            region:'us-east-1'
+            accessKeyId : Environment.accessKeyId, 
+            secretAccessKey : Environment.secretAccessKey, 
+            region : Environment.region
         });
  
         const keyname = 'images/myimage1' + Math.random() + '.jpg';
