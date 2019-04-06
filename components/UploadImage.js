@@ -1,20 +1,20 @@
 import React,{Component} from 'react';
 import { Button } from 'react-native-elements';
 import {
-    Text,
     View,
-    Dimensions,
     ActivityIndicator,
     Platform,
     Alert,
     Linking,
     StyleSheet,
-    Image,
-    TouchableOpacity,
+    YellowBox,
 } from 'react-native';
 import FadeInView from '../elements/FadeInView';
-import { ImagePicker, Permissions } from 'expo';
-import uid from 'uuid/v4';
+import { Permissions } from 'expo';
+import Environment from '../environment';
+
+YellowBox.ignoreWarnings(['Require cycle']);
+
 export default class UploadImage extends Component{
     constructor(props){
         super(props)
@@ -52,8 +52,8 @@ export default class UploadImage extends Component{
           return;
         }
     }
+
   showAlert() {
-        const { alertMessage, alertTitle, alertYes, alertNo } = this.props;
         Alert.alert(
             'Please Allow Access',
             [
@@ -67,9 +67,9 @@ export default class UploadImage extends Component{
             ],
         );
     }
+
   uploadResult = async () =>  {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        const { onStartUpload } = this.props;
         console.log(status,'status');
         if (status !== 'granted') {
             if (Platform.OS === 'ios') this.showAlert();
@@ -78,55 +78,60 @@ export default class UploadImage extends Component{
         Expo.ImagePicker.launchImageLibraryAsync({
             mediaTypes:'Images'
         }).then((result)=>{
-            console.log(result,'result');
             const file = result.uri;
             if(!result.cancelled){
                 this.setState({
                     loading:true
                 })
                 uploadResponse =  this.uploadImageAsync(result.uri).then((reponse)=>{
-                    console.log(reponse,'reponse1');
                     this.setState({
                         loading:false,
                         uploaded_photo:file
                     })
                     alert('Image uploaded successfully !!');
                 }).catch(function(error){
-                    this.setState({
-                        loading:false,
-                        uploaded_photo:file
-                    })
-                    console.log('Upload Failed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-                    alert('Image upload failed. Please try again.');
+                    console.log('error: ', error);
+                    alert(error);
                 });
-}
+            }
         })
     }
+
   async uploadImageAsync(uri) {
-        const uriParts = uri.split('.');
-        const fileType = uriParts[uriParts.length - 1];
-        const { headers } = this.props;
-        const endpoint = this.state.endpoint; // Define Endpoint Here
-        const payloadKey = this.state.poayloadKey; // Define PayloadKey here Ex. 'file'
-        const method = 'POST';
-        const formData = new FormData();
-        formData.append(payloadKey, {
-          uri,
-          name: uid(),
-          type: `image/${fileType}`,
+
+        let presignedUrl = '';
+        const xhr = new XMLHttpRequest()
+        var AWS = require('aws-sdk');
+        var s3 = new AWS.S3({
+            accessKeyId : Environment.accessKeyId, 
+            secretAccessKey : Environment.secretAccessKey, 
+            region : Environment.region
         });
-        console.log('formData ', formData)
-        const options = {
-          method,
-          body: formData,
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'multipart/form-data',
-            'Authorization': this.state.token, // If restricted provide appropriate token here otherwise ignore or remove this line
-          },
+ 
+        const keyname = 'images/myimage1' + Math.random() + '.jpg';
+        var params = {
+            Bucket: 'studyawspollydt.com', 
+            Key: keyname, 
+            ContentType: 'image/jpeg'
         };
-        return fetch(endpoint, options);
+        s3.getSignedUrl('putObject', params, function (err, url) {
+            presignedUrl = url;
+            console.log('presigned url in: ', presignedUrl)
+            xhr.open('PUT', presignedUrl)
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        console.log('Image successfully uploaded to S3')
+                    } else {
+                        console.log('Error while sending the image to S3')
+                    }
+                }
+            }
+            xhr.setRequestHeader('Content-Type', 'image/jpeg')
+            xhr.send({ uri, type: 'image/jpeg', name: 'myimage1.jpg'})
+        });
   }
+
   render(){
     if(this.state.loading){
             return(

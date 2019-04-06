@@ -4,6 +4,7 @@ import { ScrollView, View, Text, TextInput, ImageBackground,TouchableOpacity} fr
 import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
+import Environment from '../environment';
 
 class CreateQuest extends React.Component {
     

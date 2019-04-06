@@ -26,9 +26,10 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.gmail.singh3101div"
     },
-    "android":{
+    "android": {
       "package": "com.gmail.singh3101div",
       "versionCode": 1
-    }
+    },
+    "description": ""
   }
 }
