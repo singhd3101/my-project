@@ -1,11 +1,10 @@
 import React from 'react'
-import {View, Text, TextInput, ImageBackground} from 'react-native'
+import { View, Text, TextInput, ImageBackground} from 'react-native'
 import FadeInView from '../elements/FadeInView';
 import {Button,Card} from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
 
-
-class PlayerView extends React.Component { 
+class JoinTeam extends React.Component { 
     constructor(props) {
         super(props)
         this.state ={
@@ -22,10 +21,10 @@ class PlayerView extends React.Component {
         let name = this.state.name.trim();
         if(name == ''){
             this.setState({
-                error: 'Please enter a valid quest code.'
+                error: 'Please enter a valid team name.'
               });
         } else {
-            this.props.navigation.navigate('JoinTeam');
+            this.props.navigation.navigate('ViewClue', {teamName: name});
         }
     }
 
@@ -36,12 +35,10 @@ class PlayerView extends React.Component {
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
             <View style={{marginTop:150}}>
             <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white', textAlign:'center'}}>
-            Welcome Player!</Text>
+            Join Team!</Text>
             <Text style={{fontFamily:"Papyrus", fontSize:15, color:'white', textAlign:'center'}}>
-            Enter the code that you received from the organizer eg. A3E24M</Text>
+            Enter the team name</Text>
             <Card containerStyle={{width:300, alignSelf:"center"}}>
-                <Text style={{fontFamily:"Papyrus", fontSize:30, color:'#562547', textAlign:'center'}}>
-                    Enter Code</Text>
                 <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1,
                 borderBottomColor:'#555' }} value={this.state.name}
                 onChangeText={text => this.updateForm({name: text, error: ''})}/>
@@ -62,4 +59,4 @@ class PlayerView extends React.Component {
         )
     }
 }
-export default PlayerView
+export default JoinTeam

@@ -18,6 +18,7 @@ import MonitorTeams from './components/MonitorTeams';
 import OrganizerTutorial from './components/OrganizerTutorial';
 import PlayerTutorial from './components/PlayerTutorial';
 import MonitorTutorial from './components/MonitorTutorial';
+import JoinTeam from './components/JoinTeam';
 
 class Home extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -122,6 +123,9 @@ const AppNavigator = createStackNavigator({
   },
   MonitorTutorial: {
     screen: MonitorTutorial
+  },
+  JoinTeam: {
+    screen: JoinTeam
   }
   
 });

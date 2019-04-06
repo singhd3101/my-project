@@ -14,7 +14,7 @@ class ViewClue extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
-            teamName:['Avengers'],
+            teamName:'',
             chatMessages: [{playerName: "Sam", message:"Hi all, I am at library and I don't think the answer is here"},
                             {playerName: "Adam", message:"lets meet in ccis"},
                         ],
@@ -26,8 +26,12 @@ class ViewClue extends React.Component {
 
     componentDidMount() {
         const {navigation} = this.props;
-        const index = navigation.getParam("index");
-        console.log("index ", index);
+        const teamName = navigation.getParam("teamName");
+        if(teamName) {
+            this.setState({
+                teamName
+            });
+        }
     }
 
     updateForm(newState) {
@@ -122,7 +126,8 @@ class ViewClue extends React.Component {
         </TouchableOpacity>);
     }
 	    let items = this.state.teamName;
-        let team = 'Team: '.concat(items[Math.floor(Math.random()*items.length)]);
+        //let team = 'Team: '.concat(items[Math.floor(Math.random()*items.length)]);
+        let team = 'Team: '+ this.state.teamName;
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
