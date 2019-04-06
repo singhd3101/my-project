@@ -9,7 +9,18 @@ class JoinTeam extends React.Component {
         super(props)
         this.state ={
             name: '',
-            error: ''
+            error: '',
+            questCode: -1
+        }
+    }
+
+    componentDidMount() {
+        const {navigation} = this.props;
+        const questCode = navigation.getParam("questCode");
+        if(questCode) {
+            this.setState({
+                questCode
+            })
         }
     }
 
@@ -24,7 +35,7 @@ class JoinTeam extends React.Component {
                 error: 'Please enter a valid team name.'
               });
         } else {
-            this.props.navigation.navigate('ViewClue', {teamName: name});
+            this.props.navigation.navigate('ViewClue', {teamName: name, questCode: this.state.questCode});
         }
     }
 

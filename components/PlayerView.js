@@ -4,7 +4,6 @@ import FadeInView from '../elements/FadeInView';
 import {Button,Card} from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
 
-
 class PlayerView extends React.Component { 
     constructor(props) {
         super(props)
@@ -25,7 +24,12 @@ class PlayerView extends React.Component {
                 error: 'Please enter a valid quest code.'
               });
         } else {
-            this.props.navigation.navigate('JoinTeam');
+            /* fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/'+name)
+                .then((response) => response.json())
+                .then((res) => {
+                    this.props.navigation.navigate('JoinTeam', {questId: res.id});
+                }) */
+            this.props.navigation.navigate('JoinTeam', {questCode: name});
         }
     }
 

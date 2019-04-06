@@ -41,6 +41,7 @@ export default class UploadImage extends Component{
             alertYes: 'Settings',
         };
     }
+
   async askPermission() {
         // only if user allows permission to camera roll
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -122,6 +123,9 @@ export default class UploadImage extends Component{
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         console.log('Image successfully uploaded to S3')
+                        this.setState({
+                            imageName: keyname
+                        })
                     } else {
                         console.log('Error while sending the image to S3')
                     }

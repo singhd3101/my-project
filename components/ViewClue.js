@@ -18,19 +18,47 @@ class ViewClue extends React.Component {
             chatMessages: [{playerName: "Sam", message:"Hi all, I am at library and I don't think the answer is here"},
                             {playerName: "Adam", message:"lets meet in ccis"},
                         ],
-            clue: 'Clue: somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing somthing ',
+            clue: '',
             hintRequested: false,
-            score: 200,
+            score: 0,
+            teamId : -1,
+            hint: '',
+            deductedPoints : 0,
+            endTimeQuest: null
         }
     }
 
     componentDidMount() {
         const {navigation} = this.props;
         const teamName = navigation.getParam("teamName");
+        const questCode = navigation.getParam("questCode");
         if(teamName) {
             this.setState({
                 teamName
             });
+        }
+        if(questCode){
+            fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/'+questCode)
+                .then((response) => response.json())
+                .then((res) => {
+                    let team = res.teams.find((team) => {
+                        return team.name === 'Team '.concat(teamName)
+                        //return team.name === 'A'
+                    })
+                    console.log("team ", team)
+                    let score = 0;
+                    if(team.score){
+                        score = team.score;
+                    }
+                    this.setState({
+                        clue: team.clue_on.puzzle,
+                        score: score,
+                        teamId: team.id,
+                        hint: team.clue_on.hint.text,
+                        deductedPoints: team.clue_on.hint.points,
+                        endTimeQuest: team.endTimeQuest
+                    })
+                })
         }
     }
 
@@ -98,6 +126,27 @@ class ViewClue extends React.Component {
         }
     }
 
+    requestHint(){
+        let updatedScore = this.state.score - this.state.deductedPoints
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/team/'+this.state.teamId, {
+            method: 'PUT',
+            body: JSON.stringify({
+                score: updatedScore,
+                name: 'Team ' + this.state.teamName,
+                endTimeQuest: this.state.endTimeQuest,
+            }),
+            headers:{
+               'content-type': 'application/json'
+            }
+            }).then((response) => response.json())
+            .then((res) => {
+                this.setState({
+                hintRequested : this.state.hint,
+                score: res.score
+            })
+        })
+    }
+
     render() {
         let skipButton;
 
@@ -126,8 +175,8 @@ class ViewClue extends React.Component {
         </TouchableOpacity>);
     }
 	    let items = this.state.teamName;
-        //let team = 'Team: '.concat(items[Math.floor(Math.random()*items.length)]);
         let team = 'Team: '+ this.state.teamName;
+        
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
@@ -164,7 +213,7 @@ class ViewClue extends React.Component {
                 <View style={{marginTop:60}}></View>
                 {this.state.hintRequested ? 
                     <Text style={{fontFamily: "Papyrus", color: '#562547', paddingTop:5, marginBottom:-27}}>
-                    Hint: bla bla bla !</Text> :
+                    Hint: {this.state.hint}</Text> :
                 <View>
                 <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: 'powderblue', 
                 alignItems:'center', borderRadius: '10'}}>
@@ -172,17 +221,14 @@ class ViewClue extends React.Component {
                     onPress={() =>
                         Alert.alert(
                             'Confirmation',
-                            'Are you sure you want to request the hint? Note: 20 points would be deducted',
+                            'Are you sure you want to request the hint? Note: ' + this.state.deductedPoints + ' points would be deducted',
                             [
                               {
                                 text: 'Cancel',
                                 onPress: () => console.log('Cancel Pressed'),
                                 style: 'cancel',
                               },
-                              {text: 'Yes', onPress: () =>  this.setState({
-                                hintRequested : true,
-                                score: this.state.score - 20
-                            })},
+                              {text: 'Yes', onPress: () =>  this.requestHint()},
                             ],
                             {cancelable: false},
                           )
