@@ -13,9 +13,54 @@ class ListClues extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
-            clues: ['Mountain of Books', 'Where do you go to stay fit', 'Burgers, Pizza, Fried Chicken and chips'],
+            clues: [],
+            questId: '',
+
         }
     }
+    componentDidMount(){
+        this.props.navigation.addListener("didFocus", () => {
+            const questId = this.props.navigation.getParam("questId", 1);
+        console.log('Quest Id', questId)
+        this.setState({
+            questId: questId
+        })
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/' + questId)
+        .then((response) => response.json())
+                  .then((response) => {
+                    updatedClues = response.clues.filter((clue) => {
+                        return clue.deleted == false
+                    })
+                    this.setState({clues: updatedClues})
+                  })
+        });
+        const questId = this.props.navigation.getParam("questId", 1);
+        console.log('Quest Id', questId)
+        this.setState({
+            questId: questId
+        })
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/' + questId)
+        .then((response) => response.json())
+                  .then((response) => {
+                    updatedClues = response.clues.filter((clue) => {
+                        return clue.deleted == false
+                    })
+                    this.setState({clues: updatedClues})
+                  })
+    }
+
+    onDelete() {
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/' + this.state.questId)
+        .then((response) => response.json())
+                  .then((response) => {
+                    updatedClues = response.clues.filter((clue) => {
+                        return clue.deleted == false
+                    })
+                    console.log("updated array", updatedClues)
+                    this.setState({clues: updatedClues})
+                  })
+    }
+
 
     deleteClue(clueId){
         Alert.alert(
@@ -27,7 +72,15 @@ class ListClues extends React.Component {
               onPress: () => console.log('Cancel Pressed'),
               style: 'cancel',
             },
-            {text: 'Delete', onPress: () => this.props.navigation.navigate('ListClues')},
+            {text: 'Delete', onPress: () => 
+            {
+                fetch("https://treasurehunt-bitsplease.herokuapp.com/api/clues/delete/" + clueId,
+             {
+                 method: 'PUT'
+             }).then(() => {
+                this.onDelete()
+            });
+           }},
           ],
           {cancelable: false},
         );
@@ -35,8 +88,6 @@ class ListClues extends React.Component {
 
     renderClues() {
         return this.state.clues.map((item, index) =>
-        <TouchableOpacity style={{marginBottom:40}} onPress={() => this.props.navigation.navigate('CreateClues', 
-        {index: index})} key={index}>
         <Card key={index} containerStyle={{backgroundColor:'#f5f5f5'}} titleStyle={{fontFamily:"Papyrus",color:'#562547'}}>
             <View style={{flexDirection:"row"}}>
                     <View style={{flex:1}}>
@@ -45,17 +96,16 @@ class ListClues extends React.Component {
                     </View>
                     <View style={{flex:1, marginRight:-170}}>
                     <Icon name="delete" size={23} color={'red'} style={{justifyContent:'flex-end'}}
-                    onPress = {() => this.deleteClue(index)} />
+                    onPress = {() => this.deleteClue(item.id)} />
                     </View>
                 </View>
                 <Divider style={{ backgroundColor: '#D3D3D3' }} />
             <View style={styles.container}>
-            <Btn key={index + 50} title={item} onPress={() => this.props.navigation.navigate('CreateClues', 
-                    {index: index})}
+            <Btn key={index + 50} title={item.puzzle} onPress={() => this.props.navigation.navigate('CreateClues', 
+                    {questId: this.state.questId,clueId: item.id })}
                     buttonStyle={styles.button}/>
         </View>
         </Card>
-        </TouchableOpacity>
        );
     }
 
@@ -64,7 +114,7 @@ class ListClues extends React.Component {
         if(len == 0){
             alert('Create atleast one puzzle with a clue and a solution.');
         } else {
-            this.props.navigation.navigate('QuestCode');
+            this.props.navigation.navigate('QuestCode',{questId: this.state.questId});
         }
     }
 
@@ -84,7 +134,7 @@ class ListClues extends React.Component {
                         title="Create Clue" 
                         type="clear"
                         width
-                        onPress={() => this.props.navigation.navigate('CreateClues')}
+                        onPress={() => this.props.navigation.navigate('CreateClues',{questId: this.state.questId, add: true})}
                         titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/> 
                 </FadeInView>
                 </TouchableOpacity>

@@ -10,6 +10,9 @@ class CreateClues extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
+            questId:'',
+            hintId:'',
+            clueId:'',
             clue: '',
             clueError: '',
             solution: '',
@@ -18,31 +21,41 @@ class CreateClues extends React.Component {
             hint: '',
             deductedPoints: 5,
             index: -1,
+            clues: [],
+            add: false
         }
     }
 
     componentDidMount() {
       const {navigation} = this.props;
-      const index = navigation.getParam("index");
-      console.log("index ", index);
-      if(index == 0){
-        this.setState({
-          clue: 'Mountain of books',
-          solution: 'Snell Library',
-          points: 20,
-          hint: 'Near Curry Center',
-          deductedPoints: 10
-        });
-      }
-      if(index == 1){
-        this.setState({
-          clue: 'Place to go to get in shape',
-          solution: 'Marino Center',
-          points: 20,
-          hint: '',
-          deductedPoints: 10
-        });
-      }
+      const add = navigation.getParam("add");
+      const questId = navigation.getParam("questId",1)
+      this.setState({
+        questId: questId,
+        add: add
+    })
+    this.props.navigation.addListener("didFocus", () => {
+      const clueId = this.props.navigation.getParam("clueId",0);
+      const add = navigation.getParam("add");
+      this.setState({
+        clueId: clueId,
+        add: add,
+      })
+      if(!add){
+  fetch('https://treasurehunt-bitsplease.herokuapp.com/api/clues/' + clueId)
+  .then((response) => response.json())
+            .then((responseJson) => {
+              this.setState({
+                clue: responseJson.puzzle,
+                solution: responseJson.solution,
+                points: responseJson.points,
+                hint: responseJson.hint.text,
+                deductedPoints: responseJson.hint.points
+              })
+            })
+          }
+  });
+     
   }
 
     updateForm(newState) {
@@ -73,15 +86,91 @@ class CreateClues extends React.Component {
               hint: this.state.hint,
               deductedPoints
             });
-            this.props.navigation.navigate('ListClues');
+
+            if(this.state.add){
+            fetch('https://treasurehunt-bitsplease.herokuapp.com/api/hints', {
+                method: 'POST',
+                headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  text: this.state.hint,
+                  points: this.state.deductedPoints               
+                }),
+              }).then((response) => response.json())
+                  .then((responseJson) => {
+                    this.setState({
+                      hintId: responseJson.id
+                    });
+                  }) .then(() => {
+                    fetch('https://treasurehunt-bitsplease.herokuapp.com/api/clues/questId/' + this.state.questId + '/hintId/' + this.state.hintId, {
+                    method: 'POST',
+                    headers: {
+                    Accept: 'application/json',
+                            'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  puzzle: this.state.clue,
+	                solution: this.state.solution,
+	                points: this.state.points
+               
+                }),
+              }).then((response) => response.json())
+              .then((responseJson) => {
+                this.props.navigation.navigate('ListClues',{questId: this.state.questId});
+              })
+                  })
+                  .catch((error) => {
+                    console.error(error);
+                  });
+                } 
+                else{
+                  fetch('https://treasurehunt-bitsplease.herokuapp.com/api/clues/' + this.state.clueId)
+                  .then((response) => response.json())
+                            .then((responseJson) => {
+                              fetch("https://treasurehunt-bitsplease.herokuapp.com/api/hints/" + responseJson.hint.id,
+                              {
+                                  method: 'PUT',
+                                  body: JSON.stringify({
+                                    text:this.state.hint,
+                                    points:this.state.deductedPoints,
+                                }),
+                                headers:{
+                                    'content-type': 'application/json'
+                                }
+                              }).then((response) => response.json())
+                              .then(() => {
+                                fetch("https://treasurehunt-bitsplease.herokuapp.com/api/clues/" + this.state.clueId,
+                              {
+                                  method: 'PUT',
+                                  body: JSON.stringify({
+                                    puzzle: this.state.clue,
+	                                  solution: this.state.solution,
+	                                  points: this.state.points
+                                }),
+                                headers:{
+                                    'content-type': 'application/json'
+                                }
+                              }).then((response) => response.json())
+                              .then(() => {
+                                this.props.navigation.navigate('ListClues',{questId: this.state.questId});
+                              })
+                              });
+
+                            })
+
+
+                }
           }
     }
+    
 
     clear(){
       this.setState({
         clue: '',
         solution: '',
-        points: "Please Select",
+        points: 10,
         hint: '',
         clueError: '',
         solutionError: '',
@@ -101,7 +190,14 @@ class CreateClues extends React.Component {
             onPress: () => console.log('Cancel Pressed'),
             style: 'cancel',
           },
-          {text: 'Delete', onPress: () => this.props.navigation.navigate('ListClues')},
+          {text: 'Delete', onPress: () => {
+            fetch("https://treasurehunt-bitsplease.herokuapp.com/api/clues/delete/" + clueId,
+         {
+             method: 'PUT'
+         }).then(() => {
+            this.props.navigation.navigate('ListClues',{questId: this.state.questId});
+        });
+       }},
         ],
         {cancelable: false},
       );
@@ -149,7 +245,7 @@ class CreateClues extends React.Component {
                <Text style={{fontSize: 18, color: '#562547', fontFamily:"Papyrus"}}>Points for solving the clue</Text>
                 <Dropdown
                     selectedItemColor={'green'}
-                    onChangeText={text => this.setState({points : text, deductedPoints: parseInt(text, 10)/2})}
+                    onChangeText={text => this.setState({points : text, deductedPoints: parseInt(text)/2})}
                     value={this.state.points}
                     data={points}
                     itemCount={5}
@@ -164,7 +260,7 @@ class CreateClues extends React.Component {
                 Points deducted for requesting hint: {this.state.deductedPoints}</Text>
                 <View style={{marginTop:25}}></View>
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
-                <TouchableOpacity onPress={() => this.createClue()}>
+                <TouchableOpacity onPress={() => this.clear()}>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#b10000', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
@@ -174,7 +270,7 @@ class CreateClues extends React.Component {
                     titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.deleteClue()}>
+                <TouchableOpacity onPress={() => this.createClue()}>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: 'green', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
