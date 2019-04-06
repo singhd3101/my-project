@@ -12,11 +12,11 @@ class CreateQuest extends React.Component {
         super(props)
         this.state ={
             name: '',
-            numberOfPlayers: 2,
+            noOfPlayers: 2,
             timeLimit: '',
             error: '',
             timeLimitError: '',
-            numberOfTeams: 2
+            noOfTeams: 2
         }
     }
 
@@ -88,10 +88,7 @@ class CreateQuest extends React.Component {
             timeLimit: tl,
             timeLimitError: ''
           });
-          fetch("https://mighty-dusk-79530.herokuapp.com/api/users")
-            .then(res => res.json())
-            .then(name => console.log('I am ', name[0].username, '!'));
-          fetch('https://mighty-dusk-79530.herokuapp.com/api/questDetails', {
+          fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests', {
                 method: 'POST',
                 headers: {
                   Accept: 'application/json',
@@ -99,27 +96,23 @@ class CreateQuest extends React.Component {
                 },
                 body: JSON.stringify({
                     name: this.state.name,
-                    numberOfPlayers: this.state.numberOfPlayers,
-                    timeLimit: this.state.timeLimit
+                    noOfPlayers: this.state.noOfPlayers,
+                    timeLimit: this.state.timeLimit,
+                    noOfTeams:this.state.noOfTeams
                 }),
               }).then((response) => response.json())
                   .then((responseJson) => {
-                    console.log('Name: ', responseJson.name);
-                    console.log('Number of players: ', responseJson.numberOfPlayers);
-                    console.log('Time Limit: ', responseJson.timeLimit);
+                    this.props.navigation.navigate('ListClues', {questId: responseJson.id});
                   })
                   .catch((error) => {
                     console.error(error);
                   });
-          this.props.navigation.navigate('ListClues');
+          
         }
     }
 
     render() {
-
-      console.log("something", Environment.BASE_URL)
-
-      var numberOfTeams = [{
+      var noOfTeams = [{
         value: 2,
       }, {
         value: 3,
@@ -147,7 +140,7 @@ class CreateQuest extends React.Component {
           }, {
             value: 120,
           }];
-        let numberOfPlayers = [{
+        let noOfPlayers = [{
             value: 2,
           }, {
             value: 3,
@@ -177,17 +170,17 @@ class CreateQuest extends React.Component {
                Number of Players in each team</Text>
                <Dropdown
                     selectedItemColor={'green'}
-                    onChangeText={text => this.setState({numberOfPlayers : text})}
-                    value={this.state.numberOfPlayers}
-                    data={numberOfPlayers}
+                    onChangeText={text => this.setState({noOfPlayers : text})}
+                    value={this.state.noOfPlayers}
+                    data={noOfPlayers}
                 />
                 <Text style={{paddingTop:15, fontFamily:"Papyrus", fontSize:18, color:'#562547'}}>
                 Number of Teams</Text>
                <Dropdown
                     selectedItemColor={'green'}
-                    onChangeText={text => this.setState({numberOfTeams : text})}
-                    value={this.state.numberOfTeams}
-                    data={numberOfTeams}
+                    onChangeText={text => this.setState({noOfTeams : text})}
+                    value={this.state.noOfTeams}
+                    data={noOfTeams}
                 />
                 <Text style={{paddingTop:15, fontFamily:"Papyrus", fontSize:18, color:'#562547'}}>
                 Time Limit for the quest (in mins less than 360)</Text>

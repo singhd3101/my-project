@@ -7,6 +7,33 @@ import FixedHeader from '../elements/FixedHeader'
 class QuestCode extends React.Component { 
     constructor(props) {
         super(props)
+        this.state ={
+            questId: '',
+            questCode: '',
+        }
+    }
+
+    componentDidMount(){
+        this.props.navigation.addListener("didFocus", () => {
+            const questId = this.props.navigation.getParam("questId", 1);
+        this.setState({
+            questId: questId
+        })
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/' + questId)
+        .then((response) => response.json())
+                  .then((response) => {
+                    this.setState({questCode: response.code})
+                  })
+        });
+        const questId = this.props.navigation.getParam("questId", 1);
+        this.setState({
+            questId: questId
+        })
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/' + questId)
+        .then((response) => response.json())
+                  .then((response) => {
+                    this.setState({questCode: response.code})
+                  })
     }
 
     render() {
@@ -21,7 +48,7 @@ class QuestCode extends React.Component {
                 <Text style={{fontFamily:"Papyrus", fontSize:20, color:'#562547', textAlign:'center'}}>
                 Your quest has been created with the following code</Text>
                 <Text style={{fontFamily:"Papyrus", fontSize:40, color:'#562547', textAlign:'center', 
-                textDecorationLine:'underline'}}>A3E24M</Text>
+                textDecorationLine:'underline'}}>{this.state.questCode}</Text>
                 <View style={{marginTop:10}}></View>
                 <FadeInView style={{width: 250, height: 50,marginTop:'2%', backgroundColor: 'powderblue', 
                 borderRadius: '10', marginLeft:5}}>
