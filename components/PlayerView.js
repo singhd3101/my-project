@@ -24,12 +24,12 @@ class PlayerView extends React.Component {
                 error: 'Please enter a valid quest code.'
               });
         } else {
-            /* fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/'+name)
+            fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/'+name)
                 .then((response) => response.json())
                 .then((res) => {
-                    this.props.navigation.navigate('JoinTeam', {questId: res.id});
-                }) */
-            this.props.navigation.navigate('JoinTeam', {questCode: name});
+                    this.props.navigation.navigate('JoinTeam', {questCode: name});
+            })
+            .catch((error) => alert("Please enter valid quest code."))
         }
     }
 
