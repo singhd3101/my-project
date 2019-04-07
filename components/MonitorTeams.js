@@ -1,6 +1,6 @@
 import React from 'react';
-import {ScrollView,View,TextInput,StyleSheet,ImageBackground,Image,FlatList} from 'react-native';
-import { Container, Header, Content,Left, Card, CardItem, Body, Text, Icon } from 'native-base';
+import { ScrollView, View, ImageBackground, FlatList} from 'react-native';
+import { Card, CardItem, Text, Icon } from 'native-base';
 import FixedHeader from '../elements/FixedHeader';
 
 class MonitorTeams extends React.Component {
@@ -11,13 +11,24 @@ class MonitorTeams extends React.Component {
           submissions:[],
           data:[]
         }
+        this.getNewSubmissionData = this.getNewSubmissionData.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount() {  
+      this.timer = setInterval(()=> this.getNewSubmissionData(), 1000);
+    }
+
+    componentWillUnmount() {
+      clearInterval(this.timer)
+      this.timer = null;
+    }
+
+    getNewSubmissionData(){
       const {navigation} = this.props;
       const questCode = navigation.getParam("questCode");
       if(questCode) {
-        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/' + questCode)
+        let url = 'https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/' + questCode;
+        fetch(url)
         .then((response) => response.json())
         .then((res) => {
           let teams = []
@@ -28,13 +39,10 @@ class MonitorTeams extends React.Component {
               submissionId: -1
             })
           })
-          console.log("all teams", teams);
           fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submission/monitor/questId/' + res.id)
           .then((response) => response.json())
           .then((res) =>{
-            console.log("res", res);
             res.map((submission) => {
-              console.log("submission", submission);
               if(submission){
                 for(let i=0; i<teams.length; i++){
                   if(teams[i].teamName === submission.team.name){
@@ -47,14 +55,13 @@ class MonitorTeams extends React.Component {
                 }
               }
             })
-            console.log("updated teams", teams)
             this.setState({
               data: teams
             })
           })
         })
       }
-  }
+    }
 
     renderTeams(item) {
         if(item.status === 'y')

@@ -35,7 +35,12 @@ class StartQuest extends React.Component {
                 error: 'Please enter a valid team name.'
               });
         } else {
-            this.props.navigation.navigate('MonitorTeams', { questCode: this.state.name});
+            fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/'+name)
+                .then((response) => response.json())
+                .then((res) => {
+                    this.props.navigation.navigate('MonitorTeams', { questCode: this.state.name});
+            })
+            .catch((error) => alert("Please enter valid quest code."))
         }
     }
 
