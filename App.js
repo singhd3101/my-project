@@ -19,6 +19,7 @@ import OrganizerTutorial from './components/OrganizerTutorial';
 import PlayerTutorial from './components/PlayerTutorial';
 import MonitorTutorial from './components/MonitorTutorial';
 import JoinTeam from './components/JoinTeam';
+import StartQuest from './components/StartQuest';
 
 class Home extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -126,6 +127,9 @@ const AppNavigator = createStackNavigator({
   },
   JoinTeam: {
     screen: JoinTeam
+  },
+  StartQuest: {
+    screen: StartQuest
   }
   
 });

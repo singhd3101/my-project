@@ -18,14 +18,18 @@ YellowBox.ignoreWarnings(['Require cycle']);
 export default class UploadImage extends Component{
     constructor(props){
         super(props)
+        //console.log("rty ", props.teamId)
         this.askPermission = this.askPermission.bind(this);
+        this.uploadImageAsync = this.uploadImageAsync.bind(this);
         this.showAlert = this.showAlert.bind(this);
         this.state={
           endpoint:this.props.endpoint?this.props.endpoint:null,
           payloadKey:this.props.payloadKey? this.props.payloadKey:null,
           token:this.props.token?this.props.token:null,
           callbackUrl:this.props.callbackUrl?this.props.callbackUrl:null,
-          loading:false
+          loading:false,
+          teamId:this.props.teamId,
+          clueId:this.props.clueId
         }
         defaultProps = {
             onSuccess: undefined,
@@ -39,6 +43,8 @@ export default class UploadImage extends Component{
             ].join(''),
             alertNo: 'Not Now',
             alertYes: 'Settings',
+            clueId: -1,
+            teamId: -1,
         };
     }
 
@@ -69,7 +75,7 @@ export default class UploadImage extends Component{
         );
     }
 
-  uploadResult = async () =>  {
+  uploadResult = async (clueId, teamId) =>  {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         console.log(status,'status');
         if (status !== 'granted') {
@@ -84,7 +90,7 @@ export default class UploadImage extends Component{
                 this.setState({
                     loading:true
                 })
-                uploadResponse =  this.uploadImageAsync(result.uri).then((reponse)=>{
+                uploadResponse =  this.uploadImageAsync(result.uri, clueId, teamId).then((reponse)=>{
                     this.setState({
                         loading:false,
                         uploaded_photo:file
@@ -98,7 +104,7 @@ export default class UploadImage extends Component{
         })
     }
 
-  async uploadImageAsync(uri) {
+  async uploadImageAsync(uri, clueId, teamId) {
 
         let presignedUrl = '';
         const xhr = new XMLHttpRequest()
@@ -110,6 +116,7 @@ export default class UploadImage extends Component{
         });
  
         const keyname = 'images/myimage1' + Math.random() + '.jpg';
+        console.log("key ", keyname)
         var params = {
             Bucket: 'studyawspollydt.com', 
             Key: keyname, 
@@ -123,8 +130,20 @@ export default class UploadImage extends Component{
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         console.log('Image successfully uploaded to S3')
+                        //let teamId = this.state.teamId;
+                        //let clueId = this.state.clueId;
+                        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submissions/team/'+ teamId +'/clue/'+ clueId, {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                image: keyname,
+                            }),
+                            headers:{
+                                'content-type': 'application/json'
+                            }
+                        }).then((response) => response.json())
+                        .catch((err) => console.log("error: ", err))
                     } else {
-                        console.log('Error while sending the image to S3')
+                        console.log('Error while sending the image to S3', xhr.status)
                     }
                 }
             }
@@ -134,6 +153,8 @@ export default class UploadImage extends Component{
   }
 
   render(){
+      console.log("props ", this.props.clueId)
+      console.log("teamId ", this.props.teamId)
     if(this.state.loading){
             return(
                 <View style={[style.container]}>
@@ -144,7 +165,7 @@ export default class UploadImage extends Component{
         return(
             <FadeInView style={{width: '40%', height: 50,paddingTop:'1%', backgroundColor: 'powderblue',
                 alignItems:'center', borderRadius: '10'}}>
-                <Button title="Upload" type="clear" onPress={() => this.uploadResult()}
+                <Button title="Upload" type="clear" onPress={() => this.uploadResult(this.props.clueId, this.props.teamId)}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>  
                 </FadeInView>
         )

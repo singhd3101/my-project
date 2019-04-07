@@ -3,61 +3,66 @@ import {ScrollView,View,TextInput,StyleSheet,ImageBackground,Image,FlatList} fro
 import { Container, Header, Content,Left, Card, CardItem, Body, Text, Icon } from 'native-base';
 import FixedHeader from '../elements/FixedHeader';
 
-
 class MonitorTeams extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
-            data: [{
-              id:'1',
-              teamName: 'A',
-              verified: 'y',
-            }, {
-              id:'2',
-              teamName: 'B',
-              verified: 'y',
-            }, {
-              id:'3',
-              teamName: 'C',
-              verified: 'y',
-            }, {
-              id:'4',
-              teamName: 'D',
-              verified: 'y',
-            }, {
-              id:'5',
-              teamName: 'E',
-              verified: 'n',
-            },
-            {
-              id:'6',
-              teamName: 'Q',
-              verified: 'n',
-            },{
-              id:'7',
-              teamName: 'F',
-              verified: 'n',
-            },
-            {
-              id:'8',
-              teamName: 'G',
-              verified: 'n',
-            },
-            {
-              id:'9',
-              teamName: 'H',
-              verified: 'n',
-            }]
+          questCode: '',
+          submissions:[],
+          data:[]
         }
     }
 
+    componentDidMount() {
+      const {navigation} = this.props;
+      const questCode = navigation.getParam("questCode");
+      if(questCode) {
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/' + questCode)
+        .then((response) => response.json())
+        .then((res) => {
+          let teams = []
+          res.teams.map((team) => {
+            teams.push({
+              teamName: team.name,
+              status: 'n',
+              submissionId: -1
+            })
+          })
+          console.log("all teams", teams);
+          fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submission/monitor/questId/' + res.id)
+          .then((response) => response.json())
+          .then((res) =>{
+            console.log("res", res);
+            res.map((submission) => {
+              console.log("submission", submission);
+              if(submission){
+                for(let i=0; i<teams.length; i++){
+                  if(teams[i].teamName === submission.team.name){
+                    teams[i] = {
+                      teamName: teams[i].teamName,
+                      status: 'y',
+                      submissionId: submission.id,
+                    }
+                  }
+                }
+              }
+            })
+            console.log("updated teams", teams)
+            this.setState({
+              data: teams
+            })
+          })
+        })
+      }
+  }
+
     renderTeams(item) {
-        if(item.verified === 'y')
+        if(item.status === 'y')
         return <Card transparent key={item.id}> 
             <CardItem header style={{height:170,width:170, backgroundColor:'#28b515'}} button 
             onPress={() => this.props.navigation.navigate('VerifySubmission')} key={item.id} bordered>
               <View key={item.id} style={{flexDirection:"col", alignSelf: "center"}}>
-              <Text key={Math.random()} style={{color:'white',marginLeft:25}}> Team {item.teamName}</Text>
+              <Text key={Math.random()} style={{color:'white',marginLeft:25}}> {item.teamName}</Text>
               <Text key={Math.random()} style={{color:'white',marginLeft:5}}> Solved Clues: 3</Text>     
               </View>
             </CardItem>
@@ -65,7 +70,7 @@ class MonitorTeams extends React.Component {
       return <Card transparent key={item.id}> 
         <CardItem header style={{height:170, width:170,backgroundColor:'powderblue'}} button 
         onPress={() => alert("No submissions yet")} key={item.id} bordered>
-        <Text  style={{marginLeft:35,color:'#562547'}} key={item.id}>Team {item.teamName}</Text>
+        <Text  style={{marginLeft:35,color:'#562547'}} key={item.id}> {item.teamName}</Text>
       </CardItem>
 </Card>
   }

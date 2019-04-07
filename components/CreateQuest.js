@@ -4,7 +4,6 @@ import { ScrollView, View, Text, TextInput, ImageBackground,TouchableOpacity} fr
 import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
-import Environment from '../environment';
 
 class CreateQuest extends React.Component {
     
@@ -159,7 +158,8 @@ class CreateQuest extends React.Component {
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
             <ScrollView>
             <Card 
-            title="Create Quest" titleStyle={{fontSize: 20,fontFamily:"Papyrus",color:'#562547',paddingBottom:20}} 
+            title="Create Quest" titleStyle={{fontSize: 20,fontFamily:"Papyrus",color:'#562547',
+            paddingBottom:20}} 
             containerStyle={{marginTop:30,paddingTop:20, marginBottom:90}}>
                <Text style={{fontFamily:"Papyrus", fontSize:18, color:'#562547'}}>Quest Name</Text>
                <TextInput style= {{height:26,fontSize: 15, color: '#000', borderBottomWidth:1, 

@@ -57,7 +57,7 @@ export default class MonitorTutorial extends React.Component {
                             borderRadius: '10', alignSelf: "center"
                         }}>
                             <Button title="Skip Tutorial" type="clear"
-                                onPress={() => this.props.navigation.navigate('MonitorTeams')}
+                                onPress={() => this.props.navigation.navigate('StartQuest')}
                                 titleStyle={{ fontFamily: "Papyrus", color: '#562547' }} />
                         </FadeInView>
                     </ImageBackground>
@@ -80,7 +80,7 @@ export default class MonitorTutorial extends React.Component {
                             borderRadius: '10', alignSelf: "center"
                         }}>
                             <Button title="Skip Tutorial" type="clear"
-                                onPress={() => this.props.navigation.navigate('MonitorTeams')}
+                                onPress={() => this.props.navigation.navigate('StartQuest')}
                                 titleStyle={{ fontFamily: "Papyrus", color: '#562547' }} />
                         </FadeInView>
                     </ImageBackground>
@@ -103,7 +103,7 @@ export default class MonitorTutorial extends React.Component {
                         borderRadius: '10', alignSelf: "center"
                     }}>
                         <Button title="Let's Start" type="clear"
-                            onPress={() => this.props.navigation.navigate('QuestHistory')}
+                            onPress={() => this.props.navigation.navigate('StartQuest')}
                             titleStyle={{ fontFamily: "Papyrus", color: '#562547' }} />
                     </FadeInView>
                     </ImageBackground>
