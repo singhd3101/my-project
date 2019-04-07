@@ -24,7 +24,9 @@ class ViewClue extends React.Component {
             teamId : -1,
             hint: '',
             deductedPoints : 0,
-            endTimeQuest: null
+            endTimeQuest: null,
+            clueId : 0,
+            endGame: false,
         }
     }
 
@@ -43,7 +45,6 @@ class ViewClue extends React.Component {
                 .then((res) => {
                     let team = res.teams.find((team) => {
                         return team.name === 'Team '.concat(teamName)
-                        //return team.name === 'A'
                     })
                     console.log("team ", team)
                     let score = 0;
@@ -56,7 +57,9 @@ class ViewClue extends React.Component {
                         teamId: team.id,
                         hint: team.clue_on.hint.text,
                         deductedPoints: team.clue_on.hint.points,
-                        endTimeQuest: team.endTimeQuest
+                        endTimeQuest: team.endTimeQuest,
+                        clueId: team.clue_on.id,
+                        endGame: team.endTimeQuest ? true : false
                     })
                 })
         }
@@ -70,6 +73,31 @@ class ViewClue extends React.Component {
         this.props.navigation.navigate('MonitorTeams');
     }
 
+    nextClue(){
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/teams/' + this.state.teamId + '/skipClue', {
+            method: 'PUT',
+            headers:{
+               'content-type': 'application/json'
+            }
+        })
+        .then((response) => response.json())
+        .then((team) => {
+            let score = 0
+            if(team.score) {
+                score = team.score;
+            }
+            this.setState({
+                clue: team.clue_on.puzzle,
+                score: score,
+                teamId: team.id,
+                hint: team.clue_on.hint.text,
+                deductedPoints: team.clue_on.hint.points,
+                endTimeQuest: team.endTimeQuest,
+                clueId: team.clue_on.id
+            })
+        })
+    }
+
     skip(){
         Alert.alert(
             'Confirmation',
@@ -81,11 +109,7 @@ class ViewClue extends React.Component {
                 style: 'cancel',
               },
               {text: 'Yes', onPress: () =>  
-              {this.props.navigation.navigate('ViewClue', {index: 1}),
-              this.setState({
-                  hintRequested: false,
-                  clue: 'New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team, New clue for the team'
-              })}
+              {this.nextClue()}
         },
             ],
             {cancelable: false},
@@ -147,6 +171,14 @@ class ViewClue extends React.Component {
         })
     }
 
+    getClueId(){
+        return this.state.clueId;
+    }
+
+    getTeamId(){
+        return this.state.teamId;
+    }
+
     render() {
         let skipButton;
 
@@ -176,6 +208,8 @@ class ViewClue extends React.Component {
     }
 	    let items = this.state.teamName;
         let team = 'Team: '+ this.state.teamName;
+        console.log("anu ", this.state.clueId);
+        console.log("anu1 ", this.state.teamId);
         
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -184,11 +218,13 @@ class ViewClue extends React.Component {
             <Card containerStyle={{height:500}}>
             <View style={{flexDirection:"row"}}>
                     <View style={{flex:1}}>
-                    <Text style={{justifyContent:'flex-start', fontSize: 20,fontFamily:"Papyrus",color:'#562547'}}>
+                    <Text style={{justifyContent:'flex-start', fontSize: 20,fontFamily:"Papyrus",
+                    color:'#562547'}}>
                     {team}</Text>
                     </View>
                     <View style={{flex:1}}>
-                    <Text style={{justifyContent:'flex-end', textAlign:'right', fontSize: 20,fontFamily:"Papyrus",
+                    <Text style={{justifyContent:'flex-end', textAlign:'right', fontSize: 20,
+                    fontFamily:"Papyrus",
                     color:'#562547'}}>Team Score: {this.state.score}</Text>
                     </View>
                 </View>
@@ -200,7 +236,9 @@ class ViewClue extends React.Component {
                 <View style={{justifyContent: 'space-between', flex: '1', flexDirection: 'row'}}>
                 <UploadImage
                         payloadKey='file'
-                        endpoint='https://mighty-dusk-79530.herokuapp.com/api/upload' />
+                        endpoint='https://mighty-dusk-79530.herokuapp.com/api/upload'
+                        clueId = {this.state.clueId}
+                        teamId = {this.state.teamId} />
                 <FadeInView style={{width: 180, height: 50,paddingTop:'1%', backgroundColor: '#1dd43c', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
