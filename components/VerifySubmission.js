@@ -9,12 +9,22 @@ class VerifySubmission extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
-            imageUrl: "https://s3.amazonaws.com/studyawspollydt.com/images/myimage10.9500613300402108.jpg"
+            submissionId: '',
+            imageUrl: "https://s3.amazonaws.com/studyawspollydt.com/images/"
         }
     }
 
     componentDidMount(){
-        
+        const submissionId = this.props.navigation.getParam("submissionId");
+       this.setState({
+           submissionId: submissionId
+       })
+       fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submissions/' + submissionId)
+       .then((response) => response.json())
+       .then((response) => {
+         let url = this.state.imageUrl + response.image;
+         console.log("rohit",url)
+       })
     }
 
     sendReview(){

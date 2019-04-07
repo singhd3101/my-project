@@ -60,7 +60,7 @@ class MonitorTeams extends React.Component {
         if(item.status === 'y')
         return <Card transparent key={item.id}> 
             <CardItem header style={{height:170,width:170, backgroundColor:'#28b515'}} button 
-            onPress={() => this.props.navigation.navigate('VerifySubmission')} key={item.id} bordered>
+            onPress={() => this.props.navigation.navigate('VerifySubmission',{submissionId:item.submissionId})} key={item.id} bordered>
               <View key={item.id} style={{flexDirection:"col", alignSelf: "center"}}>
               <Text key={Math.random()} style={{color:'white',marginLeft:25}}> {item.teamName}</Text>
               <Text key={Math.random()} style={{color:'white',marginLeft:5}}> Solved Clues: 3</Text>     
