@@ -9,8 +9,12 @@ class VerifySubmission extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
-            
+            imageUrl: "https://s3.amazonaws.com/studyawspollydt.com/images/myimage10.9500613300402108.jpg"
         }
+    }
+
+    componentDidMount(){
+        
     }
 
     sendReview(){
@@ -24,7 +28,7 @@ class VerifySubmission extends React.Component {
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
             <ScrollView style={{marginBottom:60}}>
             <Card title="Verify Submission" containerStyle={{height:500}}>
-                <Image source={require('../assets/submission.jpg')} style={{width: '100%', height: '50%'}} />
+                <Image source={{ uri: this.state.imageUrl }} style={{width: '100%', height: '50%'}} />
                 <View style={{marginTop:10}}></View>
                 <Text style={{marginBottom:10, fontWeight:'bold'}}>Clue: Mountain of Books</Text>
                 <Text style={{marginBottom:10, fontWeight:'bold'}}>Solution: Snell Library</Text>
