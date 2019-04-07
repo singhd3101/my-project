@@ -14,16 +14,6 @@ class StartQuest extends React.Component {
         }
     }
 
-    /* componentDidMount() {
-        const {navigation} = this.props;
-        const questCode = navigation.getParam("questCode");
-        if(questCode) {
-            this.setState({
-                questCode
-            })
-        }
-    } */
-
     updateForm(newState) {
         this.setState(newState);  
     }

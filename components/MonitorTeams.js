@@ -1,7 +1,9 @@
 import React from 'react';
-import { ScrollView, View, ImageBackground, FlatList} from 'react-native';
+import { ScrollView, View, ImageBackground, FlatList, YellowBox} from 'react-native';
 import { Card, CardItem, Text, Icon } from 'native-base';
 import FixedHeader from '../elements/FixedHeader';
+
+YellowBox.ignoreWarnings(['Encountered two children with the same key']);
 
 class MonitorTeams extends React.Component {
     constructor(props) {
@@ -9,13 +11,14 @@ class MonitorTeams extends React.Component {
         this.state ={
           questCode: '',
           submissions:[],
-          data:[]
+          data:[],
+          questId: ''
         }
         this.getNewSubmissionData = this.getNewSubmissionData.bind(this);
     }
 
     componentDidMount() {  
-      this.timer = setInterval(()=> this.getNewSubmissionData(), 1000);
+      this.timer = setInterval(() => this.getNewSubmissionData(), 1000);
     }
 
     componentWillUnmount() {
@@ -26,58 +29,83 @@ class MonitorTeams extends React.Component {
     getNewSubmissionData(){
       const {navigation} = this.props;
       const questCode = navigation.getParam("questCode");
+      let teams = []
       if(questCode) {
-        let url = 'https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/' + questCode;
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/' + questCode)
+        .then((response) => response.json())
+        .then((res) => {
+          this.setState({
+            questId: res.id
+          })
+        }).then(() =>{
+          let url = 'https://treasurehunt-bitsplease.herokuapp.com/api/teams/quests/code/' + questCode;
         fetch(url)
         .then((response) => response.json())
         .then((res) => {
-          let teams = []
-          res.teams.map((team) => {
+          res.map((team) => {
             teams.push({
+              id: team.id,
               teamName: team.name,
               status: 'n',
               submissionId: -1
             })
           })
-          fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submission/monitor/questId/' + res.id)
+        }
+        ).then(() => {
+          fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submission/monitor/questId/' + this.state.questId)
           .then((response) => response.json())
           .then((res) =>{
             res.map((submission) => {
               if(submission){
                 for(let i=0; i<teams.length; i++){
                   if(teams[i].teamName === submission.team.name){
-                    teams[i] = {
+                    updatedTeam = {
+                      id: teams[i].id,
                       teamName: teams[i].teamName,
                       status: 'y',
                       submissionId: submission.id,
                     }
+                    teams[i] = updatedTeam
                   }
                 }
               }
             })
+            let updatedTeams = []
+            for(let i=0; i<teams.length; i++){
+              if(teams[i].status === 'y'){
+                updatedTeams.push(teams[i])
+              }
+            }
+            for(let i=0; i<teams.length; i++){
+              if(teams[i].status === 'n'){
+                updatedTeams.push(teams[i])
+              }
+            }
             this.setState({
-              data: teams
+              data: updatedTeams
             })
           })
+
+        })
         })
       }
     }
 
     renderTeams(item) {
         if(item.status === 'y')
-        return <Card transparent key={item.id}> 
+        return <Card transparent key={Math.random()}> 
             <CardItem header style={{height:170,width:170, backgroundColor:'#28b515'}} button 
-            onPress={() => this.props.navigation.navigate('VerifySubmission')} key={item.id} bordered>
-              <View key={item.id} style={{flexDirection:"col", alignSelf: "center"}}>
-              <Text key={Math.random()} style={{color:'white',marginLeft:25}}> {item.teamName}</Text>
-              <Text key={Math.random()} style={{color:'white',marginLeft:5}}> Solved Clues: 3</Text>     
+            onPress={() => this.props.navigation.navigate('VerifySubmission')} key={Math.random()} bordered>
+              <View key={Math.random()} style={{flexDirection:"col", alignSelf: "center"}}>
+              <Text key={Math.random()+1} style={{color:'white',marginLeft:25}}> {item.teamName}</Text>
+              <Text key={Math.random()+2} style={{color:'white',marginLeft:5}}> Solved Clues: 3</Text>     
               </View>
             </CardItem>
         </Card>
-      return <Card transparent key={item.id}> 
+      return <Card transparent key={Math.random()}> 
         <CardItem header style={{height:170, width:170,backgroundColor:'powderblue'}} button 
-        onPress={() => alert("No submissions yet")} key={item.id} bordered>
-        <Text  style={{marginLeft:35,color:'#562547'}} key={item.id}> {item.teamName}</Text>
+        onPress={() => alert("No submissions yet")} key={Math.random()+1} bordered>
+        <Text  style={{marginLeft:35,color:'#562547'}} key={Math.random()+2}> {item.teamName}</Text>
       </CardItem>
 </Card>
   }
@@ -94,7 +122,7 @@ class MonitorTeams extends React.Component {
         </View>
             <FlatList 
                 data={this.state.data}
-                keyExtractor={(item, index) => item.id}
+                keyExtractor={(item, index) => {item.id}}
                 renderItem={({item}) => this.renderTeams(item)}
                 numColumns={2}
             />
