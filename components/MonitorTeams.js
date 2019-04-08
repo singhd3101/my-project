@@ -29,6 +29,9 @@ class MonitorTeams extends React.Component {
     getNewSubmissionData(){
       const {navigation} = this.props;
       const questCode = navigation.getParam("questCode");
+      this.setState({
+        questCode: questCode
+      })
       let teams = []
       if(questCode) {
         fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/' + questCode)
@@ -58,7 +61,8 @@ class MonitorTeams extends React.Component {
             res.map((submission) => {
               if(submission){
                 for(let i=0; i<teams.length; i++){
-                  if(teams[i].teamName === submission.team.name){
+                  if(teams[i].teamName === submission.team.name && submission.imageStatus === null)
+                  {
                     updatedTeam = {
                       id: teams[i].id,
                       teamName: teams[i].teamName,
@@ -95,7 +99,7 @@ class MonitorTeams extends React.Component {
         if(item.status === 'y')
         return <Card transparent key={Math.random()}> 
             <CardItem header style={{height:170,width:170, backgroundColor:'#28b515'}} button 
-            onPress={() => this.props.navigation.navigate('VerifySubmission',{submissionId:item.submissionId})} key={Math.random()} bordered>
+            onPress={() => this.props.navigation.navigate('VerifySubmission',{submissionId:item.submissionId,questCode:this.state.questCode})} key={Math.random()} bordered>
               <View key={item.id} style={{flexDirection:"col", alignSelf: "center"}}>
               <Text key={Math.random()} style={{color:'white',marginLeft:25}}> {item.teamName}</Text>
               <Text key={Math.random()} style={{color:'white',marginLeft:5}}> Solved Clues: 3</Text>     
