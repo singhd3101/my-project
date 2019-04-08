@@ -9,16 +9,49 @@ class VerifySubmission extends React.Component {
     constructor(props) {
         super(props)
         this.state ={
-            imageUrl: "https://s3.amazonaws.com/studyawspollydt.com/images/myimage10.9500613300402108.jpg"
+            submissionId: '',
+            imageUrl: "https://s3.amazonaws.com/studyawspollydt.com/",
+            reason:'',
+            questCode:''
         }
     }
 
     componentDidMount(){
-        
+        const submissionId = this.props.navigation.getParam("submissionId");
+        const questCode = this.props.navigation.getParam("questCode");
+       this.setState({
+           submissionId: submissionId,
+           questCode: questCode
+
+       })
+       fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submissions/' + submissionId)
+       .then((response) => response.json())
+       .then((response) => {
+         let url = this.state.imageUrl + response.image;
+         this.setState({
+             imageUrl: url
+         })
+       })
     }
 
-    sendReview(){
-        this.props.navigation.navigate('MonitorTeams');
+    sendReview(status){
+            fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submissions/organizer/' + this.state.submissionId,
+            {
+                method: 'PUT',
+                body: JSON.stringify({
+                imageStatus: status,
+                reason: (status === 'Accepted') ? '' : this.state.reason
+                
+              }),
+              headers:{
+                  'content-type': 'application/json'
+              }
+        }).then((response) => response.json())
+        .then((responseJson) => {
+            console.log("bing",responseJson)
+              this.props.navigation.navigate('MonitorTeams',{questCode:this.state.questCode}) 
+        })
+           
     }
 
     render() {
@@ -38,7 +71,7 @@ class VerifySubmission extends React.Component {
                 <Button 
                     title="Accept" 
                     type="clear"
-                    onPress={() => this.sendReview()}
+                    onPress={() => this.sendReview("Accepted")}
                     titleStyle={{fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
                 <FadeInView style={{width: 150, height: 50,paddingTop:'1%', backgroundColor: '#b10000', 
@@ -46,7 +79,7 @@ class VerifySubmission extends React.Component {
                 <Button 
                     title="Reject" 
                     type="clear"
-                    onPress={() => this.sendReview()}
+                    onPress={() => this.sendReview("Rejected")}
                     titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: 'white'}}/>   
                 </FadeInView>
                 </View>
@@ -54,7 +87,7 @@ class VerifySubmission extends React.Component {
                 <View style={{marginTop:'2%'}}>
                 <Text style={{fontWeight:'bold'}}>Reason for rejection</Text>
                 <TextInput style= {{height:26,fontSize: 20, color: '#000', borderBottomWidth:1, 
-                    borderBottomColor:'#555', marginTop:10 }} value={this.state.name} 
+                    borderBottomColor:'#555', marginTop:10 }} onChangeText={text => this.setState({reason: text})} value={this.state.name} 
                     />
                 </View>
             </Card>
