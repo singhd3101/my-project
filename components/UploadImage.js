@@ -29,7 +29,8 @@ export default class UploadImage extends Component{
           callbackUrl:this.props.callbackUrl?this.props.callbackUrl:null,
           loading:false,
           teamId:this.props.teamId,
-          clueId:this.props.clueId
+          clueId:this.props.clueId,
+          uri: ''
         }
         defaultProps = {
             onSuccess: undefined,
@@ -75,6 +76,16 @@ export default class UploadImage extends Component{
         );
     }
 
+    sendSub = async() => {
+        const promise = this.uploadImageAsync(this.state.uri, this.state.clueId, this.state.teamId);
+        const value = await promise;
+        console.log("promise ", value)
+    }
+
+    fetchData(data){
+        console.log("data ", data);
+    }
+
   uploadResult = async (clueId, teamId) =>  {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         console.log(status,'status');
@@ -86,25 +97,41 @@ export default class UploadImage extends Component{
             mediaTypes:'Images'
         }).then((result)=>{
             const file = result.uri;
+            this.setState({
+                uri: result.uri,
+                clueId,
+                teamId
+            })
             if(!result.cancelled){
                 this.setState({
                     loading:true
                 })
-                uploadResponse =  this.uploadImageAsync(result.uri, clueId, teamId).then((reponse)=>{
+                let uploadedStatus = this.uploadImageAsync(result.uri, clueId, teamId, this.fetchData).then((response)=>{
+                    //response.json();
+                    console.log("tula ", response)
                     this.setState({
                         loading:false,
                         uploaded_photo:file
                     })
                     alert('Image uploaded successfully !!');
-                }).catch(function(error){
+                })
+                .then((res) => {
+                    console.log("uploadResponse ", res)
+                })
+                .catch(function(error){
                     console.log('error: ', error);
                     alert(error);
                 });
+                let data = Promise.resolve(uploadedStatus);
+                data.then((res) => {
+                    console.log("vcvcvc ", res)
+                })
             }
         })
+        //this.sendSub();
     }
 
-  async uploadImageAsync(uri, clueId, teamId) {
+  async uploadImageAsync(uri, clueId, teamId, fetchData) {
 
         let presignedUrl = '';
         const xhr = new XMLHttpRequest()
@@ -130,9 +157,7 @@ export default class UploadImage extends Component{
                 if (xhr.readyState === 4) {
                     if (xhr.status === 200) {
                         console.log('Image successfully uploaded to S3')
-                        //let teamId = this.state.teamId;
-                        //let clueId = this.state.clueId;
-                        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submissions/team/'+ teamId +'/clue/'+ clueId, {
+                        return fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submissions/team/'+ teamId +'/clue/'+ clueId, {
                             method: 'POST',
                             body: JSON.stringify({
                                 image: keyname,
@@ -141,7 +166,13 @@ export default class UploadImage extends Component{
                                 'content-type': 'application/json'
                             }
                         }).then((response) => response.json())
-                        .catch((err) => console.log("error: ", err))
+                        .then((res) => {
+                            fetchData(res)
+                        })
+                        //const json = await response.json();
+                        //console.log("here ", json); 
+                        //return json;
+                        //.catch((err) => console.log("error: ", err))
                     } else {
                         console.log('Error while sending the image to S3', xhr.status)
                     }
