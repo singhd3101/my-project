@@ -79,25 +79,7 @@ export default class UploadImage extends Component{
 
     fetchData(data){
         console.log("data ", data);
-        this.setState({
-            submissionId: data.id,
-        })
-        this.timer = setInterval(() => this.getSubmissionStatus(), 1000);
-    }
-
-    getSubmissionStatus() {
-        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submissions' + this.state.submissionId)
-        .then((response) => response.json())
-        .then((res) => {
-            if(res.imageStatus === 'ACCEPTED') {
-                alert("Congratulations !! Your submission has been accepted.")
-                this.props.navigation.navigate('ViewClue', {teamName: name, questCode: this.state.questCode});
-            }
-            if(res.imageStatus === 'REJECTED') {
-                alert("Submission declined !! Try again. ")
-                this.props.navigation.navigate('ViewClue', {teamName: name, questCode: this.state.questCode});
-            }
-        })
+        this.props.fetchSubmission(data.id);
     }
 
     componentWillUnmount() {

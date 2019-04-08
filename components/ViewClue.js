@@ -28,10 +28,20 @@ class ViewClue extends React.Component {
             clueId : 0,
             endGame: false,
             questCode: '',
+            submissionId: -1,
+            updateState: 0,
+            imageStatus: 'abcd'
         }
+        this.getSubmissionStatus = this.getSubmissionStatus.bind(this);
+        this.fetchViewClueData = this.fetchViewClueData.bind(this);
+        this.fetchSubmission = this.fetchSubmission.bind(this);
     }
 
     componentDidMount() {
+        this.fetchViewClueData();
+    }
+
+    fetchViewClueData(){
         const {navigation} = this.props;
         const teamName = navigation.getParam("teamName");
         const questCode = navigation.getParam("questCode");
@@ -71,6 +81,40 @@ class ViewClue extends React.Component {
                     }
                 })
         }
+    }
+
+    fetchSubmission(submissionId) {
+        this.setState({
+            submissionId
+        })
+        this.timer = setInterval(() => this.getSubmissionStatus(), 1000);
+    }
+
+    getSubmissionStatus() {
+        let imageStatus = ''
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submissions/' + this.state.submissionId)
+        .then((response) => response.json())
+        .then((res) => {
+            imageStatus = res.imageStatus; 
+            console.log('res.imgstatus ', res.imageStatus)
+            if(res.imageStatus === 'ACCEPTED') {
+                alert("Congratulations !! Your submission has been accepted.")
+                this.fetchViewClueData();
+                clearInterval(this.timer)
+                this.timer = null;
+            }
+            if(res.imageStatus === 'REJECTED') {
+                alert("Submission declined !! Try again. ")
+                this.fetchViewClueData();
+                clearInterval(this.timer)
+                this.timer = null;
+            }
+        })
+        console.log('imageStatus ', imageStatus)
+        this.setState({
+            updateState: Math.random(),
+            imageStatus,
+        })
     }
 
     updateForm(newState) {
@@ -246,7 +290,8 @@ class ViewClue extends React.Component {
                         clueId = {this.state.clueId}
                         teamId = {this.state.teamId}
                         teamName = {this.state.teamName}
-                        questCode = {this.state.questCode} />
+                        questCode = {this.state.questCode}
+                        fetchSubmission = {this.fetchSubmission} />
                 <FadeInView style={{width: 180, height: 50,paddingTop:'1%', backgroundColor: '#1dd43c', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 
@@ -287,6 +332,7 @@ class ViewClue extends React.Component {
                 <View style={{marginTop:80}}></View>
                 <Icon name="chat" size={45} color="#ffcf40" onPress={() => this._panel.show()} />
             </Card>
+            <Text>{this.state.imageStatus}</Text>
             <SlidingUpPanel ref={c => this._panel = c}>
                 {() => (
                     <View style={styles.chatContainer}>
