@@ -27,6 +27,7 @@ class ViewClue extends React.Component {
             endTimeQuest: null,
             clueId : 0,
             endGame: false,
+            questCode: '',
         }
     }
 
@@ -40,6 +41,9 @@ class ViewClue extends React.Component {
             });
         }
         if(questCode){
+            this.setState({
+                questCode
+            });
             fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/'+questCode)
                 .then((response) => response.json())
                 .then((res) => {
@@ -48,19 +52,23 @@ class ViewClue extends React.Component {
                     })
                     console.log("team ", team)
                     let score = 0;
-                    if(team.score){
-                        score = team.score;
+                    if(team.endTimeQuest) {
+                        alert("Congratulations !! You have completed the quest.")
+                    } else {
+                        if(team.score){
+                            score = team.score;
+                        }
+                        this.setState({
+                            clue: team.clue_on.puzzle,
+                            score: score,
+                            teamId: team.id,
+                            hint: team.clue_on.hint.text,
+                            deductedPoints: team.clue_on.hint.points,
+                            endTimeQuest: team.endTimeQuest,
+                            clueId: team.clue_on.id,
+                            endGame: team.endTimeQuest ? true : false
+                        })
                     }
-                    this.setState({
-                        clue: team.clue_on.puzzle,
-                        score: score,
-                        teamId: team.id,
-                        hint: team.clue_on.hint.text,
-                        deductedPoints: team.clue_on.hint.points,
-                        endTimeQuest: team.endTimeQuest,
-                        clueId: team.clue_on.id,
-                        endGame: team.endTimeQuest ? true : false
-                    })
                 })
         }
     }
@@ -208,8 +216,6 @@ class ViewClue extends React.Component {
     }
 	    let items = this.state.teamName;
         let team = 'Team: '+ this.state.teamName;
-        console.log("anu ", this.state.clueId);
-        console.log("anu1 ", this.state.teamId);
         
         return(
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -238,7 +244,9 @@ class ViewClue extends React.Component {
                         payloadKey='file'
                         endpoint='https://mighty-dusk-79530.herokuapp.com/api/upload'
                         clueId = {this.state.clueId}
-                        teamId = {this.state.teamId} />
+                        teamId = {this.state.teamId}
+                        teamName = {this.state.teamName}
+                        questCode = {this.state.questCode} />
                 <FadeInView style={{width: 180, height: 50,paddingTop:'1%', backgroundColor: '#1dd43c', 
                 alignItems:'center', borderRadius: '10'}}>
                 <Button 

@@ -18,10 +18,10 @@ YellowBox.ignoreWarnings(['Require cycle']);
 export default class UploadImage extends Component{
     constructor(props){
         super(props)
-        //console.log("rty ", props.teamId)
         this.askPermission = this.askPermission.bind(this);
         this.uploadImageAsync = this.uploadImageAsync.bind(this);
         this.showAlert = this.showAlert.bind(this);
+        this.fetchData = this.fetchData.bind(this);
         this.state={
           endpoint:this.props.endpoint?this.props.endpoint:null,
           payloadKey:this.props.payloadKey? this.props.payloadKey:null,
@@ -30,7 +30,8 @@ export default class UploadImage extends Component{
           loading:false,
           teamId:this.props.teamId,
           clueId:this.props.clueId,
-          uri: ''
+          uri: '',
+          submissionId: -1
         }
         defaultProps = {
             onSuccess: undefined,
@@ -49,7 +50,7 @@ export default class UploadImage extends Component{
         };
     }
 
-  async askPermission() {
+    async askPermission() {
         // only if user allows permission to camera roll
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         const { onStartUpload } = this.props;
@@ -76,17 +77,35 @@ export default class UploadImage extends Component{
         );
     }
 
-    sendSub = async() => {
-        const promise = this.uploadImageAsync(this.state.uri, this.state.clueId, this.state.teamId);
-        const value = await promise;
-        console.log("promise ", value)
-    }
-
     fetchData(data){
         console.log("data ", data);
+        this.setState({
+            submissionId: data.id,
+        })
+        this.timer = setInterval(() => this.getSubmissionStatus(), 1000);
     }
 
-  uploadResult = async (clueId, teamId) =>  {
+    getSubmissionStatus() {
+        fetch('https://treasurehunt-bitsplease.herokuapp.com/api/submissions' + this.state.submissionId)
+        .then((response) => response.json())
+        .then((res) => {
+            if(res.imageStatus === 'ACCEPTED') {
+                alert("Congratulations !! Your submission has been accepted.")
+                this.props.navigation.navigate('ViewClue', {teamName: name, questCode: this.state.questCode});
+            }
+            if(res.imageStatus === 'REJECTED') {
+                alert("Submission declined !! Try again. ")
+                this.props.navigation.navigate('ViewClue', {teamName: name, questCode: this.state.questCode});
+            }
+        })
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timer)
+        this.timer = null;
+      }
+
+    uploadResult = async (clueId, teamId) =>  {
         const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
         console.log(status,'status');
         if (status !== 'granted') {
@@ -107,28 +126,18 @@ export default class UploadImage extends Component{
                     loading:true
                 })
                 let uploadedStatus = this.uploadImageAsync(result.uri, clueId, teamId, this.fetchData).then((response)=>{
-                    //response.json();
-                    console.log("tula ", response)
                     this.setState({
                         loading:false,
                         uploaded_photo:file
                     })
                     alert('Image uploaded successfully !!');
                 })
-                .then((res) => {
-                    console.log("uploadResponse ", res)
-                })
                 .catch(function(error){
                     console.log('error: ', error);
                     alert(error);
                 });
-                let data = Promise.resolve(uploadedStatus);
-                data.then((res) => {
-                    console.log("vcvcvc ", res)
-                })
             }
         })
-        //this.sendSub();
     }
 
   async uploadImageAsync(uri, clueId, teamId, fetchData) {
@@ -169,10 +178,6 @@ export default class UploadImage extends Component{
                         .then((res) => {
                             fetchData(res)
                         })
-                        //const json = await response.json();
-                        //console.log("here ", json); 
-                        //return json;
-                        //.catch((err) => console.log("error: ", err))
                     } else {
                         console.log('Error while sending the image to S3', xhr.status)
                     }
