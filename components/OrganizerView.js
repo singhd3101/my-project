@@ -16,7 +16,6 @@ class OrganizerView extends React.Component {
 
     render() {
         return(
-        <KeyboardAwareScrollView>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <FixedHeader marginTop={60} navigating={this.props.navigation}/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
@@ -41,7 +40,6 @@ class OrganizerView extends React.Component {
         </View>       
         </ImageBackground>
       </View>
-      </KeyboardAwareScrollView>
         )
     }
 }
