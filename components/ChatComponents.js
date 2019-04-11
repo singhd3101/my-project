@@ -3,6 +3,7 @@ import { View, Text, TextInput, ScrollView, TouchableOpacity} from 'react-native
 import { Card, Button } from 'react-native-elements';
 import styles from '../assets/style';
 import FadeInView from '../elements/FadeInView';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class Chat extends React.Component {
     constructor(props) {
@@ -22,6 +23,7 @@ class Chat extends React.Component {
 
     render() {
         return(
+            <KeyboardAwareScrollView>
              <View style={{padding: 10, backgroundColor:'#f5f5f5'}}>
                 <Card style={styles.chatBox}>
                     {this.props.chatMessages.map((chatData) => (
@@ -42,6 +44,7 @@ class Chat extends React.Component {
                 </FadeInView>
                 </TouchableOpacity>
             </View>
+            </KeyboardAwareScrollView>
         )
     }
 }

@@ -4,6 +4,7 @@ import { ScrollView, View, Text, TextInput, ImageBackground, TouchableOpacity, A
 import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class CreateClues extends React.Component {
     
@@ -222,6 +223,7 @@ class CreateClues extends React.Component {
             value: 50,
           }];
         return(
+          <KeyboardAwareScrollView>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
@@ -286,6 +288,7 @@ class CreateClues extends React.Component {
             </ScrollView>
             </ImageBackground>
             </View>
+            </KeyboardAwareScrollView>
         )
     }
 }

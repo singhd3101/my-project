@@ -6,6 +6,7 @@ import { Card, Button, Divider  } from 'react-native-elements';
 import styles from '../assets/style';
 import FadeInView from '../elements/FadeInView';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class ListClues extends React.Component {
     
@@ -120,6 +121,7 @@ class ListClues extends React.Component {
 
     render() {
         return(
+            <KeyboardAwareScrollView>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
@@ -158,7 +160,7 @@ class ListClues extends React.Component {
             </ScrollView>
             </ImageBackground>
             </View>
-
+            </KeyboardAwareScrollView>
         )
     }
 }

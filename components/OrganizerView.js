@@ -3,7 +3,7 @@ import {ScrollView,View,Text,TextInput,StyleSheet,ImageBackground,Image} from 'r
 import FadeInView from '../elements/FadeInView';
 import {Button} from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class OrganizerView extends React.Component {
     
@@ -16,6 +16,7 @@ class OrganizerView extends React.Component {
 
     render() {
         return(
+        <KeyboardAwareScrollView>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <FixedHeader marginTop={60} navigating={this.props.navigation}/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
@@ -40,6 +41,7 @@ class OrganizerView extends React.Component {
         </View>       
         </ImageBackground>
       </View>
+      </KeyboardAwareScrollView>
         )
     }
 }

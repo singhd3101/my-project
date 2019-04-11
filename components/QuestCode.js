@@ -3,6 +3,7 @@ import { View, Text, ImageBackground } from 'react-native'
 import FadeInView from '../elements/FadeInView';
 import { Button, Card } from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class QuestCode extends React.Component { 
     constructor(props) {
@@ -38,6 +39,7 @@ class QuestCode extends React.Component {
 
     render() {
         return(
+            <KeyboardAwareScrollView>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
@@ -62,7 +64,7 @@ class QuestCode extends React.Component {
             </View>       
             </ImageBackground>
             </View>
-
+            </KeyboardAwareScrollView>
         )
     }
 }

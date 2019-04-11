@@ -2,6 +2,7 @@ import React from 'react';
 import { ScrollView, View, ImageBackground, FlatList, YellowBox} from 'react-native';
 import { Card, CardItem, Text, Icon } from 'native-base';
 import FixedHeader from '../elements/FixedHeader';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 YellowBox.ignoreWarnings(['Encountered two children with the same key']);
 
@@ -116,6 +117,7 @@ class MonitorTeams extends React.Component {
     
     render() {
         return(
+        <KeyboardAwareScrollView>
         <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
@@ -133,6 +135,7 @@ class MonitorTeams extends React.Component {
         </ScrollView>       
         </ImageBackground>
       </View>
+      </KeyboardAwareScrollView>
         )
     }
 }

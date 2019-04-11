@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, Text, TextInput, ImageBackground} from 'react-native'
+import { KeyboardAvoidingView, View, Text, TextInput, ImageBackground} from 'react-native'
 import FadeInView from '../elements/FadeInView';
 import {Button,Card} from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class StartQuest extends React.Component { 
     constructor(props) {
@@ -28,6 +29,17 @@ class StartQuest extends React.Component {
             fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/code/'+name)
                 .then((response) => response.json())
                 .then((res) => {
+                    fetch('https://treasurehunt-bitsplease.herokuapp.com/api/quests/' + res.id, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            started: true
+                        }),
+                    })
+                })
+                .then((res) => {
                     this.props.navigation.navigate('MonitorTeams', { questCode: this.state.name});
             })
             .catch((error) => alert("Please enter valid quest code."))
@@ -36,7 +48,8 @@ class StartQuest extends React.Component {
 
     render() {
         return(
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <KeyboardAwareScrollView>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} enabled>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
             <View style={{marginTop:150}}>
@@ -61,7 +74,7 @@ class StartQuest extends React.Component {
             </View>       
             </ImageBackground>
             </View>
-
+            </KeyboardAwareScrollView>
         )
     }
 }

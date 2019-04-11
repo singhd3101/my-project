@@ -5,6 +5,7 @@ import FixedHeader from '../elements/FixedHeader';
 import styles from '../assets/style';
 import FadeInView from '../elements/FadeInView';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class CreateTeam extends React.Component {
     static navigationOptions = {screen: 'Team'}
@@ -81,6 +82,7 @@ class CreateTeam extends React.Component {
         var header = ['Team Name', 'Action']
         var data = [['Team Name'], ['Action']]
         return(
+            <KeyboardAwareScrollView>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
@@ -119,7 +121,7 @@ class CreateTeam extends React.Component {
             </ScrollView>
             </ImageBackground>
             </View>
-
+            </KeyboardAwareScrollView>
         )
     }
 }

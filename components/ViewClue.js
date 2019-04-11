@@ -8,6 +8,7 @@ import styles from '../assets/style';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import UploadImage from './UploadImage';
 import Chat from './ChatComponents';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 class ViewClue extends React.Component {
     
@@ -64,6 +65,7 @@ class ViewClue extends React.Component {
                     let score =     0;
                     if(team.endTimeQuest) {
                         alert("Congratulations !! You have completed the quest.")
+                        this.props.navigation.navigate('Home');
                     } else {
                         if(team.score){
                             score = team.score;
@@ -266,6 +268,7 @@ class ViewClue extends React.Component {
         let team = 'Team: '+ this.state.teamName;
         
         return(
+            <KeyboardAwareScrollView>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>            
@@ -352,6 +355,7 @@ class ViewClue extends React.Component {
             </SlidingUpPanel>
             </ImageBackground>
             </View>
+            </KeyboardAwareScrollView>
         )
     }
 }
