@@ -61,7 +61,7 @@ class ViewClue extends React.Component {
                         return team.name === 'Team '.concat(teamName)
                     })
                     console.log("team ", team)
-                    let score = 0;
+                    let score =     0;
                     if(team.endTimeQuest) {
                         alert("Congratulations !! You have completed the quest.")
                     } else {
@@ -97,17 +97,21 @@ class ViewClue extends React.Component {
         .then((res) => {
             imageStatus = res.imageStatus; 
             console.log('res.imgstatus ', res.imageStatus)
-            if(res.imageStatus === 'ACCEPTED') {
-                alert("Congratulations !! Your submission has been accepted.")
-                this.fetchViewClueData();
-                clearInterval(this.timer)
-                this.timer = null;
-            }
-            if(res.imageStatus === 'REJECTED') {
-                alert("Submission declined !! Try again. ")
-                this.fetchViewClueData();
-                clearInterval(this.timer)
-                this.timer = null;
+            if(res.team.endTimeQuest){
+                alert("Congratulations !! You have completed the quest.")
+            } else {
+                if(res.imageStatus === 'ACCEPTED') {
+                    alert("Congratulations !! Your submission has been accepted.")
+                    this.fetchViewClueData();
+                    clearInterval(this.timer)
+                    this.timer = null;
+                }
+                if(res.imageStatus === 'REJECTED') {
+                    alert("Submission declined !! Try again. ")
+                    this.fetchViewClueData();
+                    clearInterval(this.timer)
+                    this.timer = null;
+                }
             }
         })
         console.log('imageStatus ', imageStatus)
