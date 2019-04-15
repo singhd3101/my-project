@@ -1,7 +1,7 @@
 import React from 'react'
-import {ScrollView,View,Text,TextInput,StyleSheet,ImageBackground,Image} from 'react-native'
+import { ScrollView, View, Text, TextInput, StyleSheet, ImageBackground, Image} from 'react-native'
 import FadeInView from '../elements/FadeInView';
-import {Button} from 'react-native-elements'
+import { Button } from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 

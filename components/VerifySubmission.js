@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { View, Text, TextInput, ImageBackground, Image,ScrollView} from 'react-native'
+import { View, Text, TextInput, ImageBackground, Image, ScrollView } from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import FadeInView from '../elements/FadeInView';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';

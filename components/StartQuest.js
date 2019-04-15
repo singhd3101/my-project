@@ -1,7 +1,7 @@
 import React from 'react'
-import { KeyboardAvoidingView, View, Text, TextInput, ImageBackground} from 'react-native'
+import { View, Text, TextInput, ImageBackground } from 'react-native'
 import FadeInView from '../elements/FadeInView';
-import {Button,Card} from 'react-native-elements'
+import { Button, Card } from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
@@ -48,10 +48,10 @@ class StartQuest extends React.Component {
 
     render() {
         return(
-            <KeyboardAwareScrollView>
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} enabled>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
+            <KeyboardAwareScrollView>
             <View style={{marginTop:150}}>
             <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white', textAlign:'center'}}>
             Start Quest!</Text>
@@ -71,10 +71,10 @@ class StartQuest extends React.Component {
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>
                 </FadeInView>
             </Card> 
-            </View>       
+            </View>
+            </KeyboardAwareScrollView>      
             </ImageBackground>
             </View>
-            </KeyboardAwareScrollView>
         )
     }
 }

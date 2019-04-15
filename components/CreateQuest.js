@@ -1,6 +1,6 @@
 import React from 'react'
 import FixedHeader from '../elements/FixedHeader';
-import { ScrollView, View, Text, TextInput, ImageBackground,TouchableOpacity} from 'react-native'
+import { ScrollView, View, Text, TextInput, ImageBackground, TouchableOpacity } from 'react-native'
 import { Card, Button } from 'react-native-elements'
 import { Dropdown } from 'react-native-material-dropdown';
 import FadeInView from '../elements/FadeInView';
