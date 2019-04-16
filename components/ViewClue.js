@@ -100,7 +100,8 @@ class ViewClue extends React.Component {
             imageStatus = res.imageStatus; 
             console.log('res.imgstatus ', res.imageStatus)
             if(res.team.endTimeQuest){
-                alert("Congratulations !! You have completed the quest.")
+                alert("Congratulations !! You have completed the quest.");
+                this.props.navigation.navigate('JoinTeam', {questCode: this.state.questCode});
             } else {
                 if(res.imageStatus === 'ACCEPTED') {
                     alert("Congratulations !! Your submission has been accepted.")
@@ -109,7 +110,7 @@ class ViewClue extends React.Component {
                     this.timer = null;
                 }
                 if(res.imageStatus === 'REJECTED') {
-                    alert("Submission declined !! Try again. ")
+                    alert("Submission declined !! Reason: ", res.reason,  ". Try again. ")
                     this.fetchViewClueData();
                     clearInterval(this.timer)
                     this.timer = null;
@@ -143,6 +144,10 @@ class ViewClue extends React.Component {
             let score = 0
             if(team.score) {
                 score = team.score;
+            }
+            if(team.endTimeQuest){
+                alert("Congratulations !! You have completed the quest.");
+                this.props.navigation.navigate('JoinTeam', {questCode: this.state.questCode});
             }
             this.setState({
                 hintRequested: false,
