@@ -17,7 +17,7 @@ const styles = StyleSheet.create ({
      justifyContent: 'center',
      alignItems: 'center',
      height: 80
-  }
+  },
 })
 
 class MonitorTeams extends React.Component {
@@ -138,15 +138,13 @@ class MonitorTeams extends React.Component {
         content = (
           <ActivityIndicator
           animating = {this.state.busy}
-          color = '#bc2b78'
+          color = 'white'
           size = "large"
           style = {styles.activityIndicator}/>
         );
       } else {
         content = (
-          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
-        <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
+          
         <ScrollView style={{padding: 15, marginBottom:120, alignSelf: "center"}}>
         <View style={{flexDirection:"row", alignSelf: "center"}}>
             <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white',textAlign:"left"}}>Teams</Text>
@@ -159,12 +157,18 @@ class MonitorTeams extends React.Component {
                 numColumns={2}
             />
         </ScrollView>       
-        </ImageBackground>
-      </View>
+        
         );
       }
 
-        return content;
+        return (
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
+        <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
+        {content}
+        </ImageBackground>
+      </View>
+        )
     }
 }
 export default MonitorTeams

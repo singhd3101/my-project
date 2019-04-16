@@ -110,7 +110,10 @@ class ViewClue extends React.Component {
                     this.timer = null;
                 }
                 if(res.imageStatus === 'REJECTED') {
-                    alert("Submission declined !! Reason: ", res.reason,  ". Try again. ")
+                    let reason = res.reason;
+                    console.log('here ', res.reason)
+                    let rea = 'Submission declined !! Reason: '.concat(reason).concat('. Try again.');
+                    alert(rea)
                     this.fetchViewClueData();
                     clearInterval(this.timer)
                     this.timer = null;
