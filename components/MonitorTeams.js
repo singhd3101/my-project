@@ -1,9 +1,24 @@
 import React from 'react';
-import { ScrollView, View, ImageBackground, FlatList, YellowBox} from 'react-native';
+import { ScrollView, View, ImageBackground, FlatList, YellowBox, ActivityIndicator, StyleSheet } from 'react-native';
 import { Card, CardItem, Text, Icon } from 'native-base';
 import FixedHeader from '../elements/FixedHeader';
 
 YellowBox.ignoreWarnings(['Encountered two children with the same key']);
+
+const styles = StyleSheet.create ({
+  container: {
+     flex: 1,
+     justifyContent: 'center',
+     alignItems: 'center',
+     marginTop: 70
+  },
+  activityIndicator: {
+     flex: 1,
+     justifyContent: 'center',
+     alignItems: 'center',
+     height: 80
+  }
+})
 
 class MonitorTeams extends React.Component {
     constructor(props) {
@@ -12,7 +27,8 @@ class MonitorTeams extends React.Component {
           questCode: '',
           submissions:[],
           data:[],
-          questId: ''
+          questId: '',
+          busy: true,
         }
         this.getNewSubmissionData = this.getNewSubmissionData.bind(this);
     }
@@ -86,7 +102,8 @@ class MonitorTeams extends React.Component {
               }
             }
             this.setState({
-              data: updatedTeams
+              data: updatedTeams,
+              busy: false
             })
           })
 
@@ -97,25 +114,37 @@ class MonitorTeams extends React.Component {
 
     renderTeams(item) {
         if(item.status === 'y')
-        return <Card transparent key={Math.random()}> 
+        return <Card transparent key={item.id}> 
             <CardItem header style={{height:170,width:170, backgroundColor:'#28b515'}} button 
-            onPress={() => this.props.navigation.navigate('VerifySubmission',{submissionId:item.submissionId,questCode:this.state.questCode})} key={Math.random()} bordered>
+            onPress={() => this.props.navigation.navigate('VerifySubmission',
+            {submissionId:item.submissionId,questCode:this.state.questCode})} key={item.id} bordered>
               <View key={item.id} style={{flexDirection:"col", alignSelf: "center"}}>
-              <Text key={Math.random()} style={{color:'white',marginLeft:25}}> {item.teamName}</Text>     
+              <Text key={item.id} style={{color:'white',marginLeft:25}}> {item.teamName}</Text>     
               </View>
             </CardItem>
         </Card>
-      return <Card transparent key={Math.random()}> 
+      return <Card transparent key={item.id}> 
         <CardItem header style={{height:170, width:170,backgroundColor:'powderblue'}} button 
-        onPress={() => alert("No submissions yet")} key={Math.random()+1} bordered>
-        <Text  style={{marginLeft:35,color:'#562547'}} key={Math.random()+2}> {item.teamName}</Text>
+        onPress={() => alert("No submissions yet")} key={item.id} bordered>
+        <Text  style={{marginLeft:35,color:'#562547'}} key={item.id}> {item.teamName}</Text>
       </CardItem>
 </Card>
   }
     
     render() {
-        return(
-        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+
+      let content;
+      if(this.state.busy){
+        content = (
+          <ActivityIndicator
+          animating = {this.state.busy}
+          color = '#bc2b78'
+          size = "large"
+          style = {styles.activityIndicator}/>
+        );
+      } else {
+        content = (
+          <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
         <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
         <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
         <ScrollView style={{padding: 15, marginBottom:120, alignSelf: "center"}}>
@@ -132,7 +161,10 @@ class MonitorTeams extends React.Component {
         </ScrollView>       
         </ImageBackground>
       </View>
-        )
+        );
+      }
+
+        return content;
     }
 }
 export default MonitorTeams

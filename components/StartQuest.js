@@ -1,9 +1,11 @@
 import React from 'react'
-import { View, Text, TextInput, ImageBackground } from 'react-native'
+import { View, Text, TextInput, ImageBackground, YellowBox } from 'react-native'
 import FadeInView from '../elements/FadeInView';
 import { Button, Card } from 'react-native-elements'
 import FixedHeader from '../elements/FixedHeader'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+YellowBox.ignoreWarnings(['Can\'t call setState']);
 
 class StartQuest extends React.Component { 
     constructor(props) {
