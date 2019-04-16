@@ -51,7 +51,6 @@ class StartQuest extends React.Component {
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} enabled>
             <FixedHeader marginTop={60}  navigating={this.props.navigation}/>
             <ImageBackground source={require('../assets/theme1.jpg')} style={{width: '100%', height: '100%'}}>
-            <KeyboardAwareScrollView>
             <View style={{marginTop:150}}>
             <Text style={{fontFamily:"Papyrus", fontSize:30, color:'white', textAlign:'center'}}>
             Start Quest!</Text>
@@ -71,8 +70,7 @@ class StartQuest extends React.Component {
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>
                 </FadeInView>
             </Card> 
-            </View>
-            </KeyboardAwareScrollView>      
+            </View>    
             </ImageBackground>
             </View>
         )

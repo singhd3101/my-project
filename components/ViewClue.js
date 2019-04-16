@@ -145,6 +145,7 @@ class ViewClue extends React.Component {
                 score = team.score;
             }
             this.setState({
+                hintRequested: false,
                 clue: team.clue_on.puzzle,
                 score: score,
                 teamId: team.id,
@@ -299,14 +300,6 @@ class ViewClue extends React.Component {
                         teamName = {this.state.teamName}
                         questCode = {this.state.questCode}
                         fetchSubmission = {this.fetchSubmission} />
-                <FadeInView style={{width: 180, height: 50,paddingTop:'1%', backgroundColor: '#1dd43c', 
-                alignItems:'center', borderRadius: '10'}}>
-                <Button 
-                    title="Request Verification" 
-                    type="clear"
-                    onPress={() => alert('Image verification requested from organizer.')}
-                    titleStyle={{fontWeight:"700", fontFamily: "Papyrus", color: '#562547'}}/>   
-                </FadeInView>
                 </View>
                 <View style={{marginTop:60}}></View>
                 {this.state.hintRequested ? 

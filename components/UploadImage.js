@@ -181,9 +181,9 @@ export default class UploadImage extends Component{
             )
         }
         return(
-            <FadeInView style={{width: '40%', height: 50,paddingTop:'1%', backgroundColor: 'powderblue',
+            <FadeInView style={{width: '100%', height: 50,paddingTop:'1%', backgroundColor: '#1dd43c',
                 alignItems:'center', borderRadius: '10'}}>
-                <Button title="Upload" type="clear" onPress={() => this.uploadResult(this.props.clueId, this.props.teamId)}
+                <Button title="Upload & Send" type="clear" onPress={() => this.uploadResult(this.props.clueId, this.props.teamId)}
                     titleStyle={{fontFamily: "Papyrus", color: '#562547'}}/>  
                 </FadeInView>
         )
